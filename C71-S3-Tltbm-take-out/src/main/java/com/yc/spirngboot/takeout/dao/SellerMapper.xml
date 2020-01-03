@@ -1,0 +1,411 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yc.spirngboot.takeout.dao.SellerMapper">
+  <resultMap id="BaseResultMap" type="com.yc.spirngboot.takeout.bean.Seller">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="sname" jdbcType="VARCHAR" property="sname" />
+    <result column="sendprice" jdbcType="DOUBLE" property="sendprice" />
+    <result column="packprice" jdbcType="DOUBLE" property="packprice" />
+    <result column="logImge" jdbcType="VARCHAR" property="logimge" />
+    <result column="starttime" jdbcType="INTEGER" property="starttime" />
+    <result column="endtime" jdbcType="INTEGER" property="endtime" />
+    <result column="sphone" jdbcType="VARCHAR" property="sphone" />
+    <result column="images" jdbcType="VARCHAR" property="images" />
+    <result column="distict_id" jdbcType="INTEGER" property="distictId" />
+    <result column="rank" jdbcType="INTEGER" property="rank" />
+    <result column="hot" jdbcType="INTEGER" property="hot" />
+    <result column="qualified" jdbcType="INTEGER" property="qualified" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.yc.spirngboot.takeout.bean.Seller">
+    <result column="description" jdbcType="LONGVARCHAR" property="description" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, sname, sendprice, packprice, logImge, starttime, endtime, sphone, images, distict_id, 
+    rank, hot, qualified
+  </sql>
+  <sql id="Blob_Column_List">
+    description
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.yc.spirngboot.takeout.bean.SellerExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from seller
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="com.yc.spirngboot.takeout.bean.SellerExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from seller
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from seller
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from seller
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.yc.spirngboot.takeout.bean.SellerExample">
+    delete from seller
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.yc.spirngboot.takeout.bean.Seller">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into seller (sname, sendprice, packprice, 
+      logImge, starttime, endtime, 
+      sphone, images, distict_id, 
+      rank, hot, qualified, 
+      description)
+    values (#{sname,jdbcType=VARCHAR}, #{sendprice,jdbcType=DOUBLE}, #{packprice,jdbcType=DOUBLE}, 
+      #{logimge,jdbcType=VARCHAR}, #{starttime,jdbcType=INTEGER}, #{endtime,jdbcType=INTEGER}, 
+      #{sphone,jdbcType=VARCHAR}, #{images,jdbcType=VARCHAR}, #{distictId,jdbcType=INTEGER}, 
+      #{rank,jdbcType=INTEGER}, #{hot,jdbcType=INTEGER}, #{qualified,jdbcType=INTEGER}, 
+      #{description,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yc.spirngboot.takeout.bean.Seller">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into seller
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="sname != null">
+        sname,
+      </if>
+      <if test="sendprice != null">
+        sendprice,
+      </if>
+      <if test="packprice != null">
+        packprice,
+      </if>
+      <if test="logimge != null">
+        logImge,
+      </if>
+      <if test="starttime != null">
+        starttime,
+      </if>
+      <if test="endtime != null">
+        endtime,
+      </if>
+      <if test="sphone != null">
+        sphone,
+      </if>
+      <if test="images != null">
+        images,
+      </if>
+      <if test="distictId != null">
+        distict_id,
+      </if>
+      <if test="rank != null">
+        rank,
+      </if>
+      <if test="hot != null">
+        hot,
+      </if>
+      <if test="qualified != null">
+        qualified,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="sname != null">
+        #{sname,jdbcType=VARCHAR},
+      </if>
+      <if test="sendprice != null">
+        #{sendprice,jdbcType=DOUBLE},
+      </if>
+      <if test="packprice != null">
+        #{packprice,jdbcType=DOUBLE},
+      </if>
+      <if test="logimge != null">
+        #{logimge,jdbcType=VARCHAR},
+      </if>
+      <if test="starttime != null">
+        #{starttime,jdbcType=INTEGER},
+      </if>
+      <if test="endtime != null">
+        #{endtime,jdbcType=INTEGER},
+      </if>
+      <if test="sphone != null">
+        #{sphone,jdbcType=VARCHAR},
+      </if>
+      <if test="images != null">
+        #{images,jdbcType=VARCHAR},
+      </if>
+      <if test="distictId != null">
+        #{distictId,jdbcType=INTEGER},
+      </if>
+      <if test="rank != null">
+        #{rank,jdbcType=INTEGER},
+      </if>
+      <if test="hot != null">
+        #{hot,jdbcType=INTEGER},
+      </if>
+      <if test="qualified != null">
+        #{qualified,jdbcType=INTEGER},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.yc.spirngboot.takeout.bean.SellerExample" resultType="java.lang.Long">
+    select count(*) from seller
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update seller
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.sname != null">
+        sname = #{record.sname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sendprice != null">
+        sendprice = #{record.sendprice,jdbcType=DOUBLE},
+      </if>
+      <if test="record.packprice != null">
+        packprice = #{record.packprice,jdbcType=DOUBLE},
+      </if>
+      <if test="record.logimge != null">
+        logImge = #{record.logimge,jdbcType=VARCHAR},
+      </if>
+      <if test="record.starttime != null">
+        starttime = #{record.starttime,jdbcType=INTEGER},
+      </if>
+      <if test="record.endtime != null">
+        endtime = #{record.endtime,jdbcType=INTEGER},
+      </if>
+      <if test="record.sphone != null">
+        sphone = #{record.sphone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.images != null">
+        images = #{record.images,jdbcType=VARCHAR},
+      </if>
+      <if test="record.distictId != null">
+        distict_id = #{record.distictId,jdbcType=INTEGER},
+      </if>
+      <if test="record.rank != null">
+        rank = #{record.rank,jdbcType=INTEGER},
+      </if>
+      <if test="record.hot != null">
+        hot = #{record.hot,jdbcType=INTEGER},
+      </if>
+      <if test="record.qualified != null">
+        qualified = #{record.qualified,jdbcType=INTEGER},
+      </if>
+      <if test="record.description != null">
+        description = #{record.description,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update seller
+    set id = #{record.id,jdbcType=INTEGER},
+      sname = #{record.sname,jdbcType=VARCHAR},
+      sendprice = #{record.sendprice,jdbcType=DOUBLE},
+      packprice = #{record.packprice,jdbcType=DOUBLE},
+      logImge = #{record.logimge,jdbcType=VARCHAR},
+      starttime = #{record.starttime,jdbcType=INTEGER},
+      endtime = #{record.endtime,jdbcType=INTEGER},
+      sphone = #{record.sphone,jdbcType=VARCHAR},
+      images = #{record.images,jdbcType=VARCHAR},
+      distict_id = #{record.distictId,jdbcType=INTEGER},
+      rank = #{record.rank,jdbcType=INTEGER},
+      hot = #{record.hot,jdbcType=INTEGER},
+      qualified = #{record.qualified,jdbcType=INTEGER},
+      description = #{record.description,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update seller
+    set id = #{record.id,jdbcType=INTEGER},
+      sname = #{record.sname,jdbcType=VARCHAR},
+      sendprice = #{record.sendprice,jdbcType=DOUBLE},
+      packprice = #{record.packprice,jdbcType=DOUBLE},
+      logImge = #{record.logimge,jdbcType=VARCHAR},
+      starttime = #{record.starttime,jdbcType=INTEGER},
+      endtime = #{record.endtime,jdbcType=INTEGER},
+      sphone = #{record.sphone,jdbcType=VARCHAR},
+      images = #{record.images,jdbcType=VARCHAR},
+      distict_id = #{record.distictId,jdbcType=INTEGER},
+      rank = #{record.rank,jdbcType=INTEGER},
+      hot = #{record.hot,jdbcType=INTEGER},
+      qualified = #{record.qualified,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yc.spirngboot.takeout.bean.Seller">
+    update seller
+    <set>
+      <if test="sname != null">
+        sname = #{sname,jdbcType=VARCHAR},
+      </if>
+      <if test="sendprice != null">
+        sendprice = #{sendprice,jdbcType=DOUBLE},
+      </if>
+      <if test="packprice != null">
+        packprice = #{packprice,jdbcType=DOUBLE},
+      </if>
+      <if test="logimge != null">
+        logImge = #{logimge,jdbcType=VARCHAR},
+      </if>
+      <if test="starttime != null">
+        starttime = #{starttime,jdbcType=INTEGER},
+      </if>
+      <if test="endtime != null">
+        endtime = #{endtime,jdbcType=INTEGER},
+      </if>
+      <if test="sphone != null">
+        sphone = #{sphone,jdbcType=VARCHAR},
+      </if>
+      <if test="images != null">
+        images = #{images,jdbcType=VARCHAR},
+      </if>
+      <if test="distictId != null">
+        distict_id = #{distictId,jdbcType=INTEGER},
+      </if>
+      <if test="rank != null">
+        rank = #{rank,jdbcType=INTEGER},
+      </if>
+      <if test="hot != null">
+        hot = #{hot,jdbcType=INTEGER},
+      </if>
+      <if test="qualified != null">
+        qualified = #{qualified,jdbcType=INTEGER},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.yc.spirngboot.takeout.bean.Seller">
+    update seller
+    set sname = #{sname,jdbcType=VARCHAR},
+      sendprice = #{sendprice,jdbcType=DOUBLE},
+      packprice = #{packprice,jdbcType=DOUBLE},
+      logImge = #{logimge,jdbcType=VARCHAR},
+      starttime = #{starttime,jdbcType=INTEGER},
+      endtime = #{endtime,jdbcType=INTEGER},
+      sphone = #{sphone,jdbcType=VARCHAR},
+      images = #{images,jdbcType=VARCHAR},
+      distict_id = #{distictId,jdbcType=INTEGER},
+      rank = #{rank,jdbcType=INTEGER},
+      hot = #{hot,jdbcType=INTEGER},
+      qualified = #{qualified,jdbcType=INTEGER},
+      description = #{description,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yc.spirngboot.takeout.bean.Seller">
+    update seller
+    set sname = #{sname,jdbcType=VARCHAR},
+      sendprice = #{sendprice,jdbcType=DOUBLE},
+      packprice = #{packprice,jdbcType=DOUBLE},
+      logImge = #{logimge,jdbcType=VARCHAR},
+      starttime = #{starttime,jdbcType=INTEGER},
+      endtime = #{endtime,jdbcType=INTEGER},
+      sphone = #{sphone,jdbcType=VARCHAR},
+      images = #{images,jdbcType=VARCHAR},
+      distict_id = #{distictId,jdbcType=INTEGER},
+      rank = #{rank,jdbcType=INTEGER},
+      hot = #{hot,jdbcType=INTEGER},
+      qualified = #{qualified,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
