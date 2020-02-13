@@ -1,7 +1,14 @@
 package com.yc.spirngboot.takeout.bean;
 
-public class User {
-    private Integer id;
+import java.io.Serializable;
+
+public class User implements Serializable {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	private Integer id;
 
     private String pwd;
 
@@ -100,4 +107,12 @@ public class User {
     public void setVip(Integer vip) {
         this.vip = vip;
     }
+
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", pwd=" + pwd + ", cityId=" + cityId + ", phone=" + phone + ", uname=" + uname
+				+ ", sex=" + sex + ", cId=" + cId + ", integral=" + integral + ", email=" + email + ", vip=" + vip
+				+ "]";
+	}
+    
 }

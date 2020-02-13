@@ -10,7 +10,20 @@
     <meta name="baidu-site-verification" content="IYCrtVH0i1" />
     <meta property="wb:webmaster" content="239d3d1dbdde1b2c" />
     <link rel="icon" type="image/png" href="images/favicon.ico"/>
+    <script type="text/javascript">
+    	function login(){
+    		var phone=$("#phone").val();
+    		var pwd=$("#pwd").val();
+    		var vcode=$("#vcode").val();
+    		$post("login.do",
+    				{phone : phone,pwd: pwd},function(result){
+    					if(result.code==0){
+    						
+    					}
+    				} )
+    	}
     
+    </script>
     <script type="text/javascript">
         
         (function(document, screen) {if (screen.width < 760) {document.location.href="/mobile/";}}(document, screen));
@@ -20,15 +33,33 @@
     
     <link rel="stylesheet" href="css/frontPage.css"/>
     
-
-    <!--[if lte IE 7]><script>window.onload=function(){location.href="/ie6warning/"}</script><![endif]-->
-    <!--[if lt IE 9]>
-    <script src="js/respond.js"></script>
-    <script>
-        var e = "abbr, article, aside, audio, canvas, datalist, details, dialog, eventsource, figure, footer, header, hgroup, mark, menu, meter, nav, output, progress, section, time, video, dh-dialog, dh-checkbox".split(', ');
-         var i= e.length;while (i--){document.createElement(e[i])}
-    </script>
-    <![endif]-->
+    <!-- 百度地图定位 -->
+	<script type="text/javascript" src="http://libs.baidu.com/jquery/1.7.2/jquery.min.js"></script>  
+   	<script src="http://api.map.baidu.com/api?v=2.0&ak=Dc8o3GUube9RVOhmeuuhfNL9QRyzhuaj" type="text/javascript"></script>
+    <script type="text/javascript">   
+    $(function(){  
+            $("#load_geolocation").text("正在获取位置......");  
+            //创建百度地图控件  
+            var geolocation = new BMap.Geolocation();  
+            geolocation.getCurrentPosition(function(r){  
+                if(this.getStatus() == BMAP_STATUS_SUCCESS){  
+                    //以指定的经度与纬度创建一个坐标点  
+                    var pt = new BMap.Point(r.point.lng,r.point.lat);  
+                    //创建一个地理位置解析器  
+                    var geoc = new BMap.Geocoder();  
+                    geoc.getLocation(pt, function(rs){//解析格式：城市，区县，街道  
+                        var addComp = rs.addressComponents;  
+                        $("#load_geolocation").text(addComp.city + ", " + addComp.district + ", " + addComp.street);  
+                    });      
+                }  
+                else {  
+                    $("#load_geolocation").text('定位失败');  
+                }          
+            },{enableHighAccuracy: true})//指示浏览器获取高精度的位置，默认false  
+         
+    });  
+    </script> 
+    
     <title>首页</title>
 </head>
 <body class="day " ng-controller="bodyCtrl"  day-or-night>
@@ -63,89 +94,18 @@
             </h1>
             <div class="city-list-box back-yellow">
                 <div class="dropdown-box">
-                    <div class="dropdown-select">
-                        <span class="dropdown-text" id="cityName" cityName="Shanghai">上海站</span>
-                        <span class="caret"></span></div>
-                    <ul class="dropdown-menu">
-                        
-                            <li ng-click="setCityAndRedirect('suzhou', '/suzhou/');">
-                                <a href="javascript:;">苏州站</a>
-                            </li>
-                        
-                            <li ng-click="setCityAndRedirect('fuzhou', '/fuzhou/');">
-                                <a href="javascript:;">福州站</a>
-                            </li>
-                        
-                            <li ng-click="setCityAndRedirect('hangzhou', '/hangzhou/');">
-                                <a href="javascript:;">杭州站</a>
-                            </li>
-                        
-                            <li ng-click="setCityAndRedirect('qingdao', '/qingdao/');">
-                                <a href="javascript:;">青岛站</a>
-                            </li>
-                        
-                            <li ng-click="setCityAndRedirect('ningbo', '/ningbo/');">
-                                <a href="javascript:;">宁波站</a>
-                            </li>
-                        
-                            <li ng-click="setCityAndRedirect('nanjing', '/nanjing/');">
-                                <a href="javascript:;">南京站</a>
-                            </li>
-                        
-                            <li ng-click="setCityAndRedirect('chongqing', '/chongqing/');">
-                                <a href="javascript:;">重庆站</a>
-                            </li>
-                        
-                            <li ng-click="setCityAndRedirect('xiamen', '/xiamen/');">
-                                <a href="javascript:;">厦门站</a>
-                            </li>
-                        
-                            <li ng-click="setCityAndRedirect('chengdu', '/chengdu/');">
-                                <a href="javascript:;">成都站</a>
-                            </li>
-                        
-                            <li ng-click="setCityAndRedirect('jinan', '/jinan/');">
-                                <a href="javascript:;">济南站</a>
-                            </li>
-                        
-                            <li ng-click="setCityAndRedirect('guangzhou', '/guangzhou/');">
-                                <a href="javascript:;">广州站</a>
-                            </li>
-                        
-                            <li ng-click="setCityAndRedirect('shenzhen', '/shenzhen/');">
-                                <a href="javascript:;">深圳站</a>
-                            </li>
-                        
-                            <li ng-click="setCityAndRedirect('zhengzhou', '/zhengzhou/');">
-                                <a href="javascript:;">郑州站</a>
-                            </li>
-                        
-                            <li ng-click="setCityAndRedirect('tianjin', '/tianjin/');">
-                                <a href="javascript:;">天津站</a>
-                            </li>
-                        
-                            <li ng-click="setCityAndRedirect('beijing', '/beijing/');">
-                                <a href="javascript:;">北京站</a>
-                            </li>
-                        
-                            <li ng-click="setCityAndRedirect('wuhan', '/wuhan/');">
-                                <a href="javascript:;">武汉站</a>
-                            </li>
-                        
-                            <li ng-click="setCityAndRedirect('changsha', '/changsha/');">
-                                <a href="javascript:;">长沙站</a>
-                            </li>
-                        
-                    </ul>
-                </div>
+                <!-- 位置显示标签 -->
+                <div>  
+     			   <span id="load_geolocation"></span>  
+    			</div>  
             </div>
         </section>
         <section class="search-box-wrap">
             <div class="big-logo position"></div>
             <div class="search-box-inner">
                 <h2 class="search-title">
-                    <strong class="fs24">输入地址，</strong>
-                    <strong class="fs20">查找附近餐厅</strong>
+                    <strong class="fs24">想吃点什么？</strong>
+                    <strong class="fs20">赶快输入查找吧！</strong>
                 </h2>
                 <div class="search-box-left search-box-border">
                     <div class="search-box-right search-box-border"  ng-init="city_name='上海'">
@@ -154,7 +114,7 @@
                             <div class="clearfix">
                                 <div class="search-input-box">
                                     <div class="search-input-inner">
-                                        <input type="text" ng-model="keyword" autocomplete placeholder="我在哪儿？" class="search-input" ng-initial value="" onkeyup="this.setAttribute('value',this.value);"/>
+                                        <input type="text" ng-model="keyword" autocomplete placeholder="去哪吃？" class="search-input" ng-initial value="" onkeyup="this.setAttribute('value',this.value);"/>
                                         <ul ng-class="{disblock:searchResultIsShow}" class="search-result-box">
                                             <li ng-class="{active:currentActiveIndex==$index}" ng-repeat="item in datas track by $index" ng-click="searchResultSelect($index)">
                                                 <h5 ng-bind="item"></h5>
@@ -359,10 +319,11 @@
     
 <dh-dialog class="disnone" type='login' height="500" header="登录" show="loginShow" >
     <form class="login-form" novalidate name="loginForm" ng-controller="loginCtrl">
+        <!-- 手机号 -->
         <div class="form-group">
             <label for="">手机号码</label>
             <div>
-                <input type="text" ng-model="user.username" ng-class="{error:user.usernameMessage}" ng-focus="user.usernameMessage=''" maxlength="11" placeholder="请输入你的手机号码" />
+                <input  id="phone" type="text" ng-model="user.username" ng-class="{error:user.usernameMessage}" ng-focus="user.usernameMessage=''" maxlength="11" placeholder="请输入你的手机号码" />
                 <span class="vaildate-error" ng-if="user.usernameMessage">
                     <span ng-bind="user.usernameMessage"></span>
                 </span>
@@ -371,18 +332,20 @@
                 </span>
             </div>
         </div>
+        <!-- 密码 -->
         <div class="form-group mb10">
             <label for="">登录密码</label>
             <div>
-                <input type="password" onpaste="return false" ng-model="user.password" ng-focus="user.passwordMessage=''"  ng-class="{error:user.passwordMessage}" maxlength="10" placeholder="请输入登录密码" />
+                <input id="pwd" type="password" onpaste="return false" ng-model="user.password" ng-focus="user.passwordMessage=''"  ng-class="{error:user.passwordMessage}" maxlength="10" placeholder="请输入登录密码" />
                 <span class="vaildate-error" ng-if="user.passwordMessage">
                     <span ng-bind="user.passwordMessage"></span>
                 </span>
             </div>
         </div>
-        <div ng-init="showCaptcha=0" ng-if="showCaptcha" class="form-group inline clearfix mb10">
+        <!-- 验证码 -->
+        <div >
             <div class="fl w50p">
-                <input type="text" ng-model="user.captcha" ng-focus="user.captchaMessage=''"  ng-class="{error:user.captchaMessage}" placeholder="请输入验证码">
+                <input id="vcode" type="text" ng-model="user.captcha" ng-focus="user.captchaMessage=''"  ng-class="{error:user.captchaMessage}" placeholder="请输入验证码">
                 <span class="vaildate-error" ng-if="user.captchaMessage">
                     <span ng-bind="user.captchaMessage"></span>
                 </span>
@@ -391,9 +354,10 @@
                 <dh-captcha change="captchaChange" src="images/yzm.gif"></dh-captcha>
             </label>
         </div>
+        
         <div class="clearfix mb10">
             <dh-checkbox model="user.rememberme" title="记住我" class="fl"></dh-checkbox>
-            <a href="pwd_forget.html" target="_blank" class="fs12 fr link">忘记密码</a>
+            <a href="/account/password/reset_via_mobile/" target="_blank" class="fs12 fr link">忘记密码</a>
         </div>
         <button class="big-btn btn-green btn mb10" ng-click="loginVaildate()" ng-disabled="loginBtnDisabled" ng-bind="loginBtn"></button>
         <div class="clearfix">

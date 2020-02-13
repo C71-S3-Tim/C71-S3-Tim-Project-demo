@@ -9,6 +9,10 @@ spring:
      staticLocations: 
         - classpath:/static
         - file:/G:/C71-S3-Pljq-springboot-blog-uploadimage
+   thymeleaf:
+     content-type: text/html 
+     cache: false 
+     mode: LEGACYHTML5
      #邮件配置
    mail:
       #邮箱服务器地址

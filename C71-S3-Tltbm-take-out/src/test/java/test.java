@@ -28,6 +28,7 @@ public class test {
 		String code="123";
 		String result=encodeByMd5(code);	
 		System.out.println("code========="+code);
-		System.out.println("result========="+result);		
+		System.out.println("result========="+result);
+		//ICy5YqxZB1uWSwcVLSNLcA
 	}
 }
