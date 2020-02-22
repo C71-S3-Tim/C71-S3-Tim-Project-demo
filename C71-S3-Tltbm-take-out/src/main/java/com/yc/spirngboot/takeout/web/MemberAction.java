@@ -14,5 +14,6 @@ public class MemberAction {
     public static void main(String[] args) {
 		System.out.println("账号管理");
 		System.out.println("222");
+		System.out.println("222");
 	}
 }

@@ -1,5 +1,4 @@
 import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 
 import javax.annotation.Resource;
 
@@ -11,7 +10,6 @@ import com.yc.spirngboot.takeout.bean.User;
 import com.yc.spirngboot.takeout.biz.UserBiz;
 
 import Decoder.BASE64Encoder;
-
 
 @SpringBootTest(classes =C71S3PljqSpringbootTakeoutApplication.class)// 就是你springboot的启动类
 public class test {
