@@ -3,8 +3,9 @@
 <mapper namespace="com.yc.spirngboot.takeout.dao.GiftMapper">
   <resultMap id="BaseResultMap" type="com.yc.spirngboot.takeout.bean.Gift">
     <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="integral" jdbcType="INTEGER" property="integral" />
-    <result column="image" jdbcType="VARCHAR" property="image" />
+    <result column="images" jdbcType="VARCHAR" property="images" />
     <result column="value" jdbcType="REAL" property="value" />
     <result column="endtime" jdbcType="TIMESTAMP" property="endtime" />
     <result column="status" jdbcType="INTEGER" property="status" />
@@ -69,7 +70,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, integral, image, value, endtime, status, number
+    id, name, integral, images, value, endtime, status, number
   </sql>
   <select id="selectByExample" parameterType="com.yc.spirngboot.takeout.bean.GiftExample" resultMap="BaseResultMap">
     select
@@ -105,12 +106,12 @@
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into gift (integral, image, value, 
-      endtime, status, number
-      )
-    values (#{integral,jdbcType=INTEGER}, #{image,jdbcType=VARCHAR}, #{value,jdbcType=REAL}, 
-      #{endtime,jdbcType=TIMESTAMP}, #{status,jdbcType=INTEGER}, #{number,jdbcType=INTEGER}
-      )
+    insert into gift (name, integral, images, 
+      value, endtime, status, 
+      number)
+    values (#{name,jdbcType=VARCHAR}, #{integral,jdbcType=INTEGER}, #{images,jdbcType=VARCHAR}, 
+      #{value,jdbcType=REAL}, #{endtime,jdbcType=TIMESTAMP}, #{status,jdbcType=INTEGER}, 
+      #{number,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.yc.spirngboot.takeout.bean.Gift">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
@@ -118,11 +119,14 @@
     </selectKey>
     insert into gift
     <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="name != null">
+        name,
+      </if>
       <if test="integral != null">
         integral,
       </if>
-      <if test="image != null">
-        image,
+      <if test="images != null">
+        images,
       </if>
       <if test="value != null">
         value,
@@ -138,11 +142,14 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
       <if test="integral != null">
         #{integral,jdbcType=INTEGER},
       </if>
-      <if test="image != null">
-        #{image,jdbcType=VARCHAR},
+      <if test="images != null">
+        #{images,jdbcType=VARCHAR},
       </if>
       <if test="value != null">
         #{value,jdbcType=REAL},
@@ -170,11 +177,14 @@
       <if test="record.id != null">
         id = #{record.id,jdbcType=INTEGER},
       </if>
+      <if test="record.name != null">
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
       <if test="record.integral != null">
         integral = #{record.integral,jdbcType=INTEGER},
       </if>
-      <if test="record.image != null">
-        image = #{record.image,jdbcType=VARCHAR},
+      <if test="record.images != null">
+        images = #{record.images,jdbcType=VARCHAR},
       </if>
       <if test="record.value != null">
         value = #{record.value,jdbcType=REAL},
@@ -196,8 +206,9 @@
   <update id="updateByExample" parameterType="map">
     update gift
     set id = #{record.id,jdbcType=INTEGER},
+      name = #{record.name,jdbcType=VARCHAR},
       integral = #{record.integral,jdbcType=INTEGER},
-      image = #{record.image,jdbcType=VARCHAR},
+      images = #{record.images,jdbcType=VARCHAR},
       value = #{record.value,jdbcType=REAL},
       endtime = #{record.endtime,jdbcType=TIMESTAMP},
       status = #{record.status,jdbcType=INTEGER},
@@ -209,11 +220,14 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.yc.spirngboot.takeout.bean.Gift">
     update gift
     <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
       <if test="integral != null">
         integral = #{integral,jdbcType=INTEGER},
       </if>
-      <if test="image != null">
-        image = #{image,jdbcType=VARCHAR},
+      <if test="images != null">
+        images = #{images,jdbcType=VARCHAR},
       </if>
       <if test="value != null">
         value = #{value,jdbcType=REAL},
@@ -232,8 +246,9 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.yc.spirngboot.takeout.bean.Gift">
     update gift
-    set integral = #{integral,jdbcType=INTEGER},
-      image = #{image,jdbcType=VARCHAR},
+    set name = #{name,jdbcType=VARCHAR},
+      integral = #{integral,jdbcType=INTEGER},
+      images = #{images,jdbcType=VARCHAR},
       value = #{value,jdbcType=REAL},
       endtime = #{endtime,jdbcType=TIMESTAMP},
       status = #{status,jdbcType=INTEGER},

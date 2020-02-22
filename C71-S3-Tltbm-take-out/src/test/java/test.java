@@ -1,12 +1,28 @@
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.List;
 
+import javax.annotation.Resource;
+
+import org.apache.catalina.mapper.Mapper;
 import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.web.bind.annotation.GetMapping;
+
+import com.yc.spirngboot.takeout.C71S3PljqSpringbootTakeoutApplication;
+import com.yc.spirngboot.takeout.bean.Gift;
+import com.yc.spirngboot.takeout.bean.User;
+import com.yc.spirngboot.takeout.biz.UserBiz;
+import com.yc.spirngboot.takeout.dao.GiftMapper;
+import com.yc.spirngboot.takeout.dao.UserMapper;
 
 import Decoder.BASE64Encoder;
 
+@SpringBootTest(classes =C71S3PljqSpringbootTakeoutApplication.class)// 就是你springboot的启动类
 public class test {
-
+	@Resource
+	private  UserBiz ubiz;
+	
 	public  String encodeByMd5(String encodeText){
 		try{
 		//创建md5的加密方式
@@ -25,6 +41,12 @@ public class test {
 }
 	@Test
 	public void testencodeByMd5() {
+		User user =new User();
+		user.setPhone("13135187907");
+		user.setPwd("123");
+		
+		ubiz.reg(user);
+		
 		String code="123";
 		String result=encodeByMd5(code);	
 		System.out.println("code========="+code);
@@ -32,3 +54,4 @@ public class test {
 		//ICy5YqxZB1uWSwcVLSNLcA
 	}
 }
+

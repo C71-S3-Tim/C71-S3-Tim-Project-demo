@@ -165,6 +165,76 @@ public class GiftExample {
             return (Criteria) this;
         }
 
+        public Criteria andNameIsNull() {
+            addCriterion("name is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andNameIsNotNull() {
+            addCriterion("name is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andNameEqualTo(String value) {
+            addCriterion("name =", value, "name");
+            return (Criteria) this;
+        }
+
+        public Criteria andNameNotEqualTo(String value) {
+            addCriterion("name <>", value, "name");
+            return (Criteria) this;
+        }
+
+        public Criteria andNameGreaterThan(String value) {
+            addCriterion("name >", value, "name");
+            return (Criteria) this;
+        }
+
+        public Criteria andNameGreaterThanOrEqualTo(String value) {
+            addCriterion("name >=", value, "name");
+            return (Criteria) this;
+        }
+
+        public Criteria andNameLessThan(String value) {
+            addCriterion("name <", value, "name");
+            return (Criteria) this;
+        }
+
+        public Criteria andNameLessThanOrEqualTo(String value) {
+            addCriterion("name <=", value, "name");
+            return (Criteria) this;
+        }
+
+        public Criteria andNameLike(String value) {
+            addCriterion("name like", value, "name");
+            return (Criteria) this;
+        }
+
+        public Criteria andNameNotLike(String value) {
+            addCriterion("name not like", value, "name");
+            return (Criteria) this;
+        }
+
+        public Criteria andNameIn(List<String> values) {
+            addCriterion("name in", values, "name");
+            return (Criteria) this;
+        }
+
+        public Criteria andNameNotIn(List<String> values) {
+            addCriterion("name not in", values, "name");
+            return (Criteria) this;
+        }
+
+        public Criteria andNameBetween(String value1, String value2) {
+            addCriterion("name between", value1, value2, "name");
+            return (Criteria) this;
+        }
+
+        public Criteria andNameNotBetween(String value1, String value2) {
+            addCriterion("name not between", value1, value2, "name");
+            return (Criteria) this;
+        }
+
         public Criteria andIntegralIsNull() {
             addCriterion("integral is null");
             return (Criteria) this;
@@ -225,73 +295,73 @@ public class GiftExample {
             return (Criteria) this;
         }
 
-        public Criteria andImageIsNull() {
-            addCriterion("image is null");
+        public Criteria andImagesIsNull() {
+            addCriterion("images is null");
             return (Criteria) this;
         }
 
-        public Criteria andImageIsNotNull() {
-            addCriterion("image is not null");
+        public Criteria andImagesIsNotNull() {
+            addCriterion("images is not null");
             return (Criteria) this;
         }
 
-        public Criteria andImageEqualTo(String value) {
-            addCriterion("image =", value, "image");
+        public Criteria andImagesEqualTo(String value) {
+            addCriterion("images =", value, "images");
             return (Criteria) this;
         }
 
-        public Criteria andImageNotEqualTo(String value) {
-            addCriterion("image <>", value, "image");
+        public Criteria andImagesNotEqualTo(String value) {
+            addCriterion("images <>", value, "images");
             return (Criteria) this;
         }
 
-        public Criteria andImageGreaterThan(String value) {
-            addCriterion("image >", value, "image");
+        public Criteria andImagesGreaterThan(String value) {
+            addCriterion("images >", value, "images");
             return (Criteria) this;
         }
 
-        public Criteria andImageGreaterThanOrEqualTo(String value) {
-            addCriterion("image >=", value, "image");
+        public Criteria andImagesGreaterThanOrEqualTo(String value) {
+            addCriterion("images >=", value, "images");
             return (Criteria) this;
         }
 
-        public Criteria andImageLessThan(String value) {
-            addCriterion("image <", value, "image");
+        public Criteria andImagesLessThan(String value) {
+            addCriterion("images <", value, "images");
             return (Criteria) this;
         }
 
-        public Criteria andImageLessThanOrEqualTo(String value) {
-            addCriterion("image <=", value, "image");
+        public Criteria andImagesLessThanOrEqualTo(String value) {
+            addCriterion("images <=", value, "images");
             return (Criteria) this;
         }
 
-        public Criteria andImageLike(String value) {
-            addCriterion("image like", value, "image");
+        public Criteria andImagesLike(String value) {
+            addCriterion("images like", value, "images");
             return (Criteria) this;
         }
 
-        public Criteria andImageNotLike(String value) {
-            addCriterion("image not like", value, "image");
+        public Criteria andImagesNotLike(String value) {
+            addCriterion("images not like", value, "images");
             return (Criteria) this;
         }
 
-        public Criteria andImageIn(List<String> values) {
-            addCriterion("image in", values, "image");
+        public Criteria andImagesIn(List<String> values) {
+            addCriterion("images in", values, "images");
             return (Criteria) this;
         }
 
-        public Criteria andImageNotIn(List<String> values) {
-            addCriterion("image not in", values, "image");
+        public Criteria andImagesNotIn(List<String> values) {
+            addCriterion("images not in", values, "images");
             return (Criteria) this;
         }
 
-        public Criteria andImageBetween(String value1, String value2) {
-            addCriterion("image between", value1, value2, "image");
+        public Criteria andImagesBetween(String value1, String value2) {
+            addCriterion("images between", value1, value2, "images");
             return (Criteria) this;
         }
 
-        public Criteria andImageNotBetween(String value1, String value2) {
-            addCriterion("image not between", value1, value2, "image");
+        public Criteria andImagesNotBetween(String value1, String value2) {
+            addCriterion("images not between", value1, value2, "images");
             return (Criteria) this;
         }
 

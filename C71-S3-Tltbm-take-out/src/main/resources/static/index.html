@@ -418,7 +418,7 @@
             </div>
         </div>
         <div class="form-group mb10">
-            <div><input type="password" ng-class="{error:user.password2Message}" ng-focus="user.password2Message=''" maxlength="10" onpaste="return false" placeholder="输入登录密码 6-10个字符" ng-model="user.password2"/>
+            <div><input type="password" ng-class="{error:user.password2Message}" ng-focus="user.password2Message=''" maxlength="10" onpaste="return false" placeholder="确认登录密码" ng-model="user.password2"/>
                 <span class="vaildate-error" ng-if="user.password2Message">
                     <span ng-bind="user.password2Message"></span>
                 </span>

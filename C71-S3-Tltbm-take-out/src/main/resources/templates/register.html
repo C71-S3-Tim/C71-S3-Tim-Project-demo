@@ -23,6 +23,27 @@
             }
         }(document, screen));
     </script>
+    <!-- 注册 -->
+    <script>
+    function register() {
+        var phone = $("#phone").val();
+        var pass = $("#pwd").val();
+        var pass2 = $("#pwd").val();
+        if (Number(pass) == Number(pass2)){
+           $.post("/register",{phone:phone,pwd:pwd2},function (res) {
+               if (res ==true){
+                   alert("注册成功");
+                   /* window.location.href ="/login"; */
+               } else {
+                   alert("注册失败，请检查数据重试");
+               }
+           })
+        }else {
+            alert("两次密码不一致！");
+        }
+    }
+    </script> 
+    
 </head>
 <body>
     
@@ -46,51 +67,54 @@
     <div class="main-inner">
         
     <div class="log-box" id="registerPageBox">
-        <div class="form-group w275">
-            <label for="">手机号码</label>
-            <input type="text" id="rPhone" maxlength="11" class="form-text" placeholder="请输入你的手机号码" />
-        </div>
-        <div class="form-error-message"></div>
-
-        <div class="captcha-wrap">
-            <div class="captcha-box" id="captchaBox" style="margin-left: -300px">
-                <div class="captcha-item">
-                    <div class="form-group captcha clearfix">
-                        <input type="text" id="rCaptcha" class="form-text" placeholder="短信验证码"/>
-                        <input type="button" id="getCaptcha"  class="captcha-btn" value="获取验证码"/>
-                    </div>
-                    <div class="form-error-message"></div>
-                </div>
-                <div class="captcha-item">
-                    <div class="form-group captcha clearfix">
-                        <input type="text" id="imgCaptcha" disabled="disabled" maxlength="4" class="form-text" placeholder="输入验证码"/>
-                        <span><img id="captchaImg" _src="/captcha/" src="/captcha/" alt="验证码"/></span>
-                    </div>
-                    <div class="form-error-message"></div>
-                </div>
-            </div>
-        </div>
-
-        <div class="form-group w275">
-            <label for="">登录密码</label>
-            <input type="password" id="rPass" maxlength="10" class="form-text" onpaste="return false" placeholder="输入登录密码 6-10个字符"/>
-        </div>
-        <div class="form-error-message"></div>
-        <div class="form-group w275">
-            <input type="password" id="rPass2" maxlength="10" class="form-text" onpaste="return false" placeholder="输入登录密码 6-10个字符"/>
-        </div>
-        <div class="form-error-message"></div>
-
-        <div class="checkbox form-group clearfix mb5">
-            <input type="checkbox" checked="checked" id="rAgree" value="true">
-            <label for="rAgree" class="fl fs12">我同意外卖超人</label>
-            <span class="fl fs12"><a class="yo" target="_blank" href="/terms-and-conditions/">"注册条款"</a></span>
-        </div>
-        <div class="form-error-message"></div>
-        <div>
-            <button class="form-btn" id="registerPageBtn">确认注册</button>
-        </div>
-        
+    	<form action="reg" method="post">
+	        <div class="form-group w275">
+	            <label for="">手机号码</label>
+	            <input type="text" name="phone" id="phone" maxlength="11" class="form-text" placeholder="请输入你的手机号码" />
+	        </div>
+	        <div class="form-error-message"></div>
+	
+	        <div class="captcha-wrap">
+	            <div class="captcha-box" id="captchaBox" style="margin-left: -300px">
+	                <div class="captcha-item">
+	                    <div class="form-group captcha clearfix">
+	                        <input type="text" id="rCaptcha" class="form-text" placeholder="短信验证码"/>
+	                        <input type="button" id="getCaptcha"  class="captcha-btn" value="获取验证码"/>
+	                    </div>
+	                    <div class="form-error-message"></div>
+	                </div>
+	                <div class="captcha-item">
+	                    <div class="form-group captcha clearfix">
+	                        <input type="text" id="imgCaptcha"  maxlength="4" class="form-text" placeholder="输入验证码"/>
+	                        <input type="button" id="getCaptcha"  style="float: right;width: 100px;height: 40px" value="获取验证码"/>
+	                   
+	                        <!-- <span><img id="captchaImg" _src="/captcha/" src="/captcha/" alt="验证码"/></span> -->
+	                    </div>
+	                    <div class="form-error-message"></div>
+	                </div>
+	            </div>
+	        </div>
+	
+	        <div class="form-group w275">
+	            <label for="">登录密码</label>
+	            <input type="password" name="pwd" id="pwd" maxlength="16" class="form-text" onpaste="return false" placeholder="输入登录密码 6-16个字符"/>
+	        </div>
+	        <div class="form-error-message"></div>
+	        <div class="form-group w275">
+	            <input type="password" id="pwd2" maxlength="16" class="form-text" onpaste="return false" placeholder="确认登录密码 "/>
+	        </div>
+	        <div class="form-error-message"></div>
+	
+	        <div class="checkbox form-group clearfix mb5">
+	            <input type="checkbox" checked="checked" id="rAgree" value="true">
+	            <label for="rAgree" class="fl fs12">我同意外卖超人</label>
+	            <span class="fl fs12"><a class="yo" target="_blank" href="/terms-and-conditions/">"注册条款"</a></span>
+	        </div>
+	        <div class="form-error-message"></div>
+	        <div>
+	            <button class="form-btn" id="registerPageBtn" onclick="register()">确认注册</button>
+	        </div>
+        </form>
     </div>
 
     </div>

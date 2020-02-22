@@ -5,9 +5,11 @@ import java.util.Date;
 public class Gift {
     private Integer id;
 
+    private String name;
+
     private Integer integral;
 
-    private String image;
+    private String images;
 
     private Float value;
 
@@ -25,6 +27,14 @@ public class Gift {
         this.id = id;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name == null ? null : name.trim();
+    }
+
     public Integer getIntegral() {
         return integral;
     }
@@ -33,12 +43,12 @@ public class Gift {
         this.integral = integral;
     }
 
-    public String getImage() {
-        return image;
+    public String getImages() {
+        return images;
     }
 
-    public void setImage(String image) {
-        this.image = image == null ? null : image.trim();
+    public void setImages(String images) {
+        this.images = images == null ? null : images.trim();
     }
 
     public Float getValue() {

@@ -5,6 +5,7 @@
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="city_id" jdbcType="INTEGER" property="cityId" />
     <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="detailedname" jdbcType="VARCHAR" property="detailedname" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -65,7 +66,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, city_id, name
+    id, city_id, name, detailedname
   </sql>
   <select id="selectByExample" parameterType="com.yc.spirngboot.takeout.bean.DistrictExample" resultMap="BaseResultMap">
     select
@@ -101,8 +102,10 @@
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into district (city_id, name)
-    values (#{cityId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR})
+    insert into district (city_id, name, detailedname
+      )
+    values (#{cityId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{detailedname,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.yc.spirngboot.takeout.bean.District">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
@@ -116,6 +119,9 @@
       <if test="name != null">
         name,
       </if>
+      <if test="detailedname != null">
+        detailedname,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="cityId != null">
@@ -123,6 +129,9 @@
       </if>
       <if test="name != null">
         #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="detailedname != null">
+        #{detailedname,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -144,6 +153,9 @@
       <if test="record.name != null">
         name = #{record.name,jdbcType=VARCHAR},
       </if>
+      <if test="record.detailedname != null">
+        detailedname = #{record.detailedname,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -153,7 +165,8 @@
     update district
     set id = #{record.id,jdbcType=INTEGER},
       city_id = #{record.cityId,jdbcType=INTEGER},
-      name = #{record.name,jdbcType=VARCHAR}
+      name = #{record.name,jdbcType=VARCHAR},
+      detailedname = #{record.detailedname,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -167,13 +180,17 @@
       <if test="name != null">
         name = #{name,jdbcType=VARCHAR},
       </if>
+      <if test="detailedname != null">
+        detailedname = #{detailedname,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.yc.spirngboot.takeout.bean.District">
     update district
     set city_id = #{cityId,jdbcType=INTEGER},
-      name = #{name,jdbcType=VARCHAR}
+      name = #{name,jdbcType=VARCHAR},
+      detailedname = #{detailedname,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

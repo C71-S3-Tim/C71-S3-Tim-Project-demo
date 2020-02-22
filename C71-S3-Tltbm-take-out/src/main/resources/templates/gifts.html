@@ -1,4 +1,6 @@
 <!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org">
+
 <!--/*技术支持，小庄602842076     验证：商城技术支持*/
 /*技术支持，小庄602842076    验证：商城技术支持*/
 /*技术支持，小庄602842076    验证：商城技术支持*/
@@ -8,7 +10,7 @@
 /*https://shop116998991.taobao.com/*/
 /*https://shop116998991.taobao.com/*/-->
 
-<html>
+
 <head>
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
@@ -53,7 +55,7 @@
                             <li><a href="index.html" class="index">首页</a></li>
                             <li class="login-register"><a href="login.html" referer-url  class="login"  rel="nofollow">登录</a><span class="cg">/</span><a href="register.html" referer-url  rel="nofollow" class="register">注册</a></li>
                             <li><a href="member_order.html" class="order-center"  rel="nofollow">查看订单</a></li>
-                            <li class=""><a href="gifts.html"  rel="nofollow">氪星礼品站</a></li>
+                            <li class=""><a href="gifts.do"  rel="nofollow">氪星礼品站</a></li>
                             <li class="phone-client "><a href="#"  rel="nofollow" target="_blank"><span>手机客户端</span></a></li>
                         </ul>
                     
@@ -108,7 +110,6 @@
                 <header>
 	
 	
-		<span class="f-size">想兑换？请<a href="javascript:" ng-click="logoinDialogShow()">立即登录</a></span>
 	
 </header>
                 
@@ -116,115 +117,23 @@
         
          <ul class="gift-item clearfix">
             
-             <li>
-                  <p class="gift-name ellipsis" title="人形USB">人形USB</p>  
-                  <p><img src="images/restaurant_08.jpg" /></p>
-                  <p class="gift-num"><span ng-bind="10000|number"></span>氪星币礼品</p>
-                  <button class="btn gift-button" ng-click="gitGift('人形USB','31')" ng-disabled="gitDisable('10000')">立即兑换</button>
+            
+             <li th:each="gift,eee: ${gift}">
+                  <p class="gift-name ellipsis" ><span th:text="${gift.name}" ></span></p>  
+                  <p><img th:src="${gift.images}"/></p>
+                  <p class="gift-num"><span th:text="${gift.integral}"></span>氪星币 </p>
+                  <p class="gift-num1">价值：<span th:text="${gift.value}"></span>&nbsp;元&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;数量：<span th:text="${gift.number}"></span></p>
+                  <button class="btn gift-button" >
+                  		<th:if>
+                  		
+                  		
+                  			立即兑换
+                  		
+                  		</th:if>
+                  </button>
              </li>
              
-             <li>
-                  <p class="gift-name ellipsis" title="透明电子钟笔筒">透明电子钟笔筒</p>  
-                  <p><img src="images/restaurant_08.jpg" /></p>
-                  <p class="gift-num"><span ng-bind="15000|number"></span>氪星币礼品</p>
-                  <button class="btn gift-button" ng-click="gitGift('透明电子钟笔筒','3')" ng-disabled="gitDisable('15000')">立即兑换</button>
-             </li>
              
-             <li>
-                  <p class="gift-name ellipsis" title="超人U盘(8G)">超人U盘(8G)</p>  
-                  <p><img src="images/restaurant_08.jpg" /></p>
-                  <p class="gift-num"><span ng-bind="18000|number"></span>氪星币礼品</p>
-                  <button class="btn gift-button" ng-click="gitGift('超人U盘(8G)','1')" ng-disabled="gitDisable('18000')">立即兑换</button>
-             </li>
-             
-             <li>
-                  <p class="gift-name ellipsis" title="usb苹果台灯">usb苹果台灯</p>  
-                  <p><img src="images/restaurant_08.jpg" /></p>
-                  <p class="gift-num"><span ng-bind="18000|number"></span>氪星币礼品</p>
-                  <button class="btn gift-button" ng-click="gitGift('usb苹果台灯','5')" ng-disabled="gitDisable('18000')">立即兑换</button>
-             </li>
-             
-             <li>
-                  <p class="gift-name ellipsis" title="人形USB">人形USB</p>  
-                  <p><img src="images/restaurant_08.jpg" /></p>
-                  <p class="gift-num"><span ng-bind="10000|number"></span>氪星币礼品</p>
-                  <button class="btn gift-button" ng-click="gitGift('人形USB','31')" ng-disabled="gitDisable('10000')">立即兑换</button>
-             </li>
-             
-             <li>
-                  <p class="gift-name ellipsis" title="透明电子钟笔筒">透明电子钟笔筒</p>  
-                  <p><img src="images/restaurant_08.jpg" /></p>
-                  <p class="gift-num"><span ng-bind="15000|number"></span>氪星币礼品</p>
-                  <button class="btn gift-button" ng-click="gitGift('透明电子钟笔筒','3')" ng-disabled="gitDisable('15000')">立即兑换</button>
-             </li>
-             
-             <li>
-                  <p class="gift-name ellipsis" title="超人U盘(8G)">超人U盘(8G)</p>  
-                  <p><img src="images/restaurant_08.jpg" /></p>
-                  <p class="gift-num"><span ng-bind="18000|number"></span>氪星币礼品</p>
-                  <button class="btn gift-button" ng-click="gitGift('超人U盘(8G)','1')" ng-disabled="gitDisable('18000')">立即兑换</button>
-             </li>
-             
-             <li>
-                  <p class="gift-name ellipsis" title="usb苹果台灯">usb苹果台灯</p>  
-                  <p><img src="images/restaurant_08.jpg" /></p>
-                  <p class="gift-num"><span ng-bind="18000|number"></span>氪星币礼品</p>
-                  <button class="btn gift-button" ng-click="gitGift('usb苹果台灯','5')" ng-disabled="gitDisable('18000')">立即兑换</button>
-             </li>
-             <li>
-                  <p class="gift-name ellipsis" title="人形USB">人形USB</p>  
-                  <p><img src="images/restaurant_08.jpg" /></p>
-                  <p class="gift-num"><span ng-bind="10000|number"></span>氪星币礼品</p>
-                  <button class="btn gift-button" ng-click="gitGift('人形USB','31')" ng-disabled="gitDisable('10000')">立即兑换</button>
-             </li>
-             
-             <li>
-                  <p class="gift-name ellipsis" title="透明电子钟笔筒">透明电子钟笔筒</p>  
-                  <p><img src="images/restaurant_08.jpg" /></p>
-                  <p class="gift-num"><span ng-bind="15000|number"></span>氪星币礼品</p>
-                  <button class="btn gift-button" ng-click="gitGift('透明电子钟笔筒','3')" ng-disabled="gitDisable('15000')">立即兑换</button>
-             </li>
-             
-             <li>
-                  <p class="gift-name ellipsis" title="超人U盘(8G)">超人U盘(8G)</p>  
-                  <p><img src="images/restaurant_08.jpg" /></p>
-                  <p class="gift-num"><span ng-bind="18000|number"></span>氪星币礼品</p>
-                  <button class="btn gift-button" ng-click="gitGift('超人U盘(8G)','1')" ng-disabled="gitDisable('18000')">立即兑换</button>
-             </li>
-             
-             <li>
-                  <p class="gift-name ellipsis" title="usb苹果台灯">usb苹果台灯</p>  
-                  <p><img src="images/restaurant_08.jpg" /></p>
-                  <p class="gift-num"><span ng-bind="18000|number"></span>氪星币礼品</p>
-                  <button class="btn gift-button" ng-click="gitGift('usb苹果台灯','5')" ng-disabled="gitDisable('18000')">立即兑换</button>
-             </li>
-             <li>
-                  <p class="gift-name ellipsis" title="人形USB">人形USB</p>  
-                  <p><img src="images/restaurant_08.jpg" /></p>
-                  <p class="gift-num"><span ng-bind="10000|number"></span>氪星币礼品</p>
-                  <button class="btn gift-button" ng-click="gitGift('人形USB','31')" ng-disabled="gitDisable('10000')">立即兑换</button>
-             </li>
-             
-             <li>
-                  <p class="gift-name ellipsis" title="透明电子钟笔筒">透明电子钟笔筒</p>  
-                  <p><img src="images/restaurant_08.jpg" /></p>
-                  <p class="gift-num"><span ng-bind="15000|number"></span>氪星币礼品</p>
-                  <button class="btn gift-button" ng-click="gitGift('透明电子钟笔筒','3')" ng-disabled="gitDisable('15000')">立即兑换</button>
-             </li>
-             
-             <li>
-                  <p class="gift-name ellipsis" title="超人U盘(8G)">超人U盘(8G)</p>  
-                  <p><img src="images/restaurant_08.jpg" /></p>
-                  <p class="gift-num"><span ng-bind="18000|number"></span>氪星币礼品</p>
-                  <button class="btn gift-button" ng-click="gitGift('超人U盘(8G)','1')" ng-disabled="gitDisable('18000')">立即兑换</button>
-             </li>
-             
-             <li>
-                  <p class="gift-name ellipsis" title="usb苹果台灯">usb苹果台灯</p>  
-                  <p><img src="images/restaurant_08.jpg" /></p>
-                  <p class="gift-num"><span ng-bind="18000|number"></span>氪星币礼品</p>
-                  <button class="btn gift-button" ng-click="gitGift('usb苹果台灯','5')" ng-disabled="gitDisable('18000')">立即兑换</button>
-             </li>
              
          </ul>
          

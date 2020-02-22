@@ -206,10 +206,11 @@ table a { color: #E18450 }
 .user-gift-main{padding:0  15px 20px 25px;min-height:400px;}
 .gift-convert{color:#666;padding:7px 15px;float:right;margin-top:-9px;cursor:pointer;border:1px solid #c3c3c3;border-radius: 5px;background: #fff;}
 .gift-item{font-size: 0.75em;}
-.gift-item li{padding:0 5px;width:164px;height:260px;border:1px solid #e6e6e6;float:left;border-radius: 2px;margin:12px 10px 0 0;}
+.gift-item li{padding:0 5px;width:164px;height:270px;border:1px solid #e6e6e6;float:left;border-radius: 2px;margin:12px 10px 0 0;}
 .gift-item li img{width:164px;height:164px;display: block;}
-.gift-name{padding:9px 0 5px 1px;}
-.gift-num{padding: 8px 0 8px;color:#666;}
+.gift-name{padding:9px 0 3px 1px;}
+.gift-num{padding: 8px 0 3px;color:#666;}
+.gift-num1{padding: 5px 0 6px;color:#666;}
 .gift-num span{color:#f60;margin-right:8px;}
 .gift-button{width:100%;height:32px;background: #81c02f;}
 .gift-histroy-body{max-height: 470px;overflow-y:auto;}

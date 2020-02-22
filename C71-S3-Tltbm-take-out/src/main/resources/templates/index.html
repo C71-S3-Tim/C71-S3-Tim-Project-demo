@@ -492,12 +492,17 @@
             <p>请您检查地址拼写/格式是否正确和 <a href="javascript:void(0)" class="link" ng-click="resetStreet()">重新输入您的地址</a>。</p>
         </div>
     </dh-dialog>
+    
+    <!-- 新店入驻 -->
+    
+    
     <dh-dialog class="disnone" height="500" type="merchants" header="商户入驻申请" show="merchantsShow">
+    <form action="newshop" method="post">
         <div class="inline" ng-controller="merchantCtrl">
             <div class="form-group row mb10">
                 <label class="col-3" >商户名称：</label>
                 <div class="col-8">
-                    <input type="text" ng-class="{error:merchants.nameMessage}" maxlength="11" placeholder="输入店铺的名称，例：美美小厨" ng-model="merchants.name"/>
+                    <input type="text" name="sname" ng-class="{error:merchants.nameMessage}" maxlength="11" placeholder="输入店铺的名称，例：美美小厨" ng-model="merchants.name"/>
                 </div>
                 <span class="vaildate-error col-8 col-offset-3" ng-if="merchants.nameMessage">
                     <span ng-bind="merchants.nameMessage"></span>
@@ -506,7 +511,7 @@
             <div class="form-group row mb10">
                 <label class="col-3">所属城市：</label>
                 <div class="col-8">
-                    <select model="city" area-model="area" ng-class="{error:merchants.cityMessage}" class="city-change"></select>
+                    <select model="city"  area-model="area" ng-class="{error:merchants.cityMessage}" class="city-change"></select>
                 </div>
                 <span class="vaildate-error col-8 col-offset-3" ng-if="merchants.cityMessage">
                     <span ng-bind="merchants.cityMessage"></span>
@@ -521,7 +526,7 @@
             <div class="form-group row mb10">
                 <label class="col-3">店主姓名：</label>
                 <div class="col-8">
-                    <input type="text" ng-class="{error:merchants.usernameMessage}" placeholder="请输入联系人姓名" ng-model="merchants.username"/>
+                    <input type="text"  ng-class="{error:merchants.usernameMessage}" placeholder="请输入联系人姓名" ng-model="merchants.username"/>
                 </div>
                 <span class="vaildate-error col-8 col-offset-3" ng-if="merchants.usernameMessage">
                     <span ng-bind="merchants.usernameMessage"></span>
@@ -544,6 +549,7 @@
                 <button class="btn normal-btn btn-cancel" ng-click="merchantCancel()">取消</button>
             </div>
         </div>
+        </form>
     </dh-dialog>
 
     <dh-dialog class="disnone" type="alert" index="1001" header="" show="requestSuccess">

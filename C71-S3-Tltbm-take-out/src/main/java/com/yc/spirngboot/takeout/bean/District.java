@@ -7,6 +7,8 @@ public class District {
 
     private String name;
 
+    private String detailedname;
+
     public Integer getId() {
         return id;
     }
@@ -29,5 +31,13 @@ public class District {
 
     public void setName(String name) {
         this.name = name == null ? null : name.trim();
+    }
+
+    public String getDetailedname() {
+        return detailedname;
+    }
+
+    public void setDetailedname(String detailedname) {
+        this.detailedname = detailedname == null ? null : detailedname.trim();
     }
 }
