@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="www.thymeleaf.org">
-<head th:include="common::head">
+<html>
+<head>
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
     <meta name="description" content="首页" />
@@ -14,29 +14,13 @@
     	function login(){
     		var phone=$("#phone").val();
     		var pwd=$("#pwd").val();
-    		
-    		$.post("login.do",
-    				{phone : phone,
-    				 pwd: pwd},
-    				function(result){
+    		var vcode=$("#vcode").val();
+    		$post("login.do",
+    				{phone : phone,pwd: pwd},function(result){
     					if(result.code==0){
-    						alert("登录成功！");
-    						//关闭模态窗口
     						
-    						var e1=$("#login");
-    						angular.element(e1).triggerHandler('click');
-    						
-    						
-    						var replace=document.getElementById("replace");
-    						replace.parentNode.removeChild(replace);   //
-    						//增加账号显示
-    	    				 $("#parent").prepend("<a class='three'>"+phone+"</a>");
-    						
-    					}else {
-    						$("#msg").text(result.msg); 
     					}
-  
-    		} )
+    				} )
     	}
     
     </script>
@@ -93,14 +77,10 @@
     <section class="member-wrap" id="member-wrap">
         <div class="common-width posr">
             
-                <div id="parent" class="member-box fs12" login-box info="loginInfo"  >
-                	
-        			<span id="replace">
-                    <a id="login"  href="javascript:void(0)" ng-click="logoinDialogShow()">登录</a>
-                    <span >/</span>
+                <div class="member-box fs12" login-box info="loginInfo">
+                    <a href="javascript:void(0)" ng-click="logoinDialogShow()">登录</a>
+                    <span>/</span>
                     <a href="javascript:void(0)" ng-click="registerDialogShow()">注册</a>
-                    </span>
-                    
                     <span>|</span>
                     <a href="member_order.html">查看订单</a>
                 </div>
@@ -339,8 +319,6 @@
     
 <dh-dialog class="disnone" type='login' height="500" header="登录" show="loginShow" >
     <form class="login-form" novalidate name="loginForm" ng-controller="loginCtrl">
-   
-	<span colspan="2" id="msg" style="text-align:center; color:red"></span>
         <!-- 手机号 -->
         <div class="form-group">
             <label for="">手机号码</label>
@@ -381,8 +359,7 @@
             <dh-checkbox model="user.rememberme" title="记住我" class="fl"></dh-checkbox>
             <a href="/account/password/reset_via_mobile/" target="_blank" class="fs12 fr link">忘记密码</a>
         </div>
-        <!-- 登录按钮 -->
-        <button class="big-btn btn-green btn mb10" onclick="login()">登录</button>
+        <button class="big-btn btn-green btn mb10" ng-click="loginVaildate()" ng-disabled="loginBtnDisabled" ng-bind="loginBtn"></button>
         <div class="clearfix">
             <span class="fr fs12">
                 没有账号?
@@ -554,8 +531,8 @@
         </li>
     </ul>
     
-     <script type="text/javascript" src="js/angular.min.js"></script> 
-     <script src="js/common.js"></script> 
+    <script type="text/javascript" src="js/angular.min.js"></script>
+    <script src="js/common.js"></script>
     
     <script type="text/javascript" src="http://webapi.amap.com/maps?v=1.3&key=5cd6dcb00bc675bf26c9b4ab2af0759a"></script>
     <script src="js/service.js"></script>
@@ -568,7 +545,6 @@
     <script src="js/frontPage.js"></script>
 
     
-    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
     <script>angular.bootstrap(document, ["app"]);</script>
 
 

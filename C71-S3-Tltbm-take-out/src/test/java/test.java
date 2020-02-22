@@ -4,7 +4,6 @@ import java.security.NoSuchAlgorithmException;
 import javax.annotation.Resource;
 
 import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.yc.spirngboot.takeout.C71S3PljqSpringbootTakeoutApplication;
@@ -40,6 +39,7 @@ public class test {
 		User user =new User();
 		user.setPhone("13135187907");
 		user.setPwd("123456");
+		
 		
 		ubiz.reg(user);
 		

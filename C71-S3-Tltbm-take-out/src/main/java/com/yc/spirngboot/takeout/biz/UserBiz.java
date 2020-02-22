@@ -22,14 +22,12 @@ public class UserBiz {
 		String newpwd=md.MD5(user.getPwd());
 		user.setPwd(newpwd);
 		//System.out.println(user);
-		um.insertSelective(user);
-	
+ 		um.insertSelective(user);
 	}
 
-	public User selectByUser(String phone,String pwd) throws BizExcption {
+	public User selectByUser(String phone) throws BizExcption {
 		UserExample ue=new UserExample();
-		ue.createCriteria().andPhoneEqualTo(phone)
-							.andPwdEqualTo(pwd);
+		ue.createCriteria().andPhoneEqualTo(phone);						
 		List<User> users=um.selectByExample(ue);
 		if(users.size()==1) {
 			return users.get(0);
