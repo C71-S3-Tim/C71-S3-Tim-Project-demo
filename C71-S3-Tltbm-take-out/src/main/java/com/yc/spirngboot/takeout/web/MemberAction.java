@@ -13,7 +13,7 @@ public class MemberAction {
 
     public static void main(String[] args) {
 		System.out.println("账号管理");
-		System.out.println("122");
-		System.out.println("112221");
+		System.out.println("122222");
+		System.out.println("11222221");
 	}
 }
