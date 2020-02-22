@@ -1,13 +1,7 @@
-<!DOCTYPE html><!--/*技术支持，小庄602842076     验证：商城技术支持*/
-/*技术支持，小庄602842076    验证：商城技术支持*/
-/*技术支持，小庄602842076    验证：商城技术支持*/
-/*技术支持，小庄602842076    验证：商城技术支持*/
-/*技术支持，小庄602842076    验证：商城技术支持*/
-/*https://shop116998991.taobao.com/*/
-/*https://shop116998991.taobao.com/*/
-/*https://shop116998991.taobao.com/*/-->
-
-<html>
+<!DOCTYPE html>
+    
+<!-- 在 html标签中加入 thymeleaf 的命名空间      xmlns ==>  xml   name  spase -->
+<html lang="en" xmlns:th="www.thymeleaf.org">
 <head>
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
@@ -19,10 +13,22 @@
     
     <link rel="stylesheet" href="css/forget_passwd.css"/>
 
-    <!--[if lt IE 9]><link rel="stylesheet" type="text/css" href="css/frontPage-ie8-fix.css" /><![endif]-->
-    <!--[if lte IE 10]><script>document.createElement('footer');document.createElement('header');document.createElement('nav');document.createElement('section');document.createElement('article');</script><![endif]-->
-    <!--[if lte IE 7]><script>window.onload=function(){location.href="/ie6warning/"}</script><![endif]-->
     <title>找回密码</title>
+    <style>
+    #footer{
+
+	height: 165px;
+
+	width: 100%;
+
+	background-color: #ddd;
+
+	position: fixed;
+
+	bottom: 0;
+
+}
+    </style>
     <script type="text/javascript">
         
         (function(document, screen) {
@@ -31,6 +37,29 @@
             }
         }(document, screen));
     </script>
+    <script src="js/jquery.min.js"></script>
+<script type="text/javascript">
+function jishi(num){
+	var tt=window.setTimeout(btnShow,num);
+}
+function btnShow(){
+	$("#send").removeAttr("disabled");
+}
+$(document).ready(function(e){
+	$("#send").click(function(e){
+		$(this).attr("disabled","disabled");
+		jishi(10000);
+		var phoneValue=$("[name=phone]").val();
+		$.post("CreateCode.php","phone="+phoneValue,function(result){
+			var rsJson=$.parseJSON(result);
+			if(rsJson.respCode!="00000"){
+				window.alert("发送失败,请稍后再试");
+			}
+		});
+		
+	});
+});
+</script>
 </head>
 <body>
     
@@ -67,7 +96,7 @@
         </div>
     
 <form action="#" method="post">
-    <div class="fill-data-box" id="phoneStep" style="margin-bottom: 400px">
+    <div class="fill-data-box" id="phoneStep">
         <div class="fill-data">
             <div class="title">手机号码：</div>
             <div class="form-group w275">
@@ -86,17 +115,18 @@
                     <div class="captcha-item">
                         <div class="form-group captcha clearfix">
                             <input type="text" id="imgCaptcha" disabled="disabled" maxlength="4" class="form-text" placeholder="输入验证码"/>
-                            <span style="float:left"><img id="phoneCaptchaImg" _src="/captcha/" src="images/yzm.gif" alt="验证码" width="100"/></span>
+							<span style="float:left"><img alt="验证码" onclick="this.src='defaultKaptcha?d='+new Date()*1" src="defaultKaptcha"alt="验证码" width="100"/></span>
+							<input type="text" id="captcha2" name="captcha2"  class="form-text" placeholder="短信验证码"/>
+                            <input type="button" id="getCaptcha" class="captcha-btn" value="获取短信验证码"/>
                         </div>
                         <div class="form-error-message"></div>
                     </div>
                 </div>
             </div>
             <div>
-                <button class="form-btn" id="phoneNextStep">下一步</button>
+                <button class="form-btn" id="phoneNextStep" onclick="">下一步</button>
             </div>
             <ul class="other-way">
-                <li>其他方式</li>
                 <li>联系客服，可以拨打<span>4001 517 577</span></li>
             </ul>
         </div>
@@ -107,10 +137,6 @@
 
         </div>
     </section>
-    
-    
-    
-    
     <footer id="footer">
         <div class="footer-first gray">
             <div class="company-info clearfix fs14 gray">
