@@ -3,16 +3,22 @@ package com.yc.spirngboot.takeout.web;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import com.yc.spirngboot.takeout.bean.Orderinfo;
+import com.yc.spirngboot.takeout.bean.OrderinfoExample.Criteria;
 import com.yc.spirngboot.takeout.bean.User;
+import com.yc.spirngboot.takeout.bean.UserExample;
 import com.yc.spirngboot.takeout.biz.BizExcption;
 import com.yc.spirngboot.takeout.biz.UserBiz;
+import com.yc.spirngboot.takeout.dao.UserMapper;
 import com.yc.spirngboot.takeout.vo.Result;
 import com.yc.spirngboot.takeout.vo.encodeByMd5;
 
@@ -23,6 +29,8 @@ public class LoginAction {
 	
 	@Resource
 	private UserBiz ubiz;
+	@Resource
+	private UserMapper um;
 	
 	@PostMapping("login.do")
 	@ResponseBody()
@@ -55,4 +63,18 @@ public class LoginAction {
 		}
 		return result;
 	}
+	
+	@RequestMapping("account")
+	public String tom(HttpSession hs,Model m,Orderinfo orderinfo) {
+		//System.out.println(hs.getAttribute("loginedUser"));	
+		int allorders=ubiz.allorders();
+		m.addAttribute("allorders",allorders);
+		
+		int sucOrders=ubiz.sucessorders();
+		m.addAttribute("sucOrders",sucOrders);
+		m.addAttribute("loginedUser",hs.getAttribute("loginedUser"));
+		return "member_index";
+	}
+	
+	
 }

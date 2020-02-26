@@ -19,7 +19,8 @@ app.controller('bodyCtrl',["$scope","$timeout","$http",function(scope,timeout,ht
         scope.requestSuccess = true;
         timeout(function(){
             scope.requestSuccess = false;
-        },2000);
+            window.location.href = 'index.html';
+        },2000);  
     })
     scope.$on('change-password-error',function(){
         scope.requestError = true;
@@ -104,10 +105,11 @@ app.controller("changePasswordCtrl",["$scope",'formVaildate','$http',function(sc
         if(vaildate){
             scope.isSubmit = true;
             scope.submitText = '修改中';
-            http.post('/ajax/change_password/',{'old_password':scope.user.password,'new_password':scope.user.newPassword})
+            http.post('change.do',{'old_password':scope.user.password,'new_password':scope.user.newPassword})
                 .success(function(d){
                     if(d.status=='ok'){
                         scope.$emit('change-password-success');
+                        /*window.location.href = 'index.html';*/
                     }else{
                         switch (d.failed_code){
                             case '1019':
