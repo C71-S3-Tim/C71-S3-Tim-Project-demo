@@ -11,35 +11,7 @@
     <meta property="wb:webmaster" content="239d3d1dbdde1b2c" />
     <link rel="icon" type="image/png" href="images/favicon.ico"/>
 
-    <script type="text/javascript">
-    	function login(){
-    		var phone=$("#phone").val();
-    		var pwd=$("#pwd").val();
-    		
-    		$.post("login.do",
-    				{phone : phone,
-    				 pwd: pwd},
-    				function(result){
-    					if(result.code==0){
-    						alert("登录成功！");
-    						//关闭模态窗口
-    						
-    						var e1=$("#login");
-    						angular.element(e1).triggerHandler('click');
-    						
-    						
-    						var replace=document.getElementById("replace");
-    						replace.parentNode.removeChild(replace);   //
-    						//增加账号显示
-    	    				 $("#parent").prepend("<a class='three'>"+phone+"</a>");
-    						
-    					}else {
-    						$("#msg").text(result.msg); 
-    					}
-  
-    		} )
-    	}
->>>>>>> branch 'master' of https://github.com/C71-S3-Tim/C71-S3-Tim-Project-demo.git
+    
     
     <script type="text/javascript">
         
