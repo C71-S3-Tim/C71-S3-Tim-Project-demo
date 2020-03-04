@@ -42,4 +42,9 @@ public class test {
 		System.out.println(""+value);
 		return "NewFile"; 
 	}
+	
+	@GetMapping("toindex")
+	public String toIndex() {
+		return "index";
+	}
 }
