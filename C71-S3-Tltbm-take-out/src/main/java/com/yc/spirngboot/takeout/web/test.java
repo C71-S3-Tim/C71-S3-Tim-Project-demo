@@ -45,6 +45,7 @@ public class test {
 	
 	@GetMapping("toindex")
 	public String toIndex() {
+		
 		return "index";
 	}
 }
