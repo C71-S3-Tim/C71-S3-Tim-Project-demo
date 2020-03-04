@@ -2,7 +2,7 @@ package com.yc.spirngboot.takeout.bean;
 
 import java.util.Date;
 
-public class Order {
+public class Myorder {
     private Integer id;
 
     private Integer gId;
@@ -17,7 +17,22 @@ public class Order {
 
     private Date time;
 
-    public Integer getId() {
+    private String ordercode;
+
+    //一对一关联查寻
+    private Good mygood;
+    
+    
+
+	public Good getMygood() {
+		return mygood;
+	}
+
+	public void setMygood(Good mygood) {
+		this.mygood = mygood;
+	}
+
+	public Integer getId() {
         return id;
     }
 
@@ -72,4 +87,19 @@ public class Order {
     public void setTime(Date time) {
         this.time = time;
     }
+
+    public String getOrdercode() {
+        return ordercode;
+    }
+
+    public void setOrdercode(String ordercode) {
+        this.ordercode = ordercode == null ? null : ordercode.trim();
+    }
+
+	@Override
+	public String toString() {
+		return "Myorder [id=" + id + ", gId=" + gId + ", number=" + number + ", money=" + money + ", senderId="
+				+ senderId + ", sendtime=" + sendtime + ", time=" + time + ", ordercode=" + ordercode + "]";
+	}
+    
 }

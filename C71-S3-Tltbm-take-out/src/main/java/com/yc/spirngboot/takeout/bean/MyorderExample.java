@@ -4,14 +4,14 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class OrderExample {
+public class MyorderExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public OrderExample() {
+    public MyorderExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
@@ -522,6 +522,76 @@ public class OrderExample {
 
         public Criteria andTimeNotBetween(Date value1, Date value2) {
             addCriterion("time not between", value1, value2, "time");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrdercodeIsNull() {
+            addCriterion("ordercode is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrdercodeIsNotNull() {
+            addCriterion("ordercode is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrdercodeEqualTo(String value) {
+            addCriterion("ordercode =", value, "ordercode");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrdercodeNotEqualTo(String value) {
+            addCriterion("ordercode <>", value, "ordercode");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrdercodeGreaterThan(String value) {
+            addCriterion("ordercode >", value, "ordercode");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrdercodeGreaterThanOrEqualTo(String value) {
+            addCriterion("ordercode >=", value, "ordercode");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrdercodeLessThan(String value) {
+            addCriterion("ordercode <", value, "ordercode");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrdercodeLessThanOrEqualTo(String value) {
+            addCriterion("ordercode <=", value, "ordercode");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrdercodeLike(String value) {
+            addCriterion("ordercode like", value, "ordercode");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrdercodeNotLike(String value) {
+            addCriterion("ordercode not like", value, "ordercode");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrdercodeIn(List<String> values) {
+            addCriterion("ordercode in", values, "ordercode");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrdercodeNotIn(List<String> values) {
+            addCriterion("ordercode not in", values, "ordercode");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrdercodeBetween(String value1, String value2) {
+            addCriterion("ordercode between", value1, value2, "ordercode");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrdercodeNotBetween(String value1, String value2) {
+            addCriterion("ordercode not between", value1, value2, "ordercode");
             return (Criteria) this;
         }
     }

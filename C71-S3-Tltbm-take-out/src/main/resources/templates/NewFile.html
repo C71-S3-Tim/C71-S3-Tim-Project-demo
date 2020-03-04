@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+ <dd class="small-star fl" >
+     <div  class="wo" style="width:12px; height: 10px; background: url(../images/small_start.png);" ></div> 
+     <div  class="wo" style="width:12px; height: 10px; background: url(../images/small_start.png);" ></div> 
+     <div  class="wo" style="width:12px; height: 10px; background: url(../images/small_start.png);" ></div>                   					
+</dd>
+ <script type="text/javascript">
+ (function (){
+	var jsondata='[[${sellers}]]';
+	 //将&quot;替换成"否则无法转成数组
+ 	var reg = new RegExp("&quot;", "g");
+ 	var jsondataByTrime= jsondata.replace(reg, '"');
+ 	//将json转成数组
+	  var sellers =JSON.parse(jsondataByTrime);
+	 var btns = document.getElementsByClassName("wo");
+	 for(var i=0;i<btns.length;i++){
+		 var star=sellers[i].rank;
+		 btns[i].style.width = 13*star+"px";
+	 }
+	 	
+ })();
+ </script>
+</body>
+</html>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.yc.spirngboot.takeout.dao.OrderMapper">
-  <resultMap id="BaseResultMap" type="com.yc.spirngboot.takeout.bean.Order">
+<mapper namespace="com.yc.spirngboot.takeout.dao.MyorderMapper">
+  <resultMap id="BaseResultMap" type="com.yc.spirngboot.takeout.bean.Myorder">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="g_id" jdbcType="INTEGER" property="gId" />
     <result column="number" jdbcType="INTEGER" property="number" />
@@ -9,6 +9,9 @@
     <result column="sender_id" jdbcType="INTEGER" property="senderId" />
     <result column="sendtime" jdbcType="INTEGER" property="sendtime" />
     <result column="time" jdbcType="TIMESTAMP" property="time" />
+    <result column="ordercode" jdbcType="VARCHAR" property="ordercode" />
+    <!-- 配置1：1关联查询-->
+  	 <association  property="mygood" autoMapping="true" column="g_id" select="com.yc.spirngboot.takeout.dao.GoodMapper.selectByPrimaryKey" ></association >
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -69,15 +72,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, g_id, number, money, sender_id, sendtime, time
+    id, g_id, number, money, sender_id, sendtime, time, ordercode
   </sql>
-  <select id="selectByExample" parameterType="com.yc.spirngboot.takeout.bean.OrderExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.yc.spirngboot.takeout.bean.MyorderExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from order
+    from myorder
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -88,35 +91,35 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from order
+    from myorder
     where id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from order
+    delete from myorder
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.yc.spirngboot.takeout.bean.OrderExample">
-    delete from order
+  <delete id="deleteByExample" parameterType="com.yc.spirngboot.takeout.bean.MyorderExample">
+    delete from myorder
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.yc.spirngboot.takeout.bean.Order">
+  <insert id="insert" parameterType="com.yc.spirngboot.takeout.bean.Myorder">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into order (g_id, number, money, 
-      sender_id, sendtime, time
-      )
+    insert into myorder (g_id, number, money, 
+      sender_id, sendtime, time, 
+      ordercode)
     values (#{gId,jdbcType=INTEGER}, #{number,jdbcType=INTEGER}, #{money,jdbcType=REAL}, 
-      #{senderId,jdbcType=INTEGER}, #{sendtime,jdbcType=INTEGER}, #{time,jdbcType=TIMESTAMP}
-      )
+      #{senderId,jdbcType=INTEGER}, #{sendtime,jdbcType=INTEGER}, #{time,jdbcType=TIMESTAMP}, 
+      #{ordercode,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.yc.spirngboot.takeout.bean.Order">
+  <insert id="insertSelective" parameterType="com.yc.spirngboot.takeout.bean.Myorder">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into order
+    insert into myorder
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="gId != null">
         g_id,
@@ -135,6 +138,9 @@
       </if>
       <if test="time != null">
         time,
+      </if>
+      <if test="ordercode != null">
+        ordercode,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -156,16 +162,19 @@
       <if test="time != null">
         #{time,jdbcType=TIMESTAMP},
       </if>
+      <if test="ordercode != null">
+        #{ordercode,jdbcType=VARCHAR},
+      </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.yc.spirngboot.takeout.bean.OrderExample" resultType="java.lang.Long">
-    select count(*) from order
+  <select id="countByExample" parameterType="com.yc.spirngboot.takeout.bean.MyorderExample" resultType="java.lang.Long">
+    select count(*) from myorder
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update order
+    update myorder
     <set>
       <if test="record.id != null">
         id = #{record.id,jdbcType=INTEGER},
@@ -188,26 +197,30 @@
       <if test="record.time != null">
         time = #{record.time,jdbcType=TIMESTAMP},
       </if>
+      <if test="record.ordercode != null">
+        ordercode = #{record.ordercode,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update order
+    update myorder
     set id = #{record.id,jdbcType=INTEGER},
       g_id = #{record.gId,jdbcType=INTEGER},
       number = #{record.number,jdbcType=INTEGER},
       money = #{record.money,jdbcType=REAL},
       sender_id = #{record.senderId,jdbcType=INTEGER},
       sendtime = #{record.sendtime,jdbcType=INTEGER},
-      time = #{record.time,jdbcType=TIMESTAMP}
+      time = #{record.time,jdbcType=TIMESTAMP},
+      ordercode = #{record.ordercode,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.yc.spirngboot.takeout.bean.Order">
-    update order
+  <update id="updateByPrimaryKeySelective" parameterType="com.yc.spirngboot.takeout.bean.Myorder">
+    update myorder
     <set>
       <if test="gId != null">
         g_id = #{gId,jdbcType=INTEGER},
@@ -227,17 +240,21 @@
       <if test="time != null">
         time = #{time,jdbcType=TIMESTAMP},
       </if>
+      <if test="ordercode != null">
+        ordercode = #{ordercode,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.yc.spirngboot.takeout.bean.Order">
-    update order
+  <update id="updateByPrimaryKey" parameterType="com.yc.spirngboot.takeout.bean.Myorder">
+    update myorder
     set g_id = #{gId,jdbcType=INTEGER},
       number = #{number,jdbcType=INTEGER},
       money = #{money,jdbcType=REAL},
       sender_id = #{senderId,jdbcType=INTEGER},
       sendtime = #{sendtime,jdbcType=INTEGER},
-      time = #{time,jdbcType=TIMESTAMP}
+      time = #{time,jdbcType=TIMESTAMP},
+      ordercode = #{ordercode,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>
