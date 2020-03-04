@@ -360,6 +360,7 @@ app.value('requestData',function(_scope , _http , _cache,_ajaxData){
             firstAdd:function(data){
                 http.post(ajax_add_delivery_address,data)
             },
+
             //新增地址的js
             add : function(){
                 http.post("toaddAddraddress",scope.userAddress)
@@ -400,6 +401,7 @@ app.value('requestData',function(_scope , _http , _cache,_ajaxData){
                console.info(url);
                 console.info(scope.currentSelectedAddress);
                 http.post(url,scope.currentSelectedAddress)
+
                 .success(function(d){
                     if(d.status == 'ok'){
                         clearForm();

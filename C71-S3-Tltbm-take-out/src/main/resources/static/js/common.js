@@ -1222,11 +1222,14 @@ var loginObj = (function(){
             scope.captchaChange = Math.random();
             scope.loginShow = true;
         }
+<<<<<<< HEAD
         scope.logoinDialogClose = function () {
             scope.user = {};
             scope.captchaChange = Math.random();
             scope.loginShow = false;
         }
+=======
+>>>>>>> branch 'master' of https://github.com/C71-S3-Tim/C71-S3-Tim-Project-demo.git
         scope.locationRegister = function () {
             scope.loginShow = false;
             scope.registerDialogShow();

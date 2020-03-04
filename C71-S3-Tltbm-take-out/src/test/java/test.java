@@ -1,10 +1,8 @@
 import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 
 import javax.annotation.Resource;
 
 import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.yc.spirngboot.takeout.C71S3PljqSpringbootTakeoutApplication;
@@ -13,7 +11,6 @@ import com.yc.spirngboot.takeout.biz.UserBiz;
 import com.yc.spirngboot.takeout.dao.UserMapper;
 
 import Decoder.BASE64Encoder;
-
 
 @SpringBootTest(classes =C71S3PljqSpringbootTakeoutApplication.class)// 就是你springboot的启动类
 public class test {
@@ -44,6 +41,7 @@ public class test {
 		user.setPhone("13135187907");
 		user.setPwd("123456");
 		user.setcId(null);
+		
 		
 		ubiz.reg(user);
 		

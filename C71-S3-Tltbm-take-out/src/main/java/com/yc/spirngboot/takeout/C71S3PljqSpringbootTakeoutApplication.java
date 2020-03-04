@@ -8,6 +8,7 @@ public class C71S3PljqSpringbootTakeoutApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(C71S3PljqSpringbootTakeoutApplication.class, args);
+		
 	}
 
 }
