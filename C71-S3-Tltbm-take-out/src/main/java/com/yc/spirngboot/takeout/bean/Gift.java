@@ -17,6 +17,8 @@ public class Gift {
 
     private Integer number;
 
+    private String name;
+
     public Integer getId() {
         return id;
     }
@@ -71,5 +73,13 @@ public class Gift {
 
     public void setNumber(Integer number) {
         this.number = number;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name == null ? null : name.trim();
     }
 }

@@ -84,11 +84,11 @@
         <div class="confirm-content fl">
             <div class="content">
                 <h3>订单已成功提交</h3>
-                <p>请保持手机13851435593畅通，稍后超人客服或餐厅会与您联系。</p>
+                <p th:text="请保持手机+${phone}+畅通，稍后超人客服或餐厅会与您联系。">13851435593畅通，稍后超人客服或餐厅会与您联系。</p>
                 <p>感谢使用外卖超人。</p>
                 
                     
-                    <p>获得氪星币：<span class="c_xkb">320</span>个</p>
+                    <p>获得氪星币：<span class="c_xkb" th:text="${intergal}"></span>个</p>
                     
                 
                 <a href="/account/center/orders/" class="order">查看订单</a>
@@ -118,8 +118,8 @@
         <div class="common-layer" id="layer-tip"></div>
         <div id="gift-tip" class="gift-tip">
             <em ng-click="closeTip()"></em>
-            <div>
-                您获得了320个氪星币！
+            <div >
+                您获得了320个氪星币！15455
                 <p>您可以查看<a href="/account/gift/center/">氪星礼品站</a></p>
             </div>
         </div>

@@ -11,10 +11,12 @@
     <result column="endtime" jdbcType="INTEGER" property="endtime" />
     <result column="sphone" jdbcType="VARCHAR" property="sphone" />
     <result column="images" jdbcType="VARCHAR" property="images" />
-    <result column="distict_id" jdbcType="INTEGER" property="distictId" />
+    <result column="city_id" jdbcType="INTEGER" property="cityId" />
     <result column="rank" jdbcType="INTEGER" property="rank" />
     <result column="hot" jdbcType="INTEGER" property="hot" />
     <result column="qualified" jdbcType="INTEGER" property="qualified" />
+   <!-- 配置关商品与店铺的联查询 1:n-->
+  	 <collection  property="goods" autoMapping="true" column="id" select="com.yc.spirngboot.takeout.dao.GoodMapper.selectByUser_id" ></collection >
   </resultMap>
   <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.yc.spirngboot.takeout.bean.Seller">
     <result column="description" jdbcType="LONGVARCHAR" property="description" />
@@ -78,7 +80,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, sname, sendprice, packprice, logImge, starttime, endtime, sphone, images, distict_id, 
+    id, sname, sendprice, packprice, logImge, starttime, endtime, sphone, images, city_id, 
     rank, hot, qualified
   </sql>
   <sql id="Blob_Column_List">
@@ -138,12 +140,12 @@
     </selectKey>
     insert into seller (sname, sendprice, packprice, 
       logImge, starttime, endtime, 
-      sphone, images, distict_id, 
+      sphone, images, city_id, 
       rank, hot, qualified, 
       description)
     values (#{sname,jdbcType=VARCHAR}, #{sendprice,jdbcType=DOUBLE}, #{packprice,jdbcType=DOUBLE}, 
       #{logimge,jdbcType=VARCHAR}, #{starttime,jdbcType=INTEGER}, #{endtime,jdbcType=INTEGER}, 
-      #{sphone,jdbcType=VARCHAR}, #{images,jdbcType=VARCHAR}, #{distictId,jdbcType=INTEGER}, 
+      #{sphone,jdbcType=VARCHAR}, #{images,jdbcType=VARCHAR}, #{cityId,jdbcType=INTEGER}, 
       #{rank,jdbcType=INTEGER}, #{hot,jdbcType=INTEGER}, #{qualified,jdbcType=INTEGER}, 
       #{description,jdbcType=LONGVARCHAR})
   </insert>
@@ -177,8 +179,8 @@
       <if test="images != null">
         images,
       </if>
-      <if test="distictId != null">
-        distict_id,
+      <if test="cityId != null">
+        city_id,
       </if>
       <if test="rank != null">
         rank,
@@ -218,8 +220,8 @@
       <if test="images != null">
         #{images,jdbcType=VARCHAR},
       </if>
-      <if test="distictId != null">
-        #{distictId,jdbcType=INTEGER},
+      <if test="cityId != null">
+        #{cityId,jdbcType=INTEGER},
       </if>
       <if test="rank != null">
         #{rank,jdbcType=INTEGER},
@@ -271,8 +273,8 @@
       <if test="record.images != null">
         images = #{record.images,jdbcType=VARCHAR},
       </if>
-      <if test="record.distictId != null">
-        distict_id = #{record.distictId,jdbcType=INTEGER},
+      <if test="record.cityId != null">
+        city_id = #{record.cityId,jdbcType=INTEGER},
       </if>
       <if test="record.rank != null">
         rank = #{record.rank,jdbcType=INTEGER},
@@ -302,7 +304,7 @@
       endtime = #{record.endtime,jdbcType=INTEGER},
       sphone = #{record.sphone,jdbcType=VARCHAR},
       images = #{record.images,jdbcType=VARCHAR},
-      distict_id = #{record.distictId,jdbcType=INTEGER},
+      city_id = #{record.cityId,jdbcType=INTEGER},
       rank = #{record.rank,jdbcType=INTEGER},
       hot = #{record.hot,jdbcType=INTEGER},
       qualified = #{record.qualified,jdbcType=INTEGER},
@@ -322,7 +324,7 @@
       endtime = #{record.endtime,jdbcType=INTEGER},
       sphone = #{record.sphone,jdbcType=VARCHAR},
       images = #{record.images,jdbcType=VARCHAR},
-      distict_id = #{record.distictId,jdbcType=INTEGER},
+      city_id = #{record.cityId,jdbcType=INTEGER},
       rank = #{record.rank,jdbcType=INTEGER},
       hot = #{record.hot,jdbcType=INTEGER},
       qualified = #{record.qualified,jdbcType=INTEGER}
@@ -357,8 +359,8 @@
       <if test="images != null">
         images = #{images,jdbcType=VARCHAR},
       </if>
-      <if test="distictId != null">
-        distict_id = #{distictId,jdbcType=INTEGER},
+      <if test="cityId != null">
+        city_id = #{cityId,jdbcType=INTEGER},
       </if>
       <if test="rank != null">
         rank = #{rank,jdbcType=INTEGER},
@@ -385,7 +387,7 @@
       endtime = #{endtime,jdbcType=INTEGER},
       sphone = #{sphone,jdbcType=VARCHAR},
       images = #{images,jdbcType=VARCHAR},
-      distict_id = #{distictId,jdbcType=INTEGER},
+      city_id = #{cityId,jdbcType=INTEGER},
       rank = #{rank,jdbcType=INTEGER},
       hot = #{hot,jdbcType=INTEGER},
       qualified = #{qualified,jdbcType=INTEGER},
@@ -402,7 +404,7 @@
       endtime = #{endtime,jdbcType=INTEGER},
       sphone = #{sphone,jdbcType=VARCHAR},
       images = #{images,jdbcType=VARCHAR},
-      distict_id = #{distictId,jdbcType=INTEGER},
+      city_id = #{cityId,jdbcType=INTEGER},
       rank = #{rank,jdbcType=INTEGER},
       hot = #{hot,jdbcType=INTEGER},
       qualified = #{qualified,jdbcType=INTEGER}

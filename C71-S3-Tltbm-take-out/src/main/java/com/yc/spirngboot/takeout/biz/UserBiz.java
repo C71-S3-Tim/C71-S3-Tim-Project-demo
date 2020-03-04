@@ -25,11 +25,10 @@ public class UserBiz {
 		um.insertSelective(user);
 	
 	}
-
-	public User selectByUser(String phone,String pwd) throws BizExcption {
+	//用户登陆
+	public User selectByUser(String phone) throws BizExcption {
 		UserExample ue=new UserExample();
-		ue.createCriteria().andPhoneEqualTo(phone)
-							.andPwdEqualTo(pwd);
+		ue.createCriteria().andPhoneEqualTo(phone);
 		List<User> users=um.selectByExample(ue);
 		if(users.size()==1) {
 			return users.get(0);
@@ -38,5 +37,11 @@ public class UserBiz {
 			
 		}
 	}
-
+	//加入积分
+	public void addIntegal(int intergal, Integer uid) {
+		User user=um.selectByPrimaryKey(uid);
+		user.setIntegral(user.getIntegral()+intergal);
+		um.updateByPrimaryKey(user);
+		
+	}
 }

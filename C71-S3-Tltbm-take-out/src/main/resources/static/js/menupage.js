@@ -577,12 +577,16 @@ app.directive("menuItem",['commonApi',function (commonApi) {
                 });
             }
             elem.on('click', function () {
+            	
+            	
                 if(!scope.canProcessOrder){
+                	console.info("1");
                     scope.$emit('restaurant-rest');
                     return false;
                 }
 
                 if (scope.grid_locationId == "" || !inRange) {
+                	console.info("2");
                     scope.$emit('show-search-address');
                     return false;
                 }

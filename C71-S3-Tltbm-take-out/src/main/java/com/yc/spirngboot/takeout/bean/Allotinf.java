@@ -3,13 +3,15 @@ package com.yc.spirngboot.takeout.bean;
 public class Allotinf {
     private Integer id;
 
-    private Integer discrictId;
-
-    private String rename;
+    private String myrename;
 
     private String rephone;
 
     private Integer uId;
+
+    private String addr;
+
+    private String remarks;
 
     public Integer getId() {
         return id;
@@ -19,20 +21,12 @@ public class Allotinf {
         this.id = id;
     }
 
-    public Integer getDiscrictId() {
-        return discrictId;
+    public String getMyrename() {
+        return myrename;
     }
 
-    public void setDiscrictId(Integer discrictId) {
-        this.discrictId = discrictId;
-    }
-
-    public String getRename() {
-        return rename;
-    }
-
-    public void setRename(String rename) {
-        this.rename = rename == null ? null : rename.trim();
+    public void setMyrename(String myrename) {
+        this.myrename = myrename == null ? null : myrename.trim();
     }
 
     public String getRephone() {
@@ -49,5 +43,21 @@ public class Allotinf {
 
     public void setuId(Integer uId) {
         this.uId = uId;
+    }
+
+    public String getAddr() {
+        return addr;
+    }
+
+    public void setAddr(String addr) {
+        this.addr = addr == null ? null : addr.trim();
+    }
+
+    public String getRemarks() {
+        return remarks;
+    }
+
+    public void setRemarks(String remarks) {
+        this.remarks = remarks == null ? null : remarks.trim();
     }
 }

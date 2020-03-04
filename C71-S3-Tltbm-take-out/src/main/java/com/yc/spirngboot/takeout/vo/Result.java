@@ -8,7 +8,6 @@ public class Result {
 	//返回的数据
 	private Object data;
 	
-	
 	public Result() {
 		super();
 	}

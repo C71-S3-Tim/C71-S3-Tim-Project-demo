@@ -360,8 +360,9 @@ app.value('requestData',function(_scope , _http , _cache,_ajaxData){
             firstAdd:function(data){
                 http.post(ajax_add_delivery_address,data)
             },
+            //新增地址的js
             add : function(){
-                http.post(ajax_add_delivery_address,scope.userAddress)
+                http.post("toaddAddraddress",scope.userAddress)
                 .success(function(d){
                     if(d.status == 'ok'){
                         scope.userAddress.id = d.id;
@@ -372,12 +373,13 @@ app.value('requestData',function(_scope , _http , _cache,_ajaxData){
                     }
                 })
                 .error(function(){
-                    scope.errorMsg = '未知错误，请稍后再试。';
+                    scope.errorMsg = '新增地址错误，请稍后再试。';
                     scope.$emit("request-error");
                 })
             },
+            //修改的js
             update : function(){
-                var url = ajax_update_delivery_address.replace('/0/','/' + scope.userAddress.id + '/');
+                var url = "toUpdateAddr".replace('/0/','/' + scope.userAddress.id + '/');
                 http.post(url,scope.userAddress)
                 .success(function(d){
                     if(d.status == 'ok'){
@@ -388,13 +390,16 @@ app.value('requestData',function(_scope , _http , _cache,_ajaxData){
                     }
                 })
                 .error(function(){
-                    scope.errorMsg = '未知错误，请稍后再试。';
+                    scope.errorMsg = '修改未知错误，请稍后再试。';
                     scope.$emit("request-error");
                 })
             },
+            //删除地址
             del : function(){
-                var url = ajax_update_delivery_address.replace('/0/','/' + scope.currentSelectedAddress.id + '/');
-                http['delete'](url)
+                var url = "deleteAddr".replace('/0/','/' + scope.currentSelectedAddress.id + '/');
+               console.info(url);
+                console.info(scope.currentSelectedAddress);
+                http.post(url,scope.currentSelectedAddress)
                 .success(function(d){
                     if(d.status == 'ok'){
                         clearForm();
