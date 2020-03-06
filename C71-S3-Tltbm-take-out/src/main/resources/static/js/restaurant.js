@@ -636,19 +636,21 @@ app.directive("restaurantMain", ['restaurantFilter', 'lazyImgLoad', 'formatResta
         }
     };
 }]);
+
+
 //用户已定过餐厅
 app.directive("historyRestaurants", ['$http', 'formatRestaurantData', function($http, formatRestaurantData){
     return{
         restrict:'A',
         link: function(scope, elem, attrs){
-            /*scope.historyChange = function(index){
+            scope.historyChange = function(index){
                 if(index > 0){
                     var obj = scope.history[index] || {};
                     if(obj.url){
                         window.open(obj.url,"_blank");
                     }
                 }
-            }*/
+            }
             elem.on('click',function(){
                 scope.$apply(function() {
                     scope.isShowHistory = !scope.isShowHistory;

@@ -1319,11 +1319,11 @@ var loginCtrl = ["$scope", "formVaildate", "$http", function (scope, fem, $http)
         if (!vaildate) {
             return false;
         }
-        scope.user.remember = scope.user.rememberme ? 1 : 0;
+        /*scope.user.remember = scope.user.rememberme ? 1 : 0;
         scope.loginBtnDisabled = true;
-        scope.loginBtn = '登录中请稍等';
+        scope.loginBtn = '登录中请稍等';*/
         //scope.showCaptcha = 0;
-        $http.post("/ajax/user_login/", scope.user)
+       /* $http.post("/ajax/user_login/", scope.user)
             .success(function (d) {
                 if (d.captcha == 1) {
                     scope.showCaptcha = 1;
@@ -1356,7 +1356,7 @@ var loginCtrl = ["$scope", "formVaildate", "$http", function (scope, fem, $http)
             })
             .error(function(){
                 scope.user.usernameMessage = '未知错误，请稍后在试。'
-            })
+            })*/
     }
 }]
 var registerCtrl = ["$scope", "formVaildate", "$http", "postJson", function (scope, fem, $http, postJson) {

@@ -5,7 +5,7 @@ public class District {
 
     private Integer cityId;
 
-    private String name;
+    private String dname;
 
     public Integer getId() {
         return id;
@@ -23,11 +23,11 @@ public class District {
         this.cityId = cityId;
     }
 
-    public String getName() {
-        return name;
+    public String getDname() {
+        return dname;
     }
 
-    public void setName(String name) {
-        this.name = name == null ? null : name.trim();
+    public void setDname(String dname) {
+        this.dname = dname == null ? null : dname.trim();
     }
 }

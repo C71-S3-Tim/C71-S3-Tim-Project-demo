@@ -684,63 +684,63 @@ public class SellerExample {
             return (Criteria) this;
         }
 
-        public Criteria andDistictIdIsNull() {
-            addCriterion("distict_id is null");
+        public Criteria andCityIdIsNull() {
+            addCriterion("city_id is null");
             return (Criteria) this;
         }
 
-        public Criteria andDistictIdIsNotNull() {
-            addCriterion("distict_id is not null");
+        public Criteria andCityIdIsNotNull() {
+            addCriterion("city_id is not null");
             return (Criteria) this;
         }
 
-        public Criteria andDistictIdEqualTo(Integer value) {
-            addCriterion("distict_id =", value, "distictId");
+        public Criteria andCityIdEqualTo(Integer value) {
+            addCriterion("city_id =", value, "cityId");
             return (Criteria) this;
         }
 
-        public Criteria andDistictIdNotEqualTo(Integer value) {
-            addCriterion("distict_id <>", value, "distictId");
+        public Criteria andCityIdNotEqualTo(Integer value) {
+            addCriterion("city_id <>", value, "cityId");
             return (Criteria) this;
         }
 
-        public Criteria andDistictIdGreaterThan(Integer value) {
-            addCriterion("distict_id >", value, "distictId");
+        public Criteria andCityIdGreaterThan(Integer value) {
+            addCriterion("city_id >", value, "cityId");
             return (Criteria) this;
         }
 
-        public Criteria andDistictIdGreaterThanOrEqualTo(Integer value) {
-            addCriterion("distict_id >=", value, "distictId");
+        public Criteria andCityIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("city_id >=", value, "cityId");
             return (Criteria) this;
         }
 
-        public Criteria andDistictIdLessThan(Integer value) {
-            addCriterion("distict_id <", value, "distictId");
+        public Criteria andCityIdLessThan(Integer value) {
+            addCriterion("city_id <", value, "cityId");
             return (Criteria) this;
         }
 
-        public Criteria andDistictIdLessThanOrEqualTo(Integer value) {
-            addCriterion("distict_id <=", value, "distictId");
+        public Criteria andCityIdLessThanOrEqualTo(Integer value) {
+            addCriterion("city_id <=", value, "cityId");
             return (Criteria) this;
         }
 
-        public Criteria andDistictIdIn(List<Integer> values) {
-            addCriterion("distict_id in", values, "distictId");
+        public Criteria andCityIdIn(List<Integer> values) {
+            addCriterion("city_id in", values, "cityId");
             return (Criteria) this;
         }
 
-        public Criteria andDistictIdNotIn(List<Integer> values) {
-            addCriterion("distict_id not in", values, "distictId");
+        public Criteria andCityIdNotIn(List<Integer> values) {
+            addCriterion("city_id not in", values, "cityId");
             return (Criteria) this;
         }
 
-        public Criteria andDistictIdBetween(Integer value1, Integer value2) {
-            addCriterion("distict_id between", value1, value2, "distictId");
+        public Criteria andCityIdBetween(Integer value1, Integer value2) {
+            addCriterion("city_id between", value1, value2, "cityId");
             return (Criteria) this;
         }
 
-        public Criteria andDistictIdNotBetween(Integer value1, Integer value2) {
-            addCriterion("distict_id not between", value1, value2, "distictId");
+        public Criteria andCityIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("city_id not between", value1, value2, "cityId");
             return (Criteria) this;
         }
 

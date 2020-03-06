@@ -224,73 +224,73 @@ public class DistrictExample {
             return (Criteria) this;
         }
 
-        public Criteria andNameIsNull() {
-            addCriterion("name is null");
+        public Criteria andDnameIsNull() {
+            addCriterion("dname is null");
             return (Criteria) this;
         }
 
-        public Criteria andNameIsNotNull() {
-            addCriterion("name is not null");
+        public Criteria andDnameIsNotNull() {
+            addCriterion("dname is not null");
             return (Criteria) this;
         }
 
-        public Criteria andNameEqualTo(String value) {
-            addCriterion("name =", value, "name");
+        public Criteria andDnameEqualTo(String value) {
+            addCriterion("dname =", value, "dname");
             return (Criteria) this;
         }
 
-        public Criteria andNameNotEqualTo(String value) {
-            addCriterion("name <>", value, "name");
+        public Criteria andDnameNotEqualTo(String value) {
+            addCriterion("dname <>", value, "dname");
             return (Criteria) this;
         }
 
-        public Criteria andNameGreaterThan(String value) {
-            addCriterion("name >", value, "name");
+        public Criteria andDnameGreaterThan(String value) {
+            addCriterion("dname >", value, "dname");
             return (Criteria) this;
         }
 
-        public Criteria andNameGreaterThanOrEqualTo(String value) {
-            addCriterion("name >=", value, "name");
+        public Criteria andDnameGreaterThanOrEqualTo(String value) {
+            addCriterion("dname >=", value, "dname");
             return (Criteria) this;
         }
 
-        public Criteria andNameLessThan(String value) {
-            addCriterion("name <", value, "name");
+        public Criteria andDnameLessThan(String value) {
+            addCriterion("dname <", value, "dname");
             return (Criteria) this;
         }
 
-        public Criteria andNameLessThanOrEqualTo(String value) {
-            addCriterion("name <=", value, "name");
+        public Criteria andDnameLessThanOrEqualTo(String value) {
+            addCriterion("dname <=", value, "dname");
             return (Criteria) this;
         }
 
-        public Criteria andNameLike(String value) {
-            addCriterion("name like", value, "name");
+        public Criteria andDnameLike(String value) {
+            addCriterion("dname like", value, "dname");
             return (Criteria) this;
         }
 
-        public Criteria andNameNotLike(String value) {
-            addCriterion("name not like", value, "name");
+        public Criteria andDnameNotLike(String value) {
+            addCriterion("dname not like", value, "dname");
             return (Criteria) this;
         }
 
-        public Criteria andNameIn(List<String> values) {
-            addCriterion("name in", values, "name");
+        public Criteria andDnameIn(List<String> values) {
+            addCriterion("dname in", values, "dname");
             return (Criteria) this;
         }
 
-        public Criteria andNameNotIn(List<String> values) {
-            addCriterion("name not in", values, "name");
+        public Criteria andDnameNotIn(List<String> values) {
+            addCriterion("dname not in", values, "dname");
             return (Criteria) this;
         }
 
-        public Criteria andNameBetween(String value1, String value2) {
-            addCriterion("name between", value1, value2, "name");
+        public Criteria andDnameBetween(String value1, String value2) {
+            addCriterion("dname between", value1, value2, "dname");
             return (Criteria) this;
         }
 
-        public Criteria andNameNotBetween(String value1, String value2) {
-            addCriterion("name not between", value1, value2, "name");
+        public Criteria andDnameNotBetween(String value1, String value2) {
+            addCriterion("dname not between", value1, value2, "dname");
             return (Criteria) this;
         }
     }

@@ -127,8 +127,8 @@ dl.dropdown-menu .title { clear: both; line-height: 34px; border-top: 1px solid 
 .restaurant-introduce dt { margin-right: 5px; max-width: 65px;}
 .restaurant-introduce dt,
 .restaurant-introduce p { font-size: 0.75em; color: #565656; }
-.small-star { width: 63px; height: 10px; background: url(../images/small_start.png) repeat-x left -12px; }
-.small-star.score { background: url(../images/small_start.png) repeat-x left top; }
+/* .small-star { width: 63px; height: 10px; background: url(../images/small_start.png) repeat-x left -12px; } */
+/* .small-star.score { background: url(../images/small_start.png) repeat-x left top; } */
 .restaurant-introduce p { }
 .restaurant-state { margin-top: 7px;}
 .restaurant-state p { font-size: 0.75em; color: #565656; margin-right: 8px; line-height: 14px;}

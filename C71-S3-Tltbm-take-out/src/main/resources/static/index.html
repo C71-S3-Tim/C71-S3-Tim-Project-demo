@@ -22,16 +22,12 @@
     					if(result.code==0){
     						alert("登录成功！");
     						//关闭模态窗口
-    						
     						var e1=$("#login");
     						angular.element(e1).triggerHandler('click');
-    						
-    						
     						var replace=document.getElementById("replace");
     						replace.parentNode.removeChild(replace);   //
     						//增加账号显示
     	    				 $("#parent").prepend("<a class='three'>"+phone+"</a>");
-    						
     					}else {
     						$("#msg").text(result.msg); 
     					}
@@ -40,6 +36,14 @@
     	}
     
     </script>
+    
+    <script type="text/javascript">
+    function query(){
+    	$("#seller").submit();
+	}
+
+    </script>
+    
     <script type="text/javascript">
         
         (function(document, screen) {if (screen.width < 760) {document.location.href="/mobile/";}}(document, screen));
@@ -73,7 +77,7 @@
                 }          
             },{enableHighAccuracy: true})//指示浏览器获取高精度的位置，默认false  
          
-    });  
+    });     
     </script> 
     
     <title>首页</title>
@@ -134,7 +138,10 @@
                             <div class="clearfix">
                                 <div class="search-input-box">
                                     <div class="search-input-inner">
-                                        <input type="text" ng-model="keyword" autocomplete placeholder="去哪吃？" class="search-input" ng-initial value="" onkeyup="this.setAttribute('value',this.value);"/>
+                               <form action="query.do" method="post" id="seller">
+                                        <input type="text" ng-model="keyword" name="sname" id="sname" autocomplete placeholder="去哪吃？" 
+                                        class="search-input" ng-initial value="" onkeyup="this.setAttribute('value',this.value);"/>
+                                    
                                         <ul ng-class="{disblock:searchResultIsShow}" class="search-result-box">
                                             <li ng-class="{active:currentActiveIndex==$index}" ng-repeat="item in datas track by $index" ng-click="searchResultSelect($index)">
                                                 <h5 ng-bind="item"></h5>
@@ -142,15 +149,16 @@
                                         </ul>
                                     </div>
                                 </div>
-                                <button class="btn btn-success fs18 fl" ng-click="searachRestaurant()" ng-disabled="searchBtnDisabled" ng-bind="searchBtnName">查找餐厅</button>
-                                
+                                <button class="btn btn-success fs18 fl"  onclick="query()"
+                                 ng-disabled="searchBtnDisabled" ng-bind="searchBtnName">查找餐厅</button>
+                                </form>
                             </div>
                             <div class="hot-area clearfix fs12">
                                 
-                                    <h3 class="fl">热门区域:</h3>
+                                    <h3 class="fl">热门店铺:</h3>
                                     <ul class="fl clearfix">
                                         
-                                            <li><a href="shop_list.html">五角场</a></li>
+                                            <li><a href="show?sellerid=">五角场</a></li>
                                         
                                             <li><a href="shop_list.html">徐家汇</a></li>
                                         

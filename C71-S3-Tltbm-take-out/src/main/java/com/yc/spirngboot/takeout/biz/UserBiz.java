@@ -9,9 +9,12 @@ import org.springframework.stereotype.Service;
 import com.yc.spirngboot.takeout.bean.Orderinfo;
 import com.yc.spirngboot.takeout.bean.OrderinfoExample;
 import com.yc.spirngboot.takeout.bean.OrderinfoExample.Criteria;
+import com.yc.spirngboot.takeout.bean.Seller;
+import com.yc.spirngboot.takeout.bean.SellerExample;
 import com.yc.spirngboot.takeout.bean.User;
 import com.yc.spirngboot.takeout.bean.UserExample;
 import com.yc.spirngboot.takeout.dao.OrderinfoMapper;
+import com.yc.spirngboot.takeout.dao.SellerMapper;
 import com.yc.spirngboot.takeout.dao.UserMapper;
 import com.yc.spirngboot.takeout.vo.encodeByMd5;
 
@@ -21,6 +24,8 @@ public class UserBiz {
 	private UserMapper um;
 	@Resource
 	private OrderinfoMapper oim;
+	@Resource
+	private SellerMapper sm;
 	
 	public void reg(User user) {
 		//对密码进行md5加密
@@ -38,8 +43,7 @@ public class UserBiz {
 		if(users.size()==1) {
 			return users.get(0);
 		}else {
-			throw new BizExcption("用户不存在");
-			
+			throw new BizExcption("用户不存在"); 
 		}
 	}
 	
@@ -70,5 +74,22 @@ public class UserBiz {
 		return sucOrders;
 	}
 	
+	
+	//模糊查询餐厅
+	public List<Seller> query(String name) {
+		String sname=name.trim();
+		SellerExample example=new SellerExample();
+		example.createCriteria().andSnameLike("%"+sname+"%");
+		List<Seller> list=sm.selectByExample(example);
+		return list;
+	}
+	
+	//热门店铺展示
+	public List<Seller> hotquery(){
+		SellerExample example=new SellerExample();
+		example.createCriteria().andHotEqualTo(0);
+		List<Seller> list=sm.selectByExample(example);
+		return list;
+	}
 
 }

@@ -1,19 +1,25 @@
 package com.yc.spirngboot.takeout.web;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.yc.spirngboot.takeout.bean.Orderinfo;
 import com.yc.spirngboot.takeout.bean.OrderinfoExample.Criteria;
+import com.yc.spirngboot.takeout.bean.Seller;
 import com.yc.spirngboot.takeout.bean.User;
 import com.yc.spirngboot.takeout.bean.UserExample;
 import com.yc.spirngboot.takeout.biz.BizExcption;
@@ -31,6 +37,17 @@ public class LoginAction {
 	private UserBiz ubiz;
 	@Resource
 	private UserMapper um;
+	
+	
+	@GetMapping(path= {"/","index","index.do"})
+	public String index(Model m,HttpSession hs) {
+		if(hs.getAttribute("loginedUser")!=null) {
+			List<Seller> hotseller=ubiz.hotquery();
+			m.addAttribute("hotsellers",hotseller);
+		}
+		return "index";
+	}
+	
 	
 	@PostMapping("login.do")
 	@ResponseBody()
@@ -64,6 +81,7 @@ public class LoginAction {
 		return result;
 	}
 	
+	//账号管理
 	@RequestMapping("account")
 	public String tom(HttpSession hs,Model m,Orderinfo orderinfo) {
 		//System.out.println(hs.getAttribute("loginedUser"));	
@@ -75,6 +93,24 @@ public class LoginAction {
 		m.addAttribute("loginedUser",hs.getAttribute("loginedUser"));
 		return "member_index";
 	}
+		
+	//查找餐厅
+	@PostMapping("query.do")
+	public String query(Model m,String sname) {
+		List<Seller> sellers=ubiz.query(sname);
+		//将数组转成jsong
+		 ObjectMapper mapper = new ObjectMapper();
+		try {
+			String json2=mapper.writeValueAsString(sellers);
+			m.addAttribute("sellers1", json2);
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		}
+		m.addAttribute("sellers",sellers);
+		m.addAttribute("size",sellers.size());
+		return "shop_list";
+	}
 	
+
 	
 }

@@ -164,66 +164,6 @@ public class AllotinfExample {
             return (Criteria) this;
         }
 
-        public Criteria andDiscrictIdIsNull() {
-            addCriterion("discrict_id is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andDiscrictIdIsNotNull() {
-            addCriterion("discrict_id is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andDiscrictIdEqualTo(Integer value) {
-            addCriterion("discrict_id =", value, "discrictId");
-            return (Criteria) this;
-        }
-
-        public Criteria andDiscrictIdNotEqualTo(Integer value) {
-            addCriterion("discrict_id <>", value, "discrictId");
-            return (Criteria) this;
-        }
-
-        public Criteria andDiscrictIdGreaterThan(Integer value) {
-            addCriterion("discrict_id >", value, "discrictId");
-            return (Criteria) this;
-        }
-
-        public Criteria andDiscrictIdGreaterThanOrEqualTo(Integer value) {
-            addCriterion("discrict_id >=", value, "discrictId");
-            return (Criteria) this;
-        }
-
-        public Criteria andDiscrictIdLessThan(Integer value) {
-            addCriterion("discrict_id <", value, "discrictId");
-            return (Criteria) this;
-        }
-
-        public Criteria andDiscrictIdLessThanOrEqualTo(Integer value) {
-            addCriterion("discrict_id <=", value, "discrictId");
-            return (Criteria) this;
-        }
-
-        public Criteria andDiscrictIdIn(List<Integer> values) {
-            addCriterion("discrict_id in", values, "discrictId");
-            return (Criteria) this;
-        }
-
-        public Criteria andDiscrictIdNotIn(List<Integer> values) {
-            addCriterion("discrict_id not in", values, "discrictId");
-            return (Criteria) this;
-        }
-
-        public Criteria andDiscrictIdBetween(Integer value1, Integer value2) {
-            addCriterion("discrict_id between", value1, value2, "discrictId");
-            return (Criteria) this;
-        }
-
-        public Criteria andDiscrictIdNotBetween(Integer value1, Integer value2) {
-            addCriterion("discrict_id not between", value1, value2, "discrictId");
-            return (Criteria) this;
-        }
-
         public Criteria andRenameIsNull() {
             addCriterion("rename is null");
             return (Criteria) this;
@@ -421,6 +361,146 @@ public class AllotinfExample {
 
         public Criteria andUIdNotBetween(Integer value1, Integer value2) {
             addCriterion("u_id not between", value1, value2, "uId");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddrIsNull() {
+            addCriterion("addr is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddrIsNotNull() {
+            addCriterion("addr is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddrEqualTo(String value) {
+            addCriterion("addr =", value, "addr");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddrNotEqualTo(String value) {
+            addCriterion("addr <>", value, "addr");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddrGreaterThan(String value) {
+            addCriterion("addr >", value, "addr");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddrGreaterThanOrEqualTo(String value) {
+            addCriterion("addr >=", value, "addr");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddrLessThan(String value) {
+            addCriterion("addr <", value, "addr");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddrLessThanOrEqualTo(String value) {
+            addCriterion("addr <=", value, "addr");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddrLike(String value) {
+            addCriterion("addr like", value, "addr");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddrNotLike(String value) {
+            addCriterion("addr not like", value, "addr");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddrIn(List<String> values) {
+            addCriterion("addr in", values, "addr");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddrNotIn(List<String> values) {
+            addCriterion("addr not in", values, "addr");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddrBetween(String value1, String value2) {
+            addCriterion("addr between", value1, value2, "addr");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddrNotBetween(String value1, String value2) {
+            addCriterion("addr not between", value1, value2, "addr");
+            return (Criteria) this;
+        }
+
+        public Criteria andRemarksIsNull() {
+            addCriterion("remarks is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andRemarksIsNotNull() {
+            addCriterion("remarks is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andRemarksEqualTo(String value) {
+            addCriterion("remarks =", value, "remarks");
+            return (Criteria) this;
+        }
+
+        public Criteria andRemarksNotEqualTo(String value) {
+            addCriterion("remarks <>", value, "remarks");
+            return (Criteria) this;
+        }
+
+        public Criteria andRemarksGreaterThan(String value) {
+            addCriterion("remarks >", value, "remarks");
+            return (Criteria) this;
+        }
+
+        public Criteria andRemarksGreaterThanOrEqualTo(String value) {
+            addCriterion("remarks >=", value, "remarks");
+            return (Criteria) this;
+        }
+
+        public Criteria andRemarksLessThan(String value) {
+            addCriterion("remarks <", value, "remarks");
+            return (Criteria) this;
+        }
+
+        public Criteria andRemarksLessThanOrEqualTo(String value) {
+            addCriterion("remarks <=", value, "remarks");
+            return (Criteria) this;
+        }
+
+        public Criteria andRemarksLike(String value) {
+            addCriterion("remarks like", value, "remarks");
+            return (Criteria) this;
+        }
+
+        public Criteria andRemarksNotLike(String value) {
+            addCriterion("remarks not like", value, "remarks");
+            return (Criteria) this;
+        }
+
+        public Criteria andRemarksIn(List<String> values) {
+            addCriterion("remarks in", values, "remarks");
+            return (Criteria) this;
+        }
+
+        public Criteria andRemarksNotIn(List<String> values) {
+            addCriterion("remarks not in", values, "remarks");
+            return (Criteria) this;
+        }
+
+        public Criteria andRemarksBetween(String value1, String value2) {
+            addCriterion("remarks between", value1, value2, "remarks");
+            return (Criteria) this;
+        }
+
+        public Criteria andRemarksNotBetween(String value1, String value2) {
+            addCriterion("remarks not between", value1, value2, "remarks");
             return (Criteria) this;
         }
     }

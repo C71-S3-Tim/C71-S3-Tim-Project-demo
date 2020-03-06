@@ -9,6 +9,7 @@
     <result column="endtime" jdbcType="TIMESTAMP" property="endtime" />
     <result column="status" jdbcType="INTEGER" property="status" />
     <result column="number" jdbcType="INTEGER" property="number" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -69,7 +70,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, integral, image, value, endtime, status, number
+    id, integral, image, value, endtime, status, number, name
   </sql>
   <select id="selectByExample" parameterType="com.yc.spirngboot.takeout.bean.GiftExample" resultMap="BaseResultMap">
     select
@@ -106,11 +107,11 @@
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into gift (integral, image, value, 
-      endtime, status, number
-      )
+      endtime, status, number, 
+      name)
     values (#{integral,jdbcType=INTEGER}, #{image,jdbcType=VARCHAR}, #{value,jdbcType=REAL}, 
-      #{endtime,jdbcType=TIMESTAMP}, #{status,jdbcType=INTEGER}, #{number,jdbcType=INTEGER}
-      )
+      #{endtime,jdbcType=TIMESTAMP}, #{status,jdbcType=INTEGER}, #{number,jdbcType=INTEGER}, 
+      #{name,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.yc.spirngboot.takeout.bean.Gift">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
@@ -136,6 +137,9 @@
       <if test="number != null">
         number,
       </if>
+      <if test="name != null">
+        name,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="integral != null">
@@ -155,6 +159,9 @@
       </if>
       <if test="number != null">
         #{number,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -188,6 +195,9 @@
       <if test="record.number != null">
         number = #{record.number,jdbcType=INTEGER},
       </if>
+      <if test="record.name != null">
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -201,7 +211,8 @@
       value = #{record.value,jdbcType=REAL},
       endtime = #{record.endtime,jdbcType=TIMESTAMP},
       status = #{record.status,jdbcType=INTEGER},
-      number = #{record.number,jdbcType=INTEGER}
+      number = #{record.number,jdbcType=INTEGER},
+      name = #{record.name,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -227,6 +238,9 @@
       <if test="number != null">
         number = #{number,jdbcType=INTEGER},
       </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -237,7 +251,8 @@
       value = #{value,jdbcType=REAL},
       endtime = #{endtime,jdbcType=TIMESTAMP},
       status = #{status,jdbcType=INTEGER},
-      number = #{number,jdbcType=INTEGER}
+      number = #{number,jdbcType=INTEGER},
+      name = #{name,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

@@ -52,7 +52,6 @@
                             <li class=""><a href="gifts.html"  rel="nofollow">氪星礼品站</a></li>
                             <li class="phone-client "><a href="#"  rel="nofollow" target="_blank"><span>手机客户端</span></a></li>
                         </ul>
-                    
                 </div>
             </header>
         
@@ -74,8 +73,8 @@
     <header class="header clearfix back-tan fs14">
         <div class="common-width">
             <h1 class="fl">
-                <i class="icon address-icon"></i>
-                当前共有238家餐厅，当前地址：<strong data-ng-bind="currentLocation"></strong>
+                <i  th:text="'当前共有'+${size}+'家餐厅，当前地址:'"></i>
+                <strong data-ng-bind="currentLocation"></strong>
             </h1>
             <a href="index.html" class="fl">[更改地址]</a>
                 <div class="fr search-address-orderList">
@@ -92,15 +91,15 @@
                 <ul class="list"></ul>
                 <ul class="banner_list">
                 
-                    <li><a target="_blank" href="#" title="上海5月-新用户减20元"><img alt="上海5月-新用户减20元" src="http://dhcad.dhero.cn/Fva4qUZRxHr9rgub7MlbjOWu-Ro6"></a></li>
+                    <li><a target="_blank" href="#" title="上海5月-新用户减20元"><img alt="上海5月-新用户减20元" src="images/Fol7bpvmB6TvTvg7-iJQ303-Dmoi"></a></li>
                 
                     <li><a target="_blank" href="#" title="上海5月-减6元"><img alt="上海5月-减6元" src="images/Fol7bpvmB6TvTvg7-iJQ303-Dmoi"></a></li>
                 
-                    <li><a target="_blank" href="#" title="上海5月-飞思乐"><img alt="上海5月-飞思乐" src="http://dhcad.dhero.cn/FjA3bCkGzWz5O7wdn04gNh29XxmC"></a></li>
+                    <li><a target="_blank" href="#" title="上海5月-飞思乐"><img alt="上海5月-飞思乐" src="images/Fol7bpvmB6TvTvg7-iJQ303-Dmoi"></a></li>
                 
-                    <li><a target="_blank" href="#" title="上海5月-吃鸭脖送啤酒"><img alt="上海5月-吃鸭脖送啤酒" src="http://dhcad.dhero.cn/FqDbdf7883i00z2XJcKo6mZZu0F-"></a></li>
+                    <li><a target="_blank" href="#" title="上海5月-吃鸭脖送啤酒"><img alt="上海5月-吃鸭脖送啤酒" src="images/Fol7bpvmB6TvTvg7-iJQ303-Dmoi"></a></li>
                 
-                    <li><a target="_blank" href="#" title="上海5月-份份减十五元"><img alt="上海5月-份份减十五元" src="http://dhcad.dhero.cn/FoRLT8DM-TpV5BPW-0a_Fiq7HLJ2"></a></li>
+                    <li><a target="_blank" href="#" title="上海5月-份份减十五元"><img alt="上海5月-份份减十五元" src="images/Fol7bpvmB6TvTvg7-iJQ303-Dmoi"></a></li>
                 
                 </ul>
             </div>
@@ -230,42 +229,37 @@
                         <div></div>
                     </div>
                     <ul class="clearfix trans recommend-restaurant">
-                        
-                        
+                     
                     </ul>
-                    
-                    
-
-
                     <ul class="clearfix transform-style" id="ye-restaurant">
                         
-                            <li data-index="1"
+                            <li data-index="1" th:each="seller,sellerStat: ${sellers}"
                                 class="restaurant-item fl c_japan-korea c_all p_all p_356 p_352 p_42  p_online fee 0"
                                 data-price='150' data-count="1205" data-title="[半价菜][送可乐]樱花日本料理">
+                                
                                 <div class="img-box fl">
                                     <a href="shop_detail.html">
-                                        <img data-src="http://dhcrestaurantlogo.dhero.cn/1592?v=1415601926" src="http://dhcrestaurantlogo.dhero.cn/0" width="82px" height="82px">
+                                        <img th:src="@{'images/'+${seller.images}}"   width="100%" height="100%">
                                     </a>
                                 </div>
-                                <article class="restaurant-introduce fl">
-                                    <h3 class="ellipsis"><a href="shop_detail.html">[半价菜][送可乐]樱花日本料理</a></h3>
+                                <article class="restaurant-introduce fl" >
+                                    <h3 class="ellipsis"><a href="shop_detail.html" th:text="${seller.sname}"></a></h3>
                                     <dl class="clearfix">
                                         
-                                            <dt class="fl ellipsis">已售1205单</dt>
+                                            <dt class="fl ellipsis">已售10单</dt>
                                         
-                                        <dd class="small-star fl">
-                                            <div class="small-star score" style="width:65px"></div>
+                                        <dd class="small-star fl" >
+                          					<div class="wo" style="width:12px; height: 10px; background: url(../images/small_start.png);" ></div>
                                         </dd>
                                     </dl>
-                                    <p>150元起送 0元配送费</p>
+                                    
+                                    <p th:text="${seller.sendprice}+'元起送'+' '+${seller.packprice}+'元配送费'"> </p>
                                     <div class="restaurant-state">
                                     <p class="fl">日韩料理</p>
                                     
                                     
                                         <span><i class="status-icon"></i></span>
-                                    
-                                    
-                                        
+          
                                              <span><img src="http://dhcactivity.dhero.cn/Fg-4kUvXVpR1DRR0O3VFr73KHEQr?imageView2/1/w/15/h/15/" alt="" /></span>
                                         
                                              <span><img src="http://dhcactivity.dhero.cn/Flswo958RM8GgqlKACT4tY5kr5K7?imageView2/1/w/15/h/15/" alt="" /></span>
@@ -277,17 +271,15 @@
                                 </article>
                                 <div class="tooltip restaurant-info">
                                     <script type="text/template">
-                                        <h3 class="ellipsis">[半价菜][送可乐]樱花日本料理</h3>
+                                        <h3 class="ellipsis" th:text="${seller.sname}"></h3>
                                         
-                                            <h4 class="ellipsis">营业时间 [09:00-22:30]</h4>
+                                            <h4 class="ellipsis" th:text="'营业时间'+${seller.starttime}+':00-'+${seller.endtime}+':00'"> [09:00-22:30]</h4>
                                         
                                         <ul>
                                             
                                              
                                                 <li><i class="status-icon"></i><span>餐厅支持在线支付</span></li>
-                                            
-                                            
-                                                
+
                                                     <li><img src="http://dhcactivity.dhero.cn/Fg-4kUvXVpR1DRR0O3VFr73KHEQr?imageView2/1/w/15/h/15/" alt="" /><span>每单赠送价值15元进口果汁1瓶！</span></li>
                                                 
                                                     <li><img src="http://dhcactivity.dhero.cn/Flswo958RM8GgqlKACT4tY5kr5K7?imageView2/1/w/15/h/15/" alt="" /><span>活动菜品立减6元，多点多减！</span></li>
@@ -304,252 +296,9 @@
                                     <div class="collect-success">收藏成功</div>
                                 
                             </li>
-                        
-                            <li data-index="2"
-                                class="restaurant-item fl c_drink-snack c_all p_all p_352 p_42   fee 0"
-                                data-price='30' data-count="827" data-title="吉祥馄饨 (高安路店)">
-                                <div class="img-box fl">
-                                    <a href="shop_detail.html">
-                                        <img data-src="http://dhcrestaurantlogo.dhero.cn/1019?v=1402216533" src="http://dhcrestaurantlogo.dhero.cn/0" width="82px" height="82px">
-                                    </a>
-                                </div>
-                                <article class="restaurant-introduce fl">
-                                    <h3 class="ellipsis"><a href="/Shanghai/ji-xiang-hun-tun-gao-an-lu-dian/menu/?gid=602341">吉祥馄饨 (高安路店)</a></h3>
-                                    <dl class="clearfix">
-                                        
-                                            <dt class="fl ellipsis">已售827单</dt>
-                                        
-                                        <dd class="small-star fl">
-                                            <div class="small-star score" style="width:65px"></div>
-                                        </dd>
-                                    </dl>
-                                    <p>30元起送 0元配送费</p>
-                                    <div class="restaurant-state">
-                                    <p class="fl">饮料小吃</p>
-                                    
-                                    
-                                    
-                                        
-                                             <span><img src="http://dhcactivity.dhero.cn/Flswo958RM8GgqlKACT4tY5kr5K7?imageView2/1/w/15/h/15/" alt="" /></span>
-                                        
-                                             <span><img src="http://dhcactivity.dhero.cn/FjnSIEuUzJvV6j-ifPq7zevJSt30?imageView2/1/w/15/h/15/" alt="" /></span>
-                                        
-                                    
-                                </div>
-                                </article>
-                                <div class="tooltip restaurant-info">
-                                    <script type="text/template">
-                                        <h3 class="ellipsis">吉祥馄饨 (高安路店)</h3>
-                                        
-                                            <h4 class="ellipsis">营业时间 [09:00-21:00]</h4>
-                                        
-                                        <ul>
-                                            
-                                            
-                                            
-                                                
-                                                    <li><img src="http://dhcactivity.dhero.cn/Flswo958RM8GgqlKACT4tY5kr5K7?imageView2/1/w/15/h/15/" alt="" /><span>活动菜品立减6元，多点多减！</span></li>
-                                                
-                                                    <li><img src="http://dhcactivity.dhero.cn/FjnSIEuUzJvV6j-ifPq7zevJSt30?imageView2/1/w/15/h/15/" alt="" /><span>该餐厅已通过认证</span></li>
-                                                
-                                            
-                                        </ul>
-                                    </script>
-                                </div>
-
-                                
-                                    <div class="collect not-collect" title="收藏餐厅" data-rid="1019"></div>
-                                    <div class="collect-success">收藏成功</div>
-                                
-                            </li>
-                        
-                            <li data-index="3"
-                                class="restaurant-item fl c_chinese-fastfood c_all p_all p_356 p_352 p_42  p_online fee 0"
-                                data-price='20' data-count="1604" data-title="旺润快餐">
-                                <div class="img-box fl">
-                                    <a href="shop_detail.html">
-                                        <img data-src="http://dhcrestaurantlogo.dhero.cn/3188?v=1402216533" src="http://dhcrestaurantlogo.dhero.cn/0" width="82px" height="82px">
-                                    </a>
-                                </div>
-                                <article class="restaurant-introduce fl">
-                                    <h3 class="ellipsis"><a href="/Shanghai/wang-run-kuai-can/menu/?gid=602341">旺润快餐</a></h3>
-                                    <dl class="clearfix">
-                                        
-                                            <dt class="fl ellipsis">已售1604单</dt>
-                                        
-                                        <dd class="small-star fl">
-                                            <div class="small-star score" style="width:52px"></div>
-                                        </dd>
-                                    </dl>
-                                    <p>20元起送 0元配送费</p>
-                                    <div class="restaurant-state">
-                                    <p class="fl">中餐简餐</p>
-                                    
-                                    
-                                        <span><i class="status-icon"></i></span>
-                                    
-                                    
-                                        
-                                             <span><img src="http://dhcactivity.dhero.cn/Fg-4kUvXVpR1DRR0O3VFr73KHEQr?imageView2/1/w/15/h/15/" alt="" /></span>
-                                        
-                                             <span><img src="http://dhcactivity.dhero.cn/Flswo958RM8GgqlKACT4tY5kr5K7?imageView2/1/w/15/h/15/" alt="" /></span>
-                                        
-                                             <span><img src="http://dhcactivity.dhero.cn/FjnSIEuUzJvV6j-ifPq7zevJSt30?imageView2/1/w/15/h/15/" alt="" /></span>
-                                        
-                                    
-                                </div>
-                                </article>
-                                <div class="tooltip restaurant-info">
-                                    <script type="text/template">
-                                        <h3 class="ellipsis">旺润快餐</h3>
-                                        
-                                            <h4 class="ellipsis">营业时间 [09:00-20:00]</h4>
-                                        
-                                        <ul>
-                                            
-                                             
-                                                <li><i class="status-icon"></i><span>餐厅支持在线支付</span></li>
-                                            
-                                            
-                                                
-                                                    <li><img src="http://dhcactivity.dhero.cn/Fg-4kUvXVpR1DRR0O3VFr73KHEQr?imageView2/1/w/15/h/15/" alt="" /><span>每单赠送价值15元进口果汁1瓶！</span></li>
-                                                
-                                                    <li><img src="http://dhcactivity.dhero.cn/Flswo958RM8GgqlKACT4tY5kr5K7?imageView2/1/w/15/h/15/" alt="" /><span>活动菜品立减6元，多点多减！</span></li>
-                                                
-                                                    <li><img src="http://dhcactivity.dhero.cn/FjnSIEuUzJvV6j-ifPq7zevJSt30?imageView2/1/w/15/h/15/" alt="" /><span>该餐厅已通过认证</span></li>
-                                                
-                                            
-                                        </ul>
-                                    </script>
-                                </div>
-
-                                
-                                    <div class="collect not-collect" title="收藏餐厅" data-rid="3188"></div>
-                                    <div class="collect-success">收藏成功</div>
-                                
-                            </li>
-                        
-                            <li data-index="4"
-                                class="restaurant-item fl c_japan-korea c_all p_all p_352 p_42 p_356  p_online  2"
-                                data-price='150' data-count="106" data-title="[7折]铃木便当屋">
-                                <div class="img-box fl">
-                                    <a href="shop_detail.html">
-                                        <img data-src="http://dhcrestaurantlogo.dhero.cn/16047?v=1419627769" src="http://dhcrestaurantlogo.dhero.cn/0" width="82px" height="82px">
-                                    </a>
-                                </div>
-                                <article class="restaurant-introduce fl">
-                                    <h3 class="ellipsis"><a href="shop_detail.html">[7折]铃木便当屋</a></h3>
-                                    <dl class="clearfix">
-                                        
-                                            <dt class="fl ellipsis">已售106单</dt>
-                                        
-                                        <dd class="small-star fl">
-                                            <div class="small-star score" style="width:65px"></div>
-                                        </dd>
-                                    </dl>
-                                    <p>150元起送 2元配送费</p>
-                                    <div class="restaurant-state">
-                                    <p class="fl">日韩料理</p>
-                                    
-                                    
-                                        <span><i class="status-icon"></i></span>
-                                    
-                                    
-                                        
-                                             <span><img src="http://dhcactivity.dhero.cn/Flswo958RM8GgqlKACT4tY5kr5K7?imageView2/1/w/15/h/15/" alt="" /></span>
-                                        
-                                             <span><img src="http://dhcactivity.dhero.cn/FjnSIEuUzJvV6j-ifPq7zevJSt30?imageView2/1/w/15/h/15/" alt="" /></span>
-                                        
-                                             <span><img src="http://dhcactivity.dhero.cn/Fg-4kUvXVpR1DRR0O3VFr73KHEQr?imageView2/1/w/15/h/15/" alt="" /></span>
-                                        
-                                    
-                                </div>
-                                </article>
-                                <div class="tooltip restaurant-info">
-                                    <script type="text/template">
-                                        <h3 class="ellipsis">[7折]铃木便当屋</h3>
-                                        
-                                            <h4 class="ellipsis">营业时间 [09:00-22:00]</h4>
-                                        
-                                        <ul>
-                                            
-                                             
-                                                <li><i class="status-icon"></i><span>餐厅支持在线支付</span></li>
-                                            
-                                            
-                                                
-                                                    <li><img src="http://dhcactivity.dhero.cn/Flswo958RM8GgqlKACT4tY5kr5K7?imageView2/1/w/15/h/15/" alt="" /><span>活动菜品立减6元，多点多减！</span></li>
-                                                
-                                                    <li><img src="http://dhcactivity.dhero.cn/FjnSIEuUzJvV6j-ifPq7zevJSt30?imageView2/1/w/15/h/15/" alt="" /><span>该餐厅已通过认证</span></li>
-                                                
-                                                    <li><img src="http://dhcactivity.dhero.cn/Fg-4kUvXVpR1DRR0O3VFr73KHEQr?imageView2/1/w/15/h/15/" alt="" /><span>每单赠送价值15元进口果汁1瓶！</span></li>
-                                                
-                                            
-                                        </ul>
-                                    </script>
-                                </div>
-
-                                
-                                    <div class="collect not-collect" title="收藏餐厅" data-rid="16047"></div>
-                                    <div class="collect-success">收藏成功</div>
-                                
-                            </li>
-                        
-                            <li data-index="5"
-                                class="restaurant-item fl c_chinese-fastfood c_all p_all p_352   fee 0"
-                                data-price='35' data-count="665" data-title="韩韩烧腊 (医学院路店)">
-                                <div class="img-box fl">
-                                    <a href="shop_detail.html">
-                                        <img data-src="http://dhcrestaurantlogo.dhero.cn/991?v=1402216533" src="http://dhcrestaurantlogo.dhero.cn/0" width="82px" height="82px">
-                                    </a>
-                                </div>
-                                <article class="restaurant-introduce fl">
-                                    <h3 class="ellipsis"><a href="/Shanghai/han-han-shao-la-yi-xue-yuan-lu-dian/menu/?gid=602341">韩韩烧腊 (医学院路店)</a></h3>
-                                    <dl class="clearfix">
-                                        
-                                            <dt class="fl ellipsis">已售665单</dt>
-                                        
-                                        <dd class="small-star fl">
-                                            <div class="small-star score" style="width:52px"></div>
-                                        </dd>
-                                    </dl>
-                                    <p>35元起送 0元配送费</p>
-                                    <div class="restaurant-state">
-                                    <p class="fl">中餐简餐</p>
-                                    
-                                    
-                                    
-                                        
-                                             <span><img src="http://dhcactivity.dhero.cn/Flswo958RM8GgqlKACT4tY5kr5K7?imageView2/1/w/15/h/15/" alt="" /></span>
-                                        
-                                    
-                                </div>
-                                </article>
-                                <div class="tooltip restaurant-info">
-                                    <script type="text/template">
-                                        <h3 class="ellipsis">韩韩烧腊 (医学院路店)</h3>
-                                        
-                                            <h4 class="ellipsis">营业时间 [09:00-14:00, 16:00-20:00]</h4>
-                                        
-                                        <ul>
-                                            
-                                            
-                                            
-                                                
-                                                    <li><img src="http://dhcactivity.dhero.cn/Flswo958RM8GgqlKACT4tY5kr5K7?imageView2/1/w/15/h/15/" alt="" /><span>活动菜品立减6元，多点多减！</span></li>
-                                                
-                                            
-                                        </ul>
-                                    </script>
-                                </div>
-
-                                
-                                    <div class="collect not-collect" title="收藏餐厅" data-rid="991"></div>
-                                    <div class="collect-success">收藏成功</div>
-                                
-                            </li>
-                        
                     </ul>
+                    
+                    
                     <div class="restaurant-list-empty all-restaurant-empty">
                         <div>暂无符合条件的餐厅，返回 <a href="javascript:;" class="link reset-filter">所有餐厅</a></div>
                     </div>
@@ -12427,7 +12176,7 @@
         <div class="form-group">
             <label for="">手机号码</label>
             <div>
-                <input type="text" ng-model="user.username" ng-class="{error:user.usernameMessage}" ng-focus="user.usernameMessage=''" maxlength="11" placeholder="请输入你的手机号码" />
+                <input type="text" name="phone" id="phone" ng-model="user.username" ng-class="{error:user.usernameMessage}" ng-focus="user.usernameMessage=''" maxlength="11" placeholder="请输入你的手机号码" />
                 <span class="vaildate-error" ng-if="user.usernameMessage">
                     <span ng-bind="user.usernameMessage"></span>
                 </span>
@@ -12439,7 +12188,7 @@
         <div class="form-group mb10">
             <label for="">登录密码</label>
             <div>
-                <input type="password" onpaste="return false" ng-model="user.password" ng-focus="user.passwordMessage=''"  ng-class="{error:user.passwordMessage}" maxlength="10" placeholder="请输入登录密码" />
+                <input type="password" name="pwd" id="pwd" onpaste="return false" ng-model="user.password" ng-focus="user.passwordMessage=''"  ng-class="{error:user.passwordMessage}" maxlength="10" placeholder="请输入登录密码" />
                 <span class="vaildate-error" ng-if="user.passwordMessage">
                     <span ng-bind="user.passwordMessage"></span>
                 </span>
@@ -12460,7 +12209,8 @@
             <dh-checkbox model="user.rememberme" title="记住我" class="fl"></dh-checkbox>
             <a href="/account/password/reset_via_mobile/" target="_blank" class="fs12 fr link">忘记密码</a>
         </div>
-        <button class="big-btn btn-green btn mb10" ng-click="loginVaildate()" ng-disabled="loginBtnDisabled" ng-bind="loginBtn"></button>
+        <!-- 登录按钮 -->
+        <button class="big-btn btn-green btn mb10" onclick="login()" ng-click="loginVaildate()" ng-disabled="loginBtnDisabled" ng-bind="loginBtn"></button>
         <div class="clearfix">
             <span class="fr fs12">
                 没有账号?
@@ -12469,6 +12219,7 @@
         </div>
     </form>
 </dh-dialog>
+
 <dh-dialog class="disnone" type='register' height="500" header="注册" show="registerShow" >
     <form ng-controller="registerCtrl" class="register-form" name="registerForm">
         <div class="form-group mb10">
@@ -12576,7 +12327,52 @@
             currentLocation = '徐家汇',
             disableCoupon = false;
     </script>
-    <script src="js/restaurant.js"></script>
+
+	<script type="text/javascript">
+		(function() {
+			var jsondata = '[[${sellers1}]]';
+			//将&quot;替换成"否则无法转成数组
+			var reg = new RegExp("&quot;", "g");
+			var jsondataByTrime = jsondata.replace(reg, '"');
+			//将json转成数组
+			var sellers = JSON.parse(jsondataByTrime);
+			var btns = document.getElementsByClassName("wo");
+			for (var i = 0; i < btns.length; i++) {
+				var star = sellers[i].rank;
+				btns[i].style.width = 13 * star + "px";
+			}
+
+		})();
+	</script>
+ <script type="text/javascript">
+    	function login(){
+    		var phone=$("#phone").val();
+    		var pwd=$("#pwd").val();
+    		
+    		$.post("login.do",
+    				{phone : phone,
+    				 pwd: pwd},
+    				function(result){
+    					if(result.code==0){
+    						alert("登录成功！");
+    						
+    						//关闭模态窗口
+    						var e1=$("#login");
+    						angular.element(e1).triggerHandler('click');
+    						var replace=document.getElementById("replace");
+    						replace.parentNode.removeChild(replace);   //
+    						//增加账号显示
+    	    				 $("#parent").prepend("<a class='three'>"+phone+"</a>");
+    					}else {
+    						$("#msg").text(result.msg); 
+    					}
+  
+    		} )
+    	}
+    
+    </script>
+
+	<script src="js/restaurant.js"></script>
 
     
     <script>angular.bootstrap(document, ["app"]);</script>
