@@ -6,7 +6,6 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
-import com.yc.spirngboot.takeout.bean.Orderinfo;
 import com.yc.spirngboot.takeout.bean.OrderinfoExample;
 import com.yc.spirngboot.takeout.bean.OrderinfoExample.Criteria;
 import com.yc.spirngboot.takeout.bean.User;
