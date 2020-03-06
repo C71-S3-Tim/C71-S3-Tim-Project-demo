@@ -100,13 +100,13 @@
         <div class="common-width posr">
             
                 <div id="parent" class="member-box fs12" login-box info="loginInfo">
-                    <a id ="login" href="javascript:void(0)" ng-click="logoinDialogShow()">登录</a>
-                    
-                    <span id="span">/</span>
-                    <a id="reg"  href="javascript:void(0)" ng-click="registerDialogClose()">注册</a>
+                    <a th:if="${session.loginedUser} eq null" id ="login" href="javascript:void(0)" ng-click="logoinDialogShow()">登录</a>
+                    <a href="member_order.html" th:if="${session.loginedUser} ne null" th:text="${session.loginedUser.phone}"></a>
+                    <span th:if="${session.loginedUser} eq null" id="span">/</span>
+                    <a th:if="${session.loginedUser} eq null" id="reg"  href="javascript:void(0)" ng-click="registerDialogClose()">注册</a>
                     <span>|</span>
                     <a href="member_order.html">查看订单</a>
-                    <a href="member_order.html" th:text="${sesion.loginedUser.phone}">55555</a>
+                    
                 </div>
             
         </div>

@@ -1,6 +1,8 @@
 package com.yc.spirngboot.takeout.web;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -24,6 +26,7 @@ import com.yc.spirngboot.takeout.bean.User;
 import com.yc.spirngboot.takeout.biz.AllotinfBiz;
 import com.yc.spirngboot.takeout.biz.MyAddrBiz;
 import com.yc.spirngboot.takeout.biz.OrderBiz;
+import com.yc.spirngboot.takeout.biz.OrderInfoBiz;
 import com.yc.spirngboot.takeout.biz.SellerBiz;
 import com.yc.spirngboot.takeout.biz.UserBiz;
 import com.yc.spirngboot.takeout.vo.CookieUtils;
@@ -42,6 +45,9 @@ public class OrderAction {
 	private SellerBiz sb;
 	@Resource
 	private UserBiz ub; 
+	
+	@Resource
+	private OrderInfoBiz of;
 	
 	@GetMapping("toOrder")
 	public String createOrder(HttpSession hs,Model m) {
@@ -101,13 +107,15 @@ public class OrderAction {
 		
 			e.printStackTrace();
 		}
+		
+		//写入订单详请
+		of.createinfo(totalMoney,order_number);
+		
 		//将积分加入
 		System.out.println("logindedUser.getId()"+logindedUser.getId());
 		ub.addIntegal(intergal,logindedUser.getId());
 		
-		//订单完成取消session
-		hs.removeAttribute("seller_id");
-		hs.removeAttribute("order_number");
+		
 		return payform;
 		
 	}
@@ -127,8 +135,31 @@ public class OrderAction {
 		return "order_success";
 		
 	}
-	
-	
+	/**
+	 * 查看订单并评论 数据库设计的订单表有bug 
+	 */
+	@GetMapping("toOrdershop")
+	public String tohshopOrder(HttpSession hs,Model m ) {
+		//获取订单编号
+		String order_number=""+ hs.getAttribute("order_number");
+		Date createTime=mob.getCreateTime(order_number);
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		String dateString = formatter.format(createTime);
+		//获取商家id
+		String seller_id=""+hs.getAttribute("seller_id");
+		//由订单编号查订单金额
+		float Money=of.selectMoney(order_number);
+		
+		Seller s=sb.selectById(Integer.parseInt(seller_id));
+		m.addAttribute("time", dateString);
+		m.addAttribute("seller", s);
+		m.addAttribute("money", Money);
+		m.addAttribute("order_number", order_number);
+		//订单完成取消session
+				//hs.removeAttribute("seller_id");
+				//hs.removeAttribute("order_number");
+		return "member_order";
+	}
 	/**
 	 * 地址新增
 	 * @param addr

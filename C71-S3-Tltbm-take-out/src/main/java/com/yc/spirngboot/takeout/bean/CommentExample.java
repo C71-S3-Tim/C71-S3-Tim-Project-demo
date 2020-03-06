@@ -225,63 +225,63 @@ public class CommentExample {
             return (Criteria) this;
         }
 
-        public Criteria andGIdIsNull() {
-            addCriterion("g_id is null");
+        public Criteria andSIdIsNull() {
+            addCriterion("s_id is null");
             return (Criteria) this;
         }
 
-        public Criteria andGIdIsNotNull() {
-            addCriterion("g_id is not null");
+        public Criteria andSIdIsNotNull() {
+            addCriterion("s_id is not null");
             return (Criteria) this;
         }
 
-        public Criteria andGIdEqualTo(Integer value) {
-            addCriterion("g_id =", value, "gId");
+        public Criteria andSIdEqualTo(Integer value) {
+            addCriterion("s_id =", value, "sId");
             return (Criteria) this;
         }
 
-        public Criteria andGIdNotEqualTo(Integer value) {
-            addCriterion("g_id <>", value, "gId");
+        public Criteria andSIdNotEqualTo(Integer value) {
+            addCriterion("s_id <>", value, "sId");
             return (Criteria) this;
         }
 
-        public Criteria andGIdGreaterThan(Integer value) {
-            addCriterion("g_id >", value, "gId");
+        public Criteria andSIdGreaterThan(Integer value) {
+            addCriterion("s_id >", value, "sId");
             return (Criteria) this;
         }
 
-        public Criteria andGIdGreaterThanOrEqualTo(Integer value) {
-            addCriterion("g_id >=", value, "gId");
+        public Criteria andSIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("s_id >=", value, "sId");
             return (Criteria) this;
         }
 
-        public Criteria andGIdLessThan(Integer value) {
-            addCriterion("g_id <", value, "gId");
+        public Criteria andSIdLessThan(Integer value) {
+            addCriterion("s_id <", value, "sId");
             return (Criteria) this;
         }
 
-        public Criteria andGIdLessThanOrEqualTo(Integer value) {
-            addCriterion("g_id <=", value, "gId");
+        public Criteria andSIdLessThanOrEqualTo(Integer value) {
+            addCriterion("s_id <=", value, "sId");
             return (Criteria) this;
         }
 
-        public Criteria andGIdIn(List<Integer> values) {
-            addCriterion("g_id in", values, "gId");
+        public Criteria andSIdIn(List<Integer> values) {
+            addCriterion("s_id in", values, "sId");
             return (Criteria) this;
         }
 
-        public Criteria andGIdNotIn(List<Integer> values) {
-            addCriterion("g_id not in", values, "gId");
+        public Criteria andSIdNotIn(List<Integer> values) {
+            addCriterion("s_id not in", values, "sId");
             return (Criteria) this;
         }
 
-        public Criteria andGIdBetween(Integer value1, Integer value2) {
-            addCriterion("g_id between", value1, value2, "gId");
+        public Criteria andSIdBetween(Integer value1, Integer value2) {
+            addCriterion("s_id between", value1, value2, "sId");
             return (Criteria) this;
         }
 
-        public Criteria andGIdNotBetween(Integer value1, Integer value2) {
-            addCriterion("g_id not between", value1, value2, "gId");
+        public Criteria andSIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("s_id not between", value1, value2, "sId");
             return (Criteria) this;
         }
 

@@ -50,9 +50,6 @@ public class LoginAction {
 			if(user.getPwd().equals(newpwd)) {
 				result.setData(user);
 				result.setCode(0);
-
-
-
 				//m.addAttribute("loginedUser", user);
 				hs.setAttribute("loginedUser", user);
 			}else {
