@@ -14,6 +14,10 @@
     <result column="number" jdbcType="INTEGER" property="number" />
     <result column="rank" jdbcType="INTEGER" property="rank" />
   </resultMap>
+  <select id="selectByUser_id" resultMap="BaseResultMap">
+		select * from good where seller_id=#{id}
+	</select>
+  
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">

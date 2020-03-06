@@ -583,6 +583,7 @@ app.directive("menuItem",['commonApi',function (commonApi) {
                 }
 
                 if (scope.grid_locationId == "" || !inRange) {
+
                     scope.$emit('show-search-address');
                     return false;
                 }

@@ -82,11 +82,11 @@
             
 	<section class="checkout-main common-width">
 		<header class="brtrl">送餐信息 (*为必填项)</header>
-		<section class="user-info">
-            <ul class="user-address-list clearfix disnone" ng-class="{disblock: userAddressList.length != 0}">
-                <li ng-repeat="item in userAddressList" ng-class="{active:item.active,userAddressHover:mobileAny}" ng-click="changeActiveAddress($index)" class="user-address-item fl">
+		<section class="user-info" >
+            <ul class="user-address-list clearfix disnone" ng-class="{disblock: userAddressList.length != 0}"  >
+                <li  ng-repeat="item in userAddressList" ng-class="{active:item.active,userAddressHover:mobileAny}" ng-click="changeActiveAddress($index)" class="user-address-item fl"> 
                     <div class="clearfix">
-                        <h3 class="fl" ng-bind="item.customer_name"></h3>
+                        <h3 class="fl" ng-bind="item.customer_name" ></h3>
                         <span class="fr"><a href="javascript:;" ng-click="updateUserAddress($index);$event.stopPropagation();" class="link">修改</a></span>
                         <span class="fr"><a href="javascript:;" ng-click="deleteUserAddress($index);$event.stopPropagation();" class="link">删除</a></span>
                     </div>
@@ -169,23 +169,23 @@
 					
 					<div class="goods-total">小计</div>
 				</div>
-				<div class="order-body">
+				<div class="order-body" th:each="order,ordersStat : ${orders}">
                     
                         <div class="order-item clearfix">
-                            <div class="goods-name">蛋黄虾仁馄饨十可口可乐一瓶</div>
-                            <div class="goods-count">2</div>
-                            <div class="goods-price">￥22.00</div>
-                            <div class="goods-total">￥44.00</div>
+                            <div class="goods-name" th:text="${order.mygood.gname}"></div>
+                            <div class="goods-count" th:text="${order.number}">2</div>
+                            <div class="goods-price" th:text="${order.money}" >￥22.00</div>
+                            <div class="goods-total" th:text="${order.money}*${order.number}">￥44.00</div>
                         </div>
                         
                     
-                    
-                        <div class="order-item order-item-addendum clearfix">
+                    	<!-- 优惠券 -->
+                        <!-- <div class="order-item order-item-addendum clearfix">
                             <div class="goods-name">点我呀，减6元 ！</div>
                             <div class="goods-count">2</div>
                             <div class="goods-price">￥-6.00</div>
                             <div class="goods-total">￥-12.00</div>
-                        </div>
+                        </div> -->
                     
 				</div>
 			</div>
@@ -193,13 +193,14 @@
 		<section class="total-sum">
 			
 			
-			<p class="tr fs14">订单金额： <span>￥32.00</span></p>
+			<p class="tr fs14" >订单金额： <span th:text="'￥'+${Tatolmoney}">￥32.00</span></p>
             <p ng-if="isVaildateCouponSuccess" class="tr fs14">优惠券： <span ng-bind="couponMoney|number:2|currency:'￥-'"></span></p>
-            <p class="tr fs14">配送费用： <span>￥0.00</span></p>
-			<p class="tr fs17 pink">需要付款： <b>￥<span ng-init="orderTotal=32.00" ng-bind="orderTotal|number:2"></span></b></p>
-			<p class="tr last">
+            <p class="tr fs14" >配送费用： <span th:text="'￥'+${packprice}"></span></p>
+			<p class="tr fs17 pink">需要付款： <b>￥<span id="totalMoney" th:text="${Tatolmoney}+${packprice}"></span></b></p>
+			<p class="tr last">	
+									<!--原来有这么一段 ng-init="orderTotal=32.00" ng-bind="orderTotal|number:2" -->
 				<a href="/shanghai/ji-xiang-hun-tun-gao-an-lu-dian/menu/?gid=602341" class="fs15 link"><i class="icon arrows-left"></i> 返回修改订单</a>
-				<button ng-disabled="!(name && phone && address&&couponCheck&&commitCheck)" ng-click="commitOrder()" class="btn btn-success fs20">提交订单 <i class="icon arrows-right"></i></button>
+				<button  ng-click="commitOrder()" class="btn btn-success fs20" onclick="topay()">提交订单 <i class="icon arrows-right"></i></button>
 			</p>
 		</section>
 	</section>
@@ -490,10 +491,48 @@
     
     <script>var feedbackUrl = '/ajax/feedback/';var app = angular.module("app", ["dh.dialog", "dh.form", 'dh.service', 'dh.other']);</script>
     <!--[if lt IE 9]><script src="js/fix.js"></script><![endif]-->
-    
+    <!-- 引入jquery标签库 -->
+    <script src="https://libs.baidu.com/jquery/1.11.3/jquery.min.js"></script>
+    <script type="text/javascript">
+    	function topay(){
+    		var totalMoney=$("#totalMoney").text();
+    		//alert(totalMoney);
+    		console.info(totalMoney);
+    		
+    		//ajax后台数据校验
+   		 $.ajax({
+            url: "toPay",
+            type: "post",
+             dataType:'text',//这里要写成text不然回调函数无法识别传回来的String 无法实现
+             data: {"totalMoney":totalMoney},
+             success: function (pag) {
+           	//将一个是 ajax返回的html页面直接打印（解释并显示成）页面
+           	document.write(pag );
+           	 
+
+            }
+         });
+    	}
+    	
+    </script>
     
     <script>
-        var check_coupon_url = "/ajax/check_coupon_code/";
+    //获取json格式商品数组
+    var str1='[[${addrsjson}]]';
+ 
+    
+    //将&quot;替换成"否则无法转成数组
+ 	var reg = new RegExp("&quot;", "g");
+ 	//var consoleStr= str.replace(reg, '"');
+ 	var consoleStr1= str1.replace(reg, '"');
+ 
+        //地址
+        var userAddress = [];
+      //将json转成数组
+        userAddress =JSON.parse(consoleStr1);
+        
+    
+    	var check_coupon_url = "/ajax/check_coupon_code/";
         var place_order_url = "/mobile/ajax/place_order/";
         var confirm_url = "/confirm/0/";
         var online_pay = "/account/order/0/online_pay/";
@@ -513,16 +552,20 @@
             orderId : '3788798',
             delivery_fee : '0.00'
         };
-        var cart_items_json=[{"name": "\u86cb\u9ec4\u867e\u4ec1\u9984\u9968\u5341\u53ef\u53e3\u53ef\u4e50\u4e00\u74f6", "price": 22.00, "id": 2236070, "additions": [{"total_price": -12.00, "price": -6.00, "quantity": 2, "id": 8168, "name": "\u70b9\u6211\u5440\uff0c\u51cf6\u5143 \uff01"}], "options": [], "quantity": 2}];
+        //点的商品
+      // var cart_items_json=[{"name": "\u86cb\u9ec4\u867e\u4ec1\u9984\u9968\u5341\u53ef\u53e3\u53ef\u4e50\u4e00\u74f6", "price": 22.00, "id": 2236070, "additions": [{"total_price": -12.00, "price": -6.00, "quantity": 2, "id": 8168, "name": "\u70b9\u6211\u5440\uff0c\u51cf6\u5143 \uff01"}], "options": [], "quantity": 2}];
+       //console.info(cart_items_json);
         var selectObj = [];
-        var userAddress = [];
+       
         var _isAuthenticated = 'ajax';
         var setLastAddrUrl =  "/ajax/delivery_address/0/last_used/";
         var lastUsedAddressId = '230901';
-        userAddress.push({customer_name:'阿逗',delivery_address:'rrrrr',customer_phone:'13815212121',id:'230896'});userAddress.push({customer_name:'阿逗',delivery_address:'江苏南京',customer_phone:'13851435593',id:'230897'});userAddress.push({customer_name:'阿逗',delivery_address:'q',customer_phone:'13851435593',id:'230898'});userAddress.push({customer_name:'阿逗',delivery_address:'wqwq',customer_phone:'13851423225',id:'230899'});userAddress.push({customer_name:'阿逗',delivery_address:'aaaa',customer_phone:'18005150081',id:'230900'});userAddress.push({customer_name:'阿逗',delivery_address:'我千千万',customer_phone:'13851435593',id:'230901'});
+       //userAddress.push({customer_name:'阿逗',delivery_address:'rrrrr',customer_phone:'13815212121',id:'230896'});userAddress.push({customer_name:'阿逗',delivery_address:'江苏南京',customer_phone:'13851435593',id:'230897'});userAddress.push({customer_name:'阿逗',delivery_address:'q',customer_phone:'13851435593',id:'230898'});userAddress.push({customer_name:'阿逗',delivery_address:'wqwq',customer_phone:'13851423225',id:'230899'});userAddress.push({customer_name:'阿逗',delivery_address:'aaaa',customer_phone:'18005150081',id:'230900'});userAddress.push({customer_name:'阿逗',delivery_address:'我千千万',customer_phone:'13851435593',id:'230901'});
+        console.info(userAddress);
         selectObj.push({id:'no',text:'即时送出',date:'2015-05-03'});
         selectObj.push({id:'10:30',text:'10:30',date:'2015-05-03'});selectObj.push({id:'11:00',text:'11:00',date:'2015-05-03'});selectObj.push({id:'11:30',text:'11:30',date:'2015-05-03'});selectObj.push({id:'12:00',text:'12:00',date:'2015-05-03'});selectObj.push({id:'12:30',text:'12:30',date:'2015-05-03'});selectObj.push({id:'13:00',text:'13:00',date:'2015-05-03'});selectObj.push({id:'13:30',text:'13:30',date:'2015-05-03'});selectObj.push({id:'14:00',text:'14:00',date:'2015-05-03'});selectObj.push({id:'14:30',text:'14:30',date:'2015-05-03'});selectObj.push({id:'15:00',text:'15:00',date:'2015-05-03'});selectObj.push({id:'15:30',text:'15:30',date:'2015-05-03'});selectObj.push({id:'16:00',text:'16:00',date:'2015-05-03'});selectObj.push({id:'16:30',text:'16:30',date:'2015-05-03'});selectObj.push({id:'17:00',text:'17:00',date:'2015-05-03'});selectObj.push({id:'17:30',text:'17:30',date:'2015-05-03'});selectObj.push({id:'18:00',text:'18:00',date:'2015-05-03'});selectObj.push({id:'18:30',text:'18:30',date:'2015-05-03'});selectObj.push({id:'19:00',text:'19:00',date:'2015-05-03'});selectObj.push({id:'19:30',text:'19:30',date:'2015-05-03'});selectObj.push({id:'20:00',text:'20:00',date:'2015-05-03'});selectObj.push({id:'20:30',text:'20:30',date:'2015-05-03'});selectObj.push({id:'21:00',text:'21:00',date:'2015-05-03'});
-    </script>
+   			
+        </script>
     <script src="js/checkout.js"></script>
     <script>
         (function(){var b=document.createElement;var a=0;var e=/www[.]google-analytics[.]com/i;var h;function d(j,k,i){if(j.addEventListener){j.addEventListener(k,i,false)}else{if(j.attachEvent){j.attachEvent("on"+k,i)}else{j["on"+k]=i}}}function g(j,k,i){if(j.removeEventListener){j.removeEventListener(k,i,false)}else{if(j.detachEvent){j.detachEvent("on"+k,i)}else{j["on"+k]=null}}}function c(j,l){function i(m){a+=1;d(m,"error",l);d(m,"load",l)}var k=window.MutationObserver||window.WebKitMutationObserver||false;if(!!k){j._observer=new k(function(m){m.forEach(function(n){if(n.attributeName=="src"&&e.test(n.target.src)){i(n.target)}})});j._observer.observe(j,{attributes:true,childList:false,characterData:false})}else{if(j.addEventListener){j._DOMAttrModified=function(m){if(m.attrName=="src"&&e.test(m.target.src)){i(m.target)}};j.addEventListener("DOMAttrModified",j._DOMAttrModified)}else{if(j.attachEvent){j._onpropertychange=function(m){if(m.propertyName=="src"&&e.test(m.srcElement.src)){i(m.srcElement)}};j.attachEvent("onpropertychange",j._onpropertychange)}}}}function f(i,k){var j=window.MutationObserver||window.WebKitMutationObserver||false;if(!!j){i._observer.disconnect();delete i._observer}else{if(i.addEventListener){i.removeEventListener("DOMAttrModified",i._DOMAttrModified);delete i._DOMAttrModified}else{if(i.attachEvent){i.detachEvent("onpropertychange",i._onpropertychange);delete i._onpropertychange}}}g(i,"error",k);g(i,"load",k);a-=1;if(a<=0&&h){h();h=null}}document.createElement=function(i){element=b.call(document,i);if(i.toLowerCase()=="img"){var j=function(k){f(k.target||k.srcElement,j)};c(element,j)}return element};this.ga_synchronize=function(i){h=i}}());

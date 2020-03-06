@@ -50,4 +50,11 @@ public class Sender {
     public void setOrdernumber(Integer ordernumber) {
         this.ordernumber = ordernumber;
     }
+
+	@Override
+	public String toString() {
+		return "Sender [id=" + id + ", phone=" + phone + ", salary=" + salary + ", name=" + name + ", ordernumber="
+				+ ordernumber + "]";
+	}
+    
 }

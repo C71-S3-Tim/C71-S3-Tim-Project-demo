@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
@@ -42,10 +43,10 @@
                         <ul class="member logging" ng-init="loginInfo=true">
                             <li><a href="index.html" class="index">首页</a></li>
                             <li class="userName">
-                                <a href="member_index.html" rel="nofollow" draw-user>18005151538<em></em></a>
+                                <a href="member_index.html" th:text="${loginedUser.phone}" rel="nofollow" draw-user>18005151538<em></em></a>
                                 <div>
-                                    <p><a href="member_index.html"  rel="nofollow">账号管理</a></p>
-                                    <p><a href="member_addr.html"  rel="nofollow">地址管理</a></p>
+                                    <p><a href="addr"  rel="nofollow">账号管理</a></p>
+                                    <p><a href="member_addrd.html"  rel="nofollow">地址管理</a></p>
                                     <p class="no-bo"><a id="logout" href="#" referer-url rel="nofollow">退出</a></p>
                                 </div>
                             </li>
@@ -77,7 +78,7 @@
             <aside class="fl">
                 <ul>
                     <li class="active">
-                        <a href="member_index.html" rel="nofollow">账号管理</a>
+                        <a href="addr" rel="nofollow">账号管理</a>
                     </li>
                     <li >
                         <a href="member_order.html" rel="nofollow">我的订单</a>
@@ -100,19 +101,23 @@
         <ul class="fs12">
             <li>
                 <label>手机号码：</label>
-                <span>18005151538</span>
+                <span th:text="${loginedUser.phone}"></span>
             </li>
+            
             <li>
                 <label>登录密码：</label>
                 <span>**********</span>
+     
                 <i class="icon edit-icon" ng-click="showChangePassword()"></i>
             </li>
-            <li>
+            <li>   
                 <label>订单信息：</label>
-                <span>总计0单</span>
-                <span>成功0单</span>
+               	 总计<span th:text="${allorders}">0</span>单
+                	成功<span th:text="${sucOrders}">0</span>单
             </li>
-            <li><label>氪 星 币：</label><span ng-bind="0|number"></span>个&nbsp;&nbsp;<a href="/account/gift/center/" title="兑换礼品" class="c_f60">兑换礼品</a></li>
+            <li><label>氪 星 币：</label>
+            <span th:text="${loginedUser.integral}">
+            </span>个&nbsp;&nbsp;<a href="gifts.html" title="兑换礼品" class="c_f60">兑换礼品</a></li>
         </ul>
      </section>
 
@@ -143,8 +148,7 @@
             </div>
         </div>
     </footer>
-    
-    
+
     <dh-dialog class="disnone" height="500" feeedbackclass="userFeedback" type="user-feedback" header="意见反馈" show="userFeedback">
         <div ng-controller="feedbackCtrl">
             <form novalidate="true" name="feedbackForm" class="inline">
@@ -157,7 +161,7 @@
                 <div class="row mb10">
                     <div class="clo-8 col-offset-3" ng-if="feedback.phoneMessage">
                         <span class="vaildate-error">联系方式不能为空</span>
-                    </div>
+；怕4【                    </div>
                 </div>
                 <div class="form-group row">
                     <label class="col-3 vt">反馈信息：</label>
@@ -215,10 +219,11 @@
             </div>
         </div>
     </dh-dialog>
-    <dh-dialog class="disnone" type="alert" height="500" index="1001" header="" show="requestSuccess">
+    <dh-dialog class="disnone"  type="alert" height="500" index="1001" header="" show="requestSuccess">
         <div class="alert-box">
-            <p>修改密码成功</p>
-            <p class="fs12">3秒后自动关闭</p>
+           <a> <p>修改密码成功</p>
+            <p class="fs12" >3秒后自动关闭</p>
+            </a>
         </div>
     </dh-dialog>
     <dh-dialog class="disnone" type="alert" height="500" index="1001" header="" show="requestError">

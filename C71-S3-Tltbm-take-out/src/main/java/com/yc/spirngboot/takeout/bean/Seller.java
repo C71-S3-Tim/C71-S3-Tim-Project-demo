@@ -1,5 +1,7 @@
 package com.yc.spirngboot.takeout.bean;
 
+import java.util.List;
+
 public class Seller {
     private Integer id;
 
@@ -29,7 +31,17 @@ public class Seller {
 
     private String description;
 
-    public Integer getId() {
+    private List<Good> goods;
+    
+    public List<Good> getGoods() {
+		return goods;
+	}
+
+	public void setGoods(List<Good> goods) {
+		this.goods = goods;
+	}
+
+	public Integer getId() {
         return id;
     }
 
@@ -140,4 +152,13 @@ public class Seller {
     public void setDescription(String description) {
         this.description = description == null ? null : description.trim();
     }
+
+	@Override
+	public String toString() {
+		return "Seller [id=" + id + ", sname=" + sname + ", sendprice=" + sendprice + ", packprice=" + packprice
+				+ ", logimge=" + logimge + ", starttime=" + starttime + ", endtime=" + endtime + ", sphone=" + sphone
+				+ ", images=" + images + ", cityId=" + cityId + ", rank=" + rank + ", hot=" + hot + ", qualified="
+				+ qualified + ", description=" + description + ", goods=" + goods + "]";
+	}
+    
 }

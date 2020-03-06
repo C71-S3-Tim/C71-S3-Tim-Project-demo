@@ -15,6 +15,8 @@
     <result column="rank" jdbcType="INTEGER" property="rank" />
     <result column="hot" jdbcType="INTEGER" property="hot" />
     <result column="qualified" jdbcType="INTEGER" property="qualified" />
+   <!-- 配置关商品与店铺的联查询 1:n-->
+  	 <collection  property="goods" autoMapping="true" column="id" select="com.yc.spirngboot.takeout.dao.GoodMapper.selectByUser_id" ></collection >
   </resultMap>
   <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.yc.spirngboot.takeout.bean.Seller">
     <result column="description" jdbcType="LONGVARCHAR" property="description" />
