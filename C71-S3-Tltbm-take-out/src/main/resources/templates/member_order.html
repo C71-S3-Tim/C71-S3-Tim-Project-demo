@@ -52,7 +52,7 @@
                             <li class="userName">
                                 <a href="member_index.html" rel="nofollow" draw-user>18005151538<em></em></a>
                                 <div>
-                                    <p><a href="addr"  rel="nofollow">账号管理</a></p>
+                                    <p><a href="member_index.html"  rel="nofollow">账号管理</a></p>
                                     <p><a href="member_addr.html"  rel="nofollow">地址管理</a></p>
                                     <p class="no-bo"><a id="logout" href="#" referer-url rel="nofollow">退出</a></p>
                                 </div>
@@ -78,13 +78,14 @@
                 <div class="dayColor_one"></div>
                 <div class="dayColor_three" ng-class="{dayColor_threeActive:threeActive}"></div>
             </div>
-             
+        
+            
     <section>
         <div class="user-center-main-box common-width clearfix">
             <aside class="fl">
                 <ul>
                     <li>
-                        <a href="addr" rel="nofollow">账号管理</a>
+                        <a href="member_index.html" rel="nofollow">账号管理</a>
                     </li>
                     <li class="active">
                         <a href="member_order.html" rel="nofollow">我的订单</a>
@@ -107,17 +108,19 @@
         
         <div class="order-list ">
              <div class="order-hd">
-                <span><i>订单编号：</i>D-03788798</span><i>创建时间：</i>2015-05-03 09:26:52
+                <span><i th:text="'订单编号:'+${order_number}">：</i ></span><i  th:text="'创建时间:'+${time}" >：</i>
              </div>
              <div class="order-bd clearfix">
                  <div class="fl restaurant-msg">
                      <div>
                          <img src="http://dhcrestaurantlogo.dhero.cn/1019?v=1402245333" alt="" width="43" height="43" class="fl" />
-                         <i class="fl">吉祥馄饨 (高安路店)</i>
+                         <i class="fl" th:text="${seller.sname}">)</i>
+                         <input hidden=""  id="seller_id" class="fl" th:value="${seller.id}">
+                         
                      </div>
                      <p class="clearfix">
                         <i class="fl"></i>
-                        <span class="fl">餐厅电话：021-64738871, 18019138185</span>
+                        <span class="fl" th:text="'餐厅电话: '+${seller.sphone}">021-64738871, 18019138185</span>
                     </p>
                  </div>
                  <div class="fl order-type padding-margin">
@@ -126,8 +129,10 @@
                  </div>
                  <div class="fl order-total padding-margin">
                      <p>订单金额</p>
-                     <p><i>￥32.00</i></p>
+                      <p><i th:text="'￥'+${money}">￥32.00</i></p>
                  </div>
+				 
+				 
                  <div class="order-operate fl padding-margin">
                     
                          
@@ -135,10 +140,93 @@
                     
                     
                     <p>
-                        <a href="javascript:" order-number orderId="3788798" class="btn_a see-details">查看详情<i></i></a>
+                        <a onclick="tocomment()"  id="lol"  class="btn_a see-details">立即评价<i></i></a>
                     </p>
                  </div>
              </div>
+			 
+			 
+			 
+			<div  id=comment hidden="" class="review-body" ng-controller="reviewCtrl">
+            <div id="gh">
+            <h2 ng-bind="restaurantName"></h2>
+            <ul  >
+                <li class="clearfix">
+                    <label><span class="red">*</span>总体评价：</label>
+                    <ul class="review-star big-star">
+                        <li class="star1" ng-class="{active:reviewObj.totalReview==1}" bigStarIndex="0"></li>
+                        <li class="star2" ng-class="{active:reviewObj.totalReview==2}" bigStarIndex="1"></li>
+                        <li class="star3" ng-class="{active:reviewObj.totalReview==3}" bigStarIndex="2"></li>
+                        <li class="star4" ng-class="{active:reviewObj.totalReview==4}" bigStarIndex="3"></li>
+                        <li class="star5" ng-class="{active:reviewObj.totalReview==5}" bigStarIndex="4"></li>
+                    </ul>
+                    <span ng-if="isReviewError" class="review-error fl">请选择总体评价！</span>
+                    <span class="fr zk-btn" ng-click="expand()">
+                        <span ng-bind="expandText"></span>
+                        <i class="icon" ng-class="{'arrows-s-up':isShow,'arrows-s-down':!isShow}"></i>
+                    </span>
+                </li>
+                <li class="clearfix" ng-show="isShow">
+                    <label >口味：</label>
+                    <ul class="review-star small-star" reviewType="tasteReview">
+                        <li class="star11" ng-class="{active:reviewObj.tasteReview==1}" bigStarIndex="0"></li>
+                        <li class="star22" ng-class="{active:reviewObj.tasteReview==2}" bigStarIndex="1"></li>
+                        <li class="star33" ng-class="{active:reviewObj.tasteReview==3}" bigStarIndex="2"></li>
+                        <li class="star44" ng-class="{active:reviewObj.tasteReview==4}" bigStarIndex="3"></li>
+                        <li class="star55" ng-class="{active:reviewObj.tasteReview==5}" bigStarIndex="4"></li>
+                    </ul>
+                </li>
+                <li class="clearfix" ng-show="isShow">
+                    <label>服务：</label>
+                    <ul class="review-star small-star" reviewType="serveReview">
+                        <li class="star11" ng-class="{active:reviewObj.serveReview==1}" bigStarIndex="0"></li>
+                        <li class="star22" ng-class="{active:reviewObj.serveReview==2}" bigStarIndex="1"></li>
+                        <li class="star33" ng-class="{active:reviewObj.serveReview==3}" bigStarIndex="2"></li>
+                        <li class="star44" ng-class="{active:reviewObj.serveReview==4}" bigStarIndex="3"></li>
+                        <li class="star55" ng-class="{active:reviewObj.serveReview==5}" bigStarIndex="4"></li>
+                    </ul>
+                </li>
+                <li class="clearfix" ng-show="isShow">
+                    <label>速度：</label>
+                    <ul class="review-star small-star" reviewType="speedReview">
+                        <li class="star11" ng-class="{active:reviewObj.speedReview==1}" bigStarIndex="0"></li>
+                        <li class="star22" ng-class="{active:reviewObj.speedReview==2}" bigStarIndex="1"></li>
+                        <li class="star33" ng-class="{active:reviewObj.speedReview==3}" bigStarIndex="2"></li>
+                        <li class="star44" ng-class="{active:reviewObj.speedReview==4}" bigStarIndex="3"></li>
+                        <li class="star55" ng-class="{active:reviewObj.speedReview==5}" bigStarIndex="4"></li>
+                    </ul>
+                </li>
+                <li class="clearfix">
+                    <label>评价：</label>
+                    <div class="fl">
+                        <textarea ng-model="reviewText" maxlength="150" name="context" id="context" cols="40" rows="8"></textarea>
+                    	<div>
+                    	<span style="color: red" hidden=" " id="msg"></span>
+                    	</div>
+                    	
+                    </div>
+                </li>
+              
+            </ul>
+            <p class="songGift">评论即可送氪星币</p>
+            <div class="tc">
+                <button class="btn btn-success" onclick="docomment()">确认</button>
+                <button class="btn btn-cancel" ng-click="cancelReview()">取消</button>
+            </div>
+            
+            </div>
+            <div ng-if="showBig" class="show-big" ng-style="bigStyle">
+                <p ng-bind="reviewData.num"></p>
+                <p ng-bind="reviewData.des" class="review-des"></p>
+            </div>
+            <div ng-show="showSmall" class="show-samll" id="show-samll" ng-style="samllStyle">
+                <p ng-bind="reviewSmallData"></p>
+            </div>
+        </div>
+			 
+			 
+			 
+			 
              <div class="order-details clearfix">
                 <div ng-hide="orderStatus['3788798']" class="order-loading">
                     <span ng-show="orderStatus['3788798_error']" class="order-hide">访问出错，请重新加载！</span>
@@ -205,7 +293,7 @@
                         <li ng-class="{first: $index == 0}" ng-repeat=" workflow in order['3788798'].status_workflow">
                            <p class="person-hd" ng-bind="workflow.date_time"></p>
                            <p ng-if="$index == 0" class="failed_reason">
-                               [[ workflow.status_desc ]] <span ng-if="order['3788798'].failed_reason">失败理由：[[ order['3788798'].failed_reason ]]</span>
+                               [[ workflow.status_desc ]] <span ng-if="">失败理由：</span>
                            </p>
                            <p ng-if="$index > 0">
                                [[ workflow.status_desc ]]
@@ -285,81 +373,7 @@
     </dh-dialog>
     
     <dh-dialog type="review" header="写评论 攒人品" height="540" show="showReview" ng-init="timeSelectedIndex=0">
-        <div class="review-body" ng-controller="reviewCtrl">
-            <h2 ng-bind="restaurantName"></h2>
-            <ul>
-                <li class="clearfix">
-                    <label><span class="red">*</span>总体评价：</label>
-                    <ul class="review-star big-star">
-                        <li class="star1" ng-class="{active:reviewObj.totalReview==1}" bigStarIndex="0"></li>
-                        <li class="star2" ng-class="{active:reviewObj.totalReview==2}" bigStarIndex="1"></li>
-                        <li class="star3" ng-class="{active:reviewObj.totalReview==3}" bigStarIndex="2"></li>
-                        <li class="star4" ng-class="{active:reviewObj.totalReview==4}" bigStarIndex="3"></li>
-                        <li class="star5" ng-class="{active:reviewObj.totalReview==5}" bigStarIndex="4"></li>
-                    </ul>
-                    <span ng-if="isReviewError" class="review-error fl">请选择总体评价！</span>
-                    <span class="fr zk-btn" ng-click="expand()">
-                        <span ng-bind="expandText"></span>
-                        <i class="icon" ng-class="{'arrows-s-up':isShow,'arrows-s-down':!isShow}"></i>
-                    </span>
-                </li>
-                <li class="clearfix" ng-show="isShow">
-                    <label >口味：</label>
-                    <ul class="review-star small-star" reviewType="tasteReview">
-                        <li class="star11" ng-class="{active:reviewObj.tasteReview==1}" bigStarIndex="0"></li>
-                        <li class="star22" ng-class="{active:reviewObj.tasteReview==2}" bigStarIndex="1"></li>
-                        <li class="star33" ng-class="{active:reviewObj.tasteReview==3}" bigStarIndex="2"></li>
-                        <li class="star44" ng-class="{active:reviewObj.tasteReview==4}" bigStarIndex="3"></li>
-                        <li class="star55" ng-class="{active:reviewObj.tasteReview==5}" bigStarIndex="4"></li>
-                    </ul>
-                </li>
-                <li class="clearfix" ng-show="isShow">
-                    <label>服务：</label>
-                    <ul class="review-star small-star" reviewType="serveReview">
-                        <li class="star11" ng-class="{active:reviewObj.serveReview==1}" bigStarIndex="0"></li>
-                        <li class="star22" ng-class="{active:reviewObj.serveReview==2}" bigStarIndex="1"></li>
-                        <li class="star33" ng-class="{active:reviewObj.serveReview==3}" bigStarIndex="2"></li>
-                        <li class="star44" ng-class="{active:reviewObj.serveReview==4}" bigStarIndex="3"></li>
-                        <li class="star55" ng-class="{active:reviewObj.serveReview==5}" bigStarIndex="4"></li>
-                    </ul>
-                </li>
-                <li class="clearfix" ng-show="isShow">
-                    <label>速度：</label>
-                    <ul class="review-star small-star" reviewType="speedReview">
-                        <li class="star11" ng-class="{active:reviewObj.speedReview==1}" bigStarIndex="0"></li>
-                        <li class="star22" ng-class="{active:reviewObj.speedReview==2}" bigStarIndex="1"></li>
-                        <li class="star33" ng-class="{active:reviewObj.speedReview==3}" bigStarIndex="2"></li>
-                        <li class="star44" ng-class="{active:reviewObj.speedReview==4}" bigStarIndex="3"></li>
-                        <li class="star55" ng-class="{active:reviewObj.speedReview==5}" bigStarIndex="4"></li>
-                    </ul>
-                </li>
-                <li class="clearfix">
-                    <label>评价：</label>
-                    <div class="fl">
-                        <textarea ng-model="reviewText" maxlength="150" name="" id="" cols="40" rows="8"></textarea>
-                    </div>
-                </li>
-                <li class="clearfix lh34">
-                    <label><span class="red">*</span>送餐时间：</label>
-                    <div class="fl">
-                        <dh-select data="datas" selectedindex="timeSelectedIndex" change="timeIndexChange(index)"></dh-select>
-                    </div>
-                    <span ng-if="isTimeError" class="time-error">请选择送餐时间！</span>
-                </li>
-            </ul>
-            <p class="songGift">评论即可送氪星币</p>
-            <div class="tc">
-                <button class="btn btn-success" ng-click="submitReview()">确认</button>
-                <button class="btn btn-cancel" ng-click="cancelReview()">取消</button>
-            </div>
-            <div ng-if="showBig" class="show-big" ng-style="bigStyle">
-                <p ng-bind="reviewData.num"></p>
-                <p ng-bind="reviewData.des" class="review-des"></p>
-            </div>
-            <div ng-show="showSmall" class="show-samll" id="show-samll" ng-style="samllStyle">
-                <p ng-bind="reviewSmallData"></p>
-            </div>
-        </div>
+        
     </dh-dialog>
     <dh-dialog class="disnone" index="1001" header="超人小提示" show="reviewError">
         <div class="alert-box error">
@@ -472,7 +486,7 @@
         </li>
         <li class="scroll-wx">
             <img src="images/scroll_wx.png" alt=""/>
-             <div><img src="images/wx.png" alt=""/></div>
+             <div><img  src="images/wx.png" alt=""/></div>
         </li>
     </ul>
     
@@ -498,7 +512,37 @@
         var reviewUrl = "/mobile/ajax/order_review/",favoriteUrl = "/ajax/restaurant/0/favorite/";
     </script>
     <script src="js/user_center.js"></script>
+	<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript">
+    	function tocomment(){	
+    		$('#comment').removeAttr("hidden"); //移除属性
 
+    	}
+    </script>
+    <script type="text/javascript">
+    	function docomment(){	
+    		var text=$("#context").val();
+    		var seller_id=$("#seller_id").val();
+    		
+    		$.post("comment.do",{
+    			text : text,
+    			seller_id : seller_id},
+        		function (result){
+    				if(result.code!=0){
+    					console.info(result);
+    					//输出提示信息
+    					$('#msg').text(result.msg);
+    					$('#msg').removeAttr("hidden"); 
+    				}else{
+    					$('#gh').attr("hidden",'hidden');
+    					
+    					$('#lol').removeAttr("onclick");
+    					$('#lol').text("已经评价！");
+    				}
+        		}
+        	) 
+    	}
+    </script>
     
     <script>angular.bootstrap(document, ["app"]);</script>
 

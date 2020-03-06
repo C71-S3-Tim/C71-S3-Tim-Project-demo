@@ -388,7 +388,7 @@ app.directive("cityChange",["commonApi",function(commonApi){
                 html = "",
                 zone = [],
                 zoneHtml = "",
-                areaObj= window.document.getElementById("areaSelect");
+                areaObj= window.document.getElementById("dname");
                 scope.model = "请选择城市";
                 scope.areaModel = "";
             for (var item in citys) {

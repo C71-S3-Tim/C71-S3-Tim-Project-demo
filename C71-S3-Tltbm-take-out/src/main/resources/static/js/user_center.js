@@ -18,9 +18,11 @@ app.controller('bodyCtrl',["$scope","$timeout","$http",function(scope,timeout,ht
         scope.showChangePass = false;
         scope.requestSuccess = true;
         timeout(function(){
+        	//关闭当前窗口
             scope.requestSuccess = false;
-            window.location.href = 'index.html';
-        },2000);  
+        },2000);
+        
+        
     })
     scope.$on('change-password-error',function(){
         scope.requestError = true;
@@ -102,14 +104,13 @@ app.controller("changePasswordCtrl",["$scope",'formVaildate','$http',function(sc
         if (mes !== '') {
             vaildate = false;
         }
-        if(vaildate){
+        if(vaildate){	
             scope.isSubmit = true;
             scope.submitText = '修改中';
-            http.post('change.do',{'old_password':scope.user.password,'new_password':scope.user.newPassword})
+            http.post('/ajax/change_password/',{'old_password':scope.user.password,'new_password':scope.user.newPassword})
                 .success(function(d){
                     if(d.status=='ok'){
                         scope.$emit('change-password-success');
-                        /*window.location.href = 'index.html';*/
                     }else{
                         switch (d.failed_code){
                             case '1019':

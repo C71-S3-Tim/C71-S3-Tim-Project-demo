@@ -4,6 +4,7 @@ public class Allotinf {
     private Integer id;
 
     private String rename;
+    private String myrename;
 
     private String rephone;
 
@@ -27,6 +28,13 @@ public class Allotinf {
 
     public void setRename(String rename) {
         this.rename = rename == null ? null : rename.trim();
+    }
+    public String getMyrename() {
+        return myrename;
+    }
+
+    public void setMyrename(String myrename) {
+        this.myrename = myrename == null ? null : myrename.trim();
     }
 
     public String getRephone() {

@@ -4,7 +4,7 @@
   <resultMap id="BaseResultMap" type="com.yc.spirngboot.takeout.bean.Comment">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="u_id" jdbcType="INTEGER" property="uId" />
-    <result column="g_id" jdbcType="INTEGER" property="gId" />
+    <result column="s_id" jdbcType="INTEGER" property="sId" />
     <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
   </resultMap>
   <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.yc.spirngboot.takeout.bean.Comment">
@@ -69,7 +69,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, u_id, g_id, createtime
+    id, u_id, s_id, createtime
   </sql>
   <sql id="Blob_Column_List">
     content
@@ -126,9 +126,9 @@
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into comment (u_id, g_id, createtime, 
+    insert into comment (u_id, s_id, createtime, 
       content)
-    values (#{uId,jdbcType=INTEGER}, #{gId,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP}, 
+    values (#{uId,jdbcType=INTEGER}, #{sId,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP}, 
       #{content,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.yc.spirngboot.takeout.bean.Comment">
@@ -140,8 +140,8 @@
       <if test="uId != null">
         u_id,
       </if>
-      <if test="gId != null">
-        g_id,
+      <if test="sId != null">
+        s_id,
       </if>
       <if test="createtime != null">
         createtime,
@@ -154,8 +154,8 @@
       <if test="uId != null">
         #{uId,jdbcType=INTEGER},
       </if>
-      <if test="gId != null">
-        #{gId,jdbcType=INTEGER},
+      <if test="sId != null">
+        #{sId,jdbcType=INTEGER},
       </if>
       <if test="createtime != null">
         #{createtime,jdbcType=TIMESTAMP},
@@ -180,8 +180,8 @@
       <if test="record.uId != null">
         u_id = #{record.uId,jdbcType=INTEGER},
       </if>
-      <if test="record.gId != null">
-        g_id = #{record.gId,jdbcType=INTEGER},
+      <if test="record.sId != null">
+        s_id = #{record.sId,jdbcType=INTEGER},
       </if>
       <if test="record.createtime != null">
         createtime = #{record.createtime,jdbcType=TIMESTAMP},
@@ -198,7 +198,7 @@
     update comment
     set id = #{record.id,jdbcType=INTEGER},
       u_id = #{record.uId,jdbcType=INTEGER},
-      g_id = #{record.gId,jdbcType=INTEGER},
+      s_id = #{record.sId,jdbcType=INTEGER},
       createtime = #{record.createtime,jdbcType=TIMESTAMP},
       content = #{record.content,jdbcType=LONGVARCHAR}
     <if test="_parameter != null">
@@ -209,7 +209,7 @@
     update comment
     set id = #{record.id,jdbcType=INTEGER},
       u_id = #{record.uId,jdbcType=INTEGER},
-      g_id = #{record.gId,jdbcType=INTEGER},
+      s_id = #{record.sId,jdbcType=INTEGER},
       createtime = #{record.createtime,jdbcType=TIMESTAMP}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -221,8 +221,8 @@
       <if test="uId != null">
         u_id = #{uId,jdbcType=INTEGER},
       </if>
-      <if test="gId != null">
-        g_id = #{gId,jdbcType=INTEGER},
+      <if test="sId != null">
+        s_id = #{sId,jdbcType=INTEGER},
       </if>
       <if test="createtime != null">
         createtime = #{createtime,jdbcType=TIMESTAMP},
@@ -236,7 +236,7 @@
   <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.yc.spirngboot.takeout.bean.Comment">
     update comment
     set u_id = #{uId,jdbcType=INTEGER},
-      g_id = #{gId,jdbcType=INTEGER},
+      s_id = #{sId,jdbcType=INTEGER},
       createtime = #{createtime,jdbcType=TIMESTAMP},
       content = #{content,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=INTEGER}
@@ -244,7 +244,7 @@
   <update id="updateByPrimaryKey" parameterType="com.yc.spirngboot.takeout.bean.Comment">
     update comment
     set u_id = #{uId,jdbcType=INTEGER},
-      g_id = #{gId,jdbcType=INTEGER},
+      s_id = #{sId,jdbcType=INTEGER},
       createtime = #{createtime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>

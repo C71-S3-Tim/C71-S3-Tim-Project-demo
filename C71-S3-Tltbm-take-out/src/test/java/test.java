@@ -8,6 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import com.yc.spirngboot.takeout.C71S3PljqSpringbootTakeoutApplication;
 import com.yc.spirngboot.takeout.bean.User;
 import com.yc.spirngboot.takeout.biz.UserBiz;
+import com.yc.spirngboot.takeout.dao.UserMapper;
 
 import Decoder.BASE64Encoder;
 
@@ -15,6 +16,8 @@ import Decoder.BASE64Encoder;
 public class test {
 	@Resource
 	private  UserBiz ubiz;
+	@Resource
+	private UserMapper um;
 	
 	public  String encodeByMd5(String encodeText){
 		try{
@@ -37,6 +40,7 @@ public class test {
 		User user =new User();
 		user.setPhone("13135187907");
 		user.setPwd("123456");
+		user.setcId(null);
 		
 		
 		ubiz.reg(user);
@@ -47,4 +51,23 @@ public class test {
 		System.out.println("result========="+result);
 		//ICy5YqxZB1uWSwcVLSNLcA
 	}
+	@Test
+	public void testUpdate(String newpwd ,User user) {
+		
+		String result=encodeByMd5(newpwd);
+		user.setPwd(result);
+		
+		um.updateByPrimaryKeySelective(user);
+		
+		User us=new User();
+		us.setId(18);
+		us.setPwd("888888");
+		us.setPhone("13135187907");
+		um.updateByPrimaryKeySelective(us);
+		
+	}
+	
+	
+	
+	
 }

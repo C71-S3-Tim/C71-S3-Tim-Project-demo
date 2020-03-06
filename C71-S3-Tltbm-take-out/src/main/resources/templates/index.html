@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="www.thymeleaf.org">
 <head >
+
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
     <meta name="description" content="首页" />
@@ -51,6 +52,41 @@
         
         (function(document, screen) {if (screen.width < 760) {document.location.href="/mobile/";}}(document, screen));
     </script>
+    <script type="text/javascript">
+    function login(){
+    	var phone=$("#phone").val();
+    	var pwd=$("#pwd").val();
+    	
+    	$.post("login.do",{
+    		phone : phone,
+    		pwd : pwd},
+    		function (result){
+    		console.info(result);
+    			if(result.code==0){
+    				alert("登陆成功！")
+    				//关闭模态窗口
+    			
+					var e1=$("#login");
+					angular.element(e1).triggerHandler('click');
+					
+    				//删除登陆和注册增加用户的显示账号
+    				var login=document.getElementById("login");
+    				var reg=document.getElementById("reg");
+    				var sp=document.getElementById("span");
+    				sp.parentNode.removeChild(sp);//删除 /
+    				login.parentNode.removeChild(login);//删除登陆
+    				reg.parentNode.removeChild(reg);//删除注册
+    				//增加账号显示
+    				 var phone=result.data.phone;
+    				 $("#parent").prepend("<a class='three'>"+phone+"</a>");
+    			}else{
+    				alert(result.msg)
+    			}
+    		}
+    		)
+    }
+
+    </script>
     
     <link rel="stylesheet" href="css/common.css?v=2015-5-20"/>
     
@@ -79,11 +115,44 @@
                     $("#load_geolocation").text('定位失败');  
                 }          
             },{enableHighAccuracy: true})//指示浏览器获取高精度的位置，默认false  
-         
     });     
     </script> 
     
+
     <title>首页</title>
+    
+    <script src="https://libs.baidu.com/jquery/1.11.3/jquery.min.js"></script>
+    <script type="text/javascript">
+    
+     function addnewseller() {
+    	var sphone = $("#phone").val();
+    	var sname = $("#sname").val();
+    	var name = $("#name").val();
+    	var dname = $("#dname").val();
+    	 $.ajax({
+             url: "newseller",
+             type: "post",
+              dataType:'json',//这里要写成text不然回调函数无法识别传回来的String 无法实现
+              data: {"sphone":sphone,
+            	  	"sname": sname,
+            	  	"name":name,
+            	  	"dname":dname
+            	  	},
+              success: function (result) {
+            	  if(result.code == 0){
+      				alert( "注册申请已发出，请等候管理员联系！！！")
+      			
+  				}else {
+  					
+  					/* $("#msg").val(result.msg);  */
+  				alert(result.msg);
+             }
+              }
+          });
+    	
+    } 
+    </script>
+    
 </head>
 <body class="day " ng-controller="bodyCtrl"  day-or-night>
     <section class="common-back" id="wrapBackground">
@@ -107,6 +176,7 @@
                     <a th:if="${session.loginedUser} eq null" id="reg"  href="javascript:void(0)" ng-click="registerDialogClose()">注册</a>
                     <span>|</span>
                     <a href="member_order.html">查看订单</a>
+                    
                 </div>
             
         </div>
@@ -339,11 +409,11 @@
     
     <a href="javascript:void(0)" animate-top="-65" class="merchants-icon" ng-click="merchantsShow=true;merchants={};merchants.checkbox=true;"></a>
     
-<dh-dialog class="disnone" type='login' height="500" header="登录" show="loginShow" >
+<dh-dialog id="model" class="disnone" type='login' height="500" header="登录" show="loginShow" >
     <form class="login-form" novalidate name="loginForm" ng-controller="loginCtrl">
-   
 	<span colspan="2" id="msg" style="text-align:center; color:red"></span>
         <!-- 手机号 -->
+
         <div class="form-group">
             <label for="">手机号码</label>
             <div>
@@ -378,7 +448,6 @@
                 <dh-captcha change="captchaChange" src="images/yzm.gif"></dh-captcha>
             </label>
         </div>
-        
         <div class="clearfix mb10">
             <dh-checkbox model="user.rememberme" title="记住我" class="fl"></dh-checkbox>
             <a href="/account/password/reset_via_mobile/" target="_blank" class="fs12 fr link">忘记密码</a>
@@ -388,7 +457,7 @@
         <div class="clearfix">
             <span class="fr fs12">
                 没有账号?
-                <a href="javascript:void(0)" ng-click="locationRegister()" class="link">立即注册</a>
+                <a href="javascript:void(0)" class="link">立即注册</a>
             </span>
         </div>
     </form>
@@ -456,6 +525,7 @@
         <button ng-disabled="!user.remember || registerBtnDisabled" ng-click="registerVaildate()" class="big-btn btn-green btn mb10" ng-bind="registerBtn"></button>
     </form>
 </dh-dialog>
+
 <script>
     var common_sms_code = '/ajax/common_sms_code/';
     var ajax_customer_user_register_start = '/ajax/customer_user_register_start/';
@@ -478,12 +548,16 @@
             <p>请您检查地址拼写/格式是否正确和 <a href="javascript:void(0)" class="link" ng-click="resetStreet()">重新输入您的地址</a>。</p>
         </div>
     </dh-dialog>
+    
+    <!-- 新店入驻 -->
+    
     <dh-dialog class="disnone" height="500" type="merchants" header="商户入驻申请" show="merchantsShow">
+    <form action="newshop" method="post">
         <div class="inline" ng-controller="merchantCtrl">
             <div class="form-group row mb10">
                 <label class="col-3" >商户名称：</label>
                 <div class="col-8">
-                    <input type="text" ng-class="{error:merchants.nameMessage}" maxlength="11" placeholder="输入店铺的名称，例：美美小厨" ng-model="merchants.name"/>
+                    <input type="text" id="sname" name="sname" ng-class="{error:merchants.nameMessage}" maxlength="11" placeholder="输入店铺的名称，例：美美小厨" ng-model="merchants.name"/>
                 </div>
                 <span class="vaildate-error col-8 col-offset-3" ng-if="merchants.nameMessage">
                     <span ng-bind="merchants.nameMessage"></span>
@@ -492,7 +566,7 @@
             <div class="form-group row mb10">
                 <label class="col-3">所属城市：</label>
                 <div class="col-8">
-                    <select model="city" area-model="area" ng-class="{error:merchants.cityMessage}" class="city-change"></select>
+                    <select id="name" model="city"  area-model="area" ng-class="{error:merchants.cityMessage}" class="city-change"></select>
                 </div>
                 <span class="vaildate-error col-8 col-offset-3" ng-if="merchants.cityMessage">
                     <span ng-bind="merchants.cityMessage"></span>
@@ -501,22 +575,14 @@
             <div class="form-group row mb10">
                 <label class="col-3">行政分区：</label>
                 <span class="col-8">
-                    <select  id="areaSelect"></select>
-                </span>
-            </div>
-            <div class="form-group row mb10">
-                <label class="col-3">店主姓名：</label>
-                <div class="col-8">
-                    <input type="text" ng-class="{error:merchants.usernameMessage}" placeholder="请输入联系人姓名" ng-model="merchants.username"/>
-                </div>
-                <span class="vaildate-error col-8 col-offset-3" ng-if="merchants.usernameMessage">
-                    <span ng-bind="merchants.usernameMessage"></span>
+                    <select  id="dname" name="dname"></select>
                 </span>
             </div>
             <div class="form-group row mb20">
                 <label class="col-3">联系电话：</label>
                 <div class="col-8">
-                   <input type="text" ng-class="{error:merchants.phoneMessage}" maxlength="11" placeholder="建议输入11位手机号码" ng-model="merchants.phone"/>
+                   <input type="text" id="phone" ng-class="{error:merchants.phoneMessage}" maxlength="11" placeholder="建议输入11位手机号码" ng-model="merchants.phone"/>
+                   
                 </div>
                 <span class="vaildate-error col-8 col-offset-3" ng-if="merchants.phoneMessage">
                     <span ng-bind="merchants.phoneMessage"></span>
@@ -526,10 +592,10 @@
                <input type="checkbox" ng-model="merchants.checkbox" id="male"/><label for="male">我同意外卖超人</label><a href="/agreement" target="_blank">"餐厅入驻协议"</a>
             </div>
             <div class="tc merchants-btn">
-                <button class="btn normal-btn btn-success" ng-click="merchantSubmit()" ng-disabled="!merchants.checkbox">确认</button>
-                <button class="btn normal-btn btn-cancel" ng-click="merchantCancel()">取消</button>
+                <button type="button" class="btn normal-btn btn-success" id="newseller" onclick="addnewseller()"> 确认</button>
             </div>
         </div>
+        </form>
     </dh-dialog>
 
     <dh-dialog class="disnone" type="alert" index="1001" header="" show="requestSuccess">
@@ -568,7 +634,7 @@
     
     <script>var manually_locations='';</script>
     <script src="js/frontPage.js"></script>
-
+	<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
     
     <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
     <script>angular.bootstrap(document, ["app"]);</script>

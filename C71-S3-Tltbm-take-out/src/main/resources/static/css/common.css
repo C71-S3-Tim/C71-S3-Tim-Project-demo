@@ -134,7 +134,7 @@ input.error,textarea.error,select.error{box-shadow:0 0 5px #FF8A73;border:1px so
 .form-group label{display:block;font-size:0.875em;height:34px;line-height: 34px;}
 .form-group label.require:before{content:'*';color:#ff0000;font-size:.75em}
 .form-group button{padding-top:11px;padding-bottom:11px}
-.form-group input,.form-group select{width:100%}
+.form-group input,.form-group select{width:90%}
 .form-group > div{margin-right:24px}
 .captcha{cursor:pointer}
 .input-icon{position:relative}

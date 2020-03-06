@@ -4,6 +4,7 @@
   <resultMap id="BaseResultMap" type="com.yc.spirngboot.takeout.bean.Allotinf">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="rename" jdbcType="VARCHAR" property="rename" />
+    <result column="Myrename" jdbcType="VARCHAR" property="myrename" />
     <result column="rephone" jdbcType="VARCHAR" property="rephone" />
     <result column="u_id" jdbcType="INTEGER" property="uId" />
     <result column="addr" jdbcType="VARCHAR" property="addr" />
@@ -68,7 +69,10 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, rename, rephone, u_id, addr, remarks
+
+ 
+	    id, Myrename, rephone, u_id, addr, remarks
+
   </sql>
   <select id="selectByExample" parameterType="com.yc.spirngboot.takeout.bean.AllotinfExample" resultMap="BaseResultMap">
     select
@@ -104,9 +108,11 @@
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into allotinf (rename, rephone, u_id, 
+
+
+    insert into allotinf (Myrename, rephone, u_id, 
       addr, remarks)
-    values (#{rename,jdbcType=VARCHAR}, #{rephone,jdbcType=VARCHAR}, #{uId,jdbcType=INTEGER}, 
+    values (#{myrename,jdbcType=VARCHAR}, #{rephone,jdbcType=VARCHAR}, #{uId,jdbcType=INTEGER}, 
       #{addr,jdbcType=VARCHAR}, #{remarks,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.yc.spirngboot.takeout.bean.Allotinf">
@@ -115,8 +121,11 @@
     </selectKey>
     insert into allotinf
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="rename != null">
-        rename,
+
+
+      <if test="myrename != null">
+        Myrename,
+
       </if>
       <if test="rephone != null">
         rephone,
@@ -132,8 +141,11 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="rename != null">
-        #{rename,jdbcType=VARCHAR},
+
+
+      <if test="myrename != null">
+        #{myrename,jdbcType=VARCHAR},
+
       </if>
       <if test="rephone != null">
         #{rephone,jdbcType=VARCHAR},
@@ -161,8 +173,8 @@
       <if test="record.id != null">
         id = #{record.id,jdbcType=INTEGER},
       </if>
-      <if test="record.rename != null">
-        rename = #{record.rename,jdbcType=VARCHAR},
+      <if test="record.myrename != null">
+        Myrename = #{record.myrename,jdbcType=VARCHAR},
       </if>
       <if test="record.rephone != null">
         rephone = #{record.rephone,jdbcType=VARCHAR},
@@ -184,7 +196,7 @@
   <update id="updateByExample" parameterType="map">
     update allotinf
     set id = #{record.id,jdbcType=INTEGER},
-      rename = #{record.rename,jdbcType=VARCHAR},
+      Myrename = #{record.myrename,jdbcType=VARCHAR},
       rephone = #{record.rephone,jdbcType=VARCHAR},
       u_id = #{record.uId,jdbcType=INTEGER},
       addr = #{record.addr,jdbcType=VARCHAR},
@@ -196,8 +208,8 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.yc.spirngboot.takeout.bean.Allotinf">
     update allotinf
     <set>
-      <if test="rename != null">
-        rename = #{rename,jdbcType=VARCHAR},
+      <if test="myrename != null">
+        Myrename = #{myrename,jdbcType=VARCHAR},
       </if>
       <if test="rephone != null">
         rephone = #{rephone,jdbcType=VARCHAR},
@@ -216,7 +228,7 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.yc.spirngboot.takeout.bean.Allotinf">
     update allotinf
-    set rename = #{rename,jdbcType=VARCHAR},
+    set Myrename = #{myrename,jdbcType=VARCHAR},
       rephone = #{rephone,jdbcType=VARCHAR},
       u_id = #{uId,jdbcType=INTEGER},
       addr = #{addr,jdbcType=VARCHAR},

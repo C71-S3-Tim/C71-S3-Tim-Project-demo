@@ -14,7 +14,7 @@
 		</commentGenerator>
 
 		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
-			connectionURL="jdbc:mysql://127.0.0.1/C71-S3-G-take_out?useUnicode=true&amp;characterEncoding=UTF-8" 
+			connectionURL="jdbc:mysql://127.0.0.1/C71-S3-G-take_out?" 
 			userId="root" password="a">
 		</jdbcConnection>
 		
@@ -33,7 +33,7 @@
 		</javaClientGenerator>
 
 		<!-- % 表示所有的表 -->
-		<table tableName="%" >
+		<table tableName="%">
 			<!-- 配置自增列 id -->
 			<generatedKey column="id" sqlStatement="mysql" identity="true"/>
 			<!-- 配置 日期字段 -->

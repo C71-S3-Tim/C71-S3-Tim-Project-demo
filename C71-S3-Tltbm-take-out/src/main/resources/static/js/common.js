@@ -1222,6 +1222,14 @@ var loginObj = (function(){
             scope.captchaChange = Math.random();
             scope.loginShow = true;
         }
+
+        scope.logoinDialogClose = function () {
+            scope.user = {};
+            scope.captchaChange = Math.random();
+            scope.loginShow = false;
+        }
+
+
         scope.locationRegister = function () {
             scope.loginShow = false;
             scope.registerDialogShow();

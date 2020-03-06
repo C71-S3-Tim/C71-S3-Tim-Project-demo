@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" xmlns:th="www.thymeleaf.org">
 <head>
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
@@ -11,10 +11,10 @@
     <meta property="wb:webmaster" content="239d3d1dbdde1b2c" />
     <link rel="icon" type="image/png" href="images/favicon.ico"/>
     
-    <script type="text/javascript">
+    <!-- <script type="text/javascript">
         
         (function(document, screen) {if (screen.width < 760) {document.location.href="/mobile/";}}(document, screen));
-    </script>
+    </script> -->
     
     <link rel="stylesheet" href="css/common.css?v=2015-5-20"/>
     
@@ -116,10 +116,10 @@
                         <th>操作</th>
                     </tr>
                 </thead>
-                <tr ng-repeat="item in userAddressList">
-                    <td ng-bind="item.customer_name"></td>
-                    <td ng-bind="item.customer_phone"></td>
-                    <td ng-bind="item.delivery_address"></td>
+                <tr th:each="address,eee: ${address}">
+                    <td><span th:text="${address.rename}" ></span></td>
+                    <td><span th:text="${address.rephone}" ></span></td>
+                    <td><span th:text="${address.addr}" ></span></td>
                     <td>
                         <a href="javascript:;" ng-click="editUserAddress($index)">修改</a>
                         <a href="javascript:;" ng-click="deleteUserAddress($index)">删除</a>
@@ -127,59 +127,60 @@
                 </tr>
             </table>
         </article>
+        
+        <form action="insertAddr" method="post">
         <article ng-show="userAddressList.length < 8">
+        
             <header class="mb10">
                 <h2>新增地址</h2><strong>(最多只能保存 8 个有效地址)</strong>
             </header>
             <section class="add-address-box">
-                <form novalidate="true" name="userAddressForm">
+                
                     <div class="form-group mb10 row">
                         <label class="col-2">收单人：</label>
                         <div class="col-6">
-                            <input type="text" required maxlength="10"
-                                ng-class="{error:userAddressForm.submit && userAddressForm.name.$invalid}" name="name"
-                                placeholder="如何称呼" ng-model="userAddress.customer_name">
+                            <input type="text" required maxlength="10" name="rename"
+                                placeholder="如何称呼" >
                         </div>
-                        <span ng-if="userAddressForm.submit && userAddressForm.name.$invalid">
+                        <!-- <span ng-if="userAddressForm.submit && userAddressForm.name.$invalid">
                             <span class="vaildate-error">称呼不能为空</span>
-                        </span>
+                        </span> -->
                     </div>
                     <div class="form-group mb10 row">
                         <label class="col-2">手机号码：</label>
                         <div class="col-6">
-                            <input type="text" maxlength="11" required mobile
-                                ng-class="{error:userAddressForm.submit && userAddressForm.contact.$invalid}" name="contact"
-                                placeholder="138xxxxxxxx" ng-model="userAddress.customer_phone">
+                            <input name="rephone" type="text" maxlength="11" required mobile
+                                placeholder="138xxxxxxxx" >
                         </div>
-                        <span ng-if="userAddressForm.submit && userAddressForm.contact.$error.required">
+                        <!-- <span ng-if="userAddressForm.submit && userAddressForm.contact.$error.required">
                             <span class="vaildate-error">手机号码不能为空</span>
                         </span>
                         <span ng-if="userAddressForm.submit && userAddressForm.contact.$error.mobile">
                             <span class="vaildate-error">请输入正确的11位手机号码</span>
-                        </span>
+                        </span> -->
                     </div>
                     <div class="form-group mb30 row">
                         <label class="col-2">送餐地址：</label>
                         <div class="col-6">
-                            <input type="text" required
-                                ng-class="{error:userAddressForm.submit && userAddressForm.address.$invalid}" name="address"
-                                placeholder="详细地址，如武定西路1189号606室" ng-model="userAddress.delivery_address">
+                            <input name="addr" type="text" required
+                                placeholder="详细地址，如武定西路1189号606室" >
                         </div>
-                        <span ng-if="(userAddressForm.submit && userAddressForm.address.$invalid)">
+                        <!-- <span ng-if="(userAddressForm.submit && userAddressForm.address.$invalid)">
                             <span class="vaildate-error">送餐地址不能为空</span>
-                        </span>
+                        </span> -->
                     </div>
                     <div class="form-group mb30 row">
                         <label class="col-2"></label>
                         <div class="col-8">
-                            <button class="btn btn-success normal-btn" ng-click="addUserAddress()">
+                            <button class="btn btn-success normal-btn" onclick="insertAddr()">
                                 保存送餐地址
                             </button>
                         </div>
                     </div>
-                </form>
+                
             </section>
         </article>
+        </form>
     </section>
 
 

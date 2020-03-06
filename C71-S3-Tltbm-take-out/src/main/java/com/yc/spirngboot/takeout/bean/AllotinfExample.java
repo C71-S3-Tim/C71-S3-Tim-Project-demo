@@ -166,71 +166,75 @@ public class AllotinfExample {
 
         public Criteria andRenameIsNull() {
             addCriterion("rename is null");
+			return (Criteria) this;
+        }
+        public Criteria andMyrenameIsNull() {
+            addCriterion("Myrename is null");
             return (Criteria) this;
         }
 
-        public Criteria andRenameIsNotNull() {
-            addCriterion("rename is not null");
+        public Criteria andMyrenameIsNotNull() {
+            addCriterion("Myrename is not null");
             return (Criteria) this;
         }
 
-        public Criteria andRenameEqualTo(String value) {
-            addCriterion("rename =", value, "rename");
+        public Criteria andMyrenameEqualTo(String value) {
+            addCriterion("Myrename =", value, "myrename");
             return (Criteria) this;
         }
 
-        public Criteria andRenameNotEqualTo(String value) {
-            addCriterion("rename <>", value, "rename");
+        public Criteria andMyrenameNotEqualTo(String value) {
+            addCriterion("Myrename <>", value, "myrename");
             return (Criteria) this;
         }
 
-        public Criteria andRenameGreaterThan(String value) {
-            addCriterion("rename >", value, "rename");
+        public Criteria andMyrenameGreaterThan(String value) {
+            addCriterion("Myrename >", value, "myrename");
             return (Criteria) this;
         }
 
-        public Criteria andRenameGreaterThanOrEqualTo(String value) {
-            addCriterion("rename >=", value, "rename");
+        public Criteria andMyrenameGreaterThanOrEqualTo(String value) {
+            addCriterion("Myrename >=", value, "myrename");
             return (Criteria) this;
         }
 
-        public Criteria andRenameLessThan(String value) {
-            addCriterion("rename <", value, "rename");
+        public Criteria andMyrenameLessThan(String value) {
+            addCriterion("Myrename <", value, "myrename");
             return (Criteria) this;
         }
 
-        public Criteria andRenameLessThanOrEqualTo(String value) {
-            addCriterion("rename <=", value, "rename");
+        public Criteria andMyrenameLessThanOrEqualTo(String value) {
+            addCriterion("Myrename <=", value, "myrename");
             return (Criteria) this;
         }
 
-        public Criteria andRenameLike(String value) {
-            addCriterion("rename like", value, "rename");
+        public Criteria andMyrenameLike(String value) {
+            addCriterion("Myrename like", value, "myrename");
             return (Criteria) this;
         }
 
-        public Criteria andRenameNotLike(String value) {
-            addCriterion("rename not like", value, "rename");
+        public Criteria andMyrenameNotLike(String value) {
+            addCriterion("Myrename not like", value, "myrename");
             return (Criteria) this;
         }
 
-        public Criteria andRenameIn(List<String> values) {
-            addCriterion("rename in", values, "rename");
+        public Criteria andMyrenameIn(List<String> values) {
+            addCriterion("Myrename in", values, "myrename");
             return (Criteria) this;
         }
 
-        public Criteria andRenameNotIn(List<String> values) {
-            addCriterion("rename not in", values, "rename");
+        public Criteria andMyrenameNotIn(List<String> values) {
+            addCriterion("Myrename not in", values, "myrename");
             return (Criteria) this;
         }
 
-        public Criteria andRenameBetween(String value1, String value2) {
-            addCriterion("rename between", value1, value2, "rename");
+        public Criteria andMyrenameBetween(String value1, String value2) {
+            addCriterion("Myrename between", value1, value2, "myrename");
             return (Criteria) this;
         }
 
-        public Criteria andRenameNotBetween(String value1, String value2) {
-            addCriterion("rename not between", value1, value2, "rename");
+        public Criteria andMyrenameNotBetween(String value1, String value2) {
+            addCriterion("Myrename not between", value1, value2, "myrename");
             return (Criteria) this;
         }
 

@@ -1,12 +1,21 @@
 package com.yc.spirngboot.takeout.bean;
+import javax.validation.constraints.NotEmpty;
+
+
+import org.hibernate.validator.constraints.Length;
 
 public class User {
     private Integer id;
+
+    @NotEmpty(message="密码不能为空")
+    @Length(min=6, message="密码不得低于6位")
 
     private String pwd;
 
     private Integer cityId;
 
+    @NotEmpty(message="手机号码不能为空")
+    @Length(min=11, max=11, message="请输入11位手机号码")
     private String phone;
 
     private String uname;

@@ -7,7 +7,7 @@ public class Comment {
 
     private Integer uId;
 
-    private Integer gId;
+    private Integer sId;
 
     private Timestamp createtime;
 
@@ -29,12 +29,12 @@ public class Comment {
         this.uId = uId;
     }
 
-    public Integer getgId() {
-        return gId;
+    public Integer getsId() {
+        return sId;
     }
 
-    public void setgId(Integer gId) {
-        this.gId = gId;
+    public void setsId(Integer sId) {
+        this.sId = sId;
     }
 
     public Timestamp getCreatetime() {

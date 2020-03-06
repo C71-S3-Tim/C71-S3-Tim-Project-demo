@@ -10,6 +10,7 @@
     <meta name="baidu-site-verification" content="IYCrtVH0i1" />
     <meta property="wb:webmaster" content="239d3d1dbdde1b2c" />
     <link rel="icon" type="image/png" href="images/favicon.ico"/>
+
     <script type="text/javascript">
     	function login(){
     		var phone=$("#phone").val();
@@ -34,7 +35,9 @@
   
     		} )
     	}
-    
+
+
+   
     </script>
     
     <script type="text/javascript">
@@ -43,10 +46,46 @@
 	}
 
     </script>
+
     
     <script type="text/javascript">
         
         (function(document, screen) {if (screen.width < 760) {document.location.href="/mobile/";}}(document, screen));
+    </script>
+    <script type="text/javascript">
+    function login(){
+    	var phone=$("#phone").val();
+    	var pwd=$("#pwd").val();
+    	
+    	$.post("login.do",{
+    		phone : phone,
+    		pwd : pwd},
+    		function (result){
+    		console.info(result);
+    			if(result.code==0){
+    				alert("登陆成功！")
+    				//关闭模态窗口
+    			
+					var e1=$("#login");
+					angular.element(e1).triggerHandler('click');
+					
+    				//删除登陆和注册增加用户的显示账号
+    				var login=document.getElementById("login");
+    				var reg=document.getElementById("reg");
+    				var sp=document.getElementById("span");
+    				sp.parentNode.removeChild(sp);//删除 /
+    				login.parentNode.removeChild(login);//删除登陆
+    				reg.parentNode.removeChild(reg);//删除注册
+    				//增加账号显示
+    				 var phone=result.data.phone;
+    				 $("#parent").prepend("<a class='three'>"+phone+"</a>");
+    			}else{
+    				alert(result.msg)
+    			}
+    		}
+    		)
+    }
+
     </script>
     
     <link rel="stylesheet" href="css/common.css?v=2015-5-20"/>
@@ -79,7 +118,7 @@
          
     });     
     </script> 
-    
+
     <title>首页</title>
 </head>
 <body class="day " ng-controller="bodyCtrl"  day-or-night>
@@ -97,6 +136,7 @@
     <section class="member-wrap" id="member-wrap">
         <div class="common-width posr">
             
+
                 <div id="parent" class="member-box fs12" login-box info="loginInfo"  >
                 	
         			<span id="replace">
@@ -104,9 +144,9 @@
                     <span >/</span>
                     <a href="javascript:void(0)" ng-click="registerDialogShow()">注册</a>
                     </span>
-                    
                     <span>|</span>
                     <a href="member_order.html">查看订单</a>
+                    <a href="member_order.html" th:text="${sesion.loginedUser.phone}">55555</a>
                 </div>
             
         </div>
@@ -118,10 +158,12 @@
             </h1>
             <div class="city-list-box back-yellow">
                 <div class="dropdown-box">
-                <!-- 位置显示标签 -->
+                   <!-- 位置显示标签 -->
                 <div>  
      			   <span id="load_geolocation"></span>  
     			</div>  
+    			    
+                </div>
             </div>
         </section>
         <section class="search-box-wrap">
@@ -141,7 +183,6 @@
                                <form action="query.do" method="post" id="seller">
                                         <input type="text" ng-model="keyword" name="sname" id="sname" autocomplete placeholder="去哪吃？" 
                                         class="search-input" ng-initial value="" onkeyup="this.setAttribute('value',this.value);"/>
-                                    
                                         <ul ng-class="{disblock:searchResultIsShow}" class="search-result-box">
                                             <li ng-class="{active:currentActiveIndex==$index}" ng-repeat="item in datas track by $index" ng-click="searchResultSelect($index)">
                                                 <h5 ng-bind="item"></h5>
@@ -345,15 +386,17 @@
     
     <a href="javascript:void(0)" animate-top="-65" class="merchants-icon" ng-click="merchantsShow=true;merchants={};merchants.checkbox=true;"></a>
     
-<dh-dialog class="disnone" type='login' height="500" header="登录" show="loginShow" >
+<dh-dialog id="model" class="disnone" type='login' height="500" header="登录" show="loginShow" >
     <form class="login-form" novalidate name="loginForm" ng-controller="loginCtrl">
+
    
 	<span colspan="2" id="msg" style="text-align:center; color:red"></span>
         <!-- 手机号 -->
+
         <div class="form-group">
             <label for="">手机号码</label>
             <div>
-                <input  id="phone" type="text" ng-model="user.username" ng-class="{error:user.usernameMessage}" ng-focus="user.usernameMessage=''" maxlength="11" placeholder="请输入你的手机号码" />
+                <input id="phone" type="text" ng-model="user.username" ng-class="{error:user.usernameMessage}" ng-focus="user.usernameMessage=''" maxlength="11" placeholder="请输入你的手机号码" />
                 <span class="vaildate-error" ng-if="user.usernameMessage">
                     <span ng-bind="user.usernameMessage"></span>
                 </span>
@@ -362,7 +405,8 @@
                 </span>
             </div>
         </div>
-        <!-- 密码 -->
+     
+         <!-- 登陆密码 -->
         <div class="form-group mb10">
             <label for="">登录密码</label>
             <div>
@@ -372,10 +416,10 @@
                 </span>
             </div>
         </div>
-        <!-- 验证码 -->
-        <div >
+        <!-- 登陆验证码 -->
+        <div ng-init="showCaptcha=0" ng-if="showCaptcha" class="form-group inline clearfix mb10">
             <div class="fl w50p">
-                <input id="vcode" type="text" ng-model="user.captcha" ng-focus="user.captchaMessage=''"  ng-class="{error:user.captchaMessage}" placeholder="请输入验证码">
+                <input type="text" ng-model="user.captcha" ng-focus="user.captchaMessage=''"  ng-class="{error:user.captchaMessage}" placeholder="请输入验证码">
                 <span class="vaildate-error" ng-if="user.captchaMessage">
                     <span ng-bind="user.captchaMessage"></span>
                 </span>
@@ -384,27 +428,30 @@
                 <dh-captcha change="captchaChange" src="images/yzm.gif"></dh-captcha>
             </label>
         </div>
-        
+        	<!-- 忘记密码 -->
         <div class="clearfix mb10">
             <dh-checkbox model="user.rememberme" title="记住我" class="fl"></dh-checkbox>
-            <a href="/account/password/reset_via_mobile/" target="_blank" class="fs12 fr link">忘记密码</a>
+            <a href="pwd_forget.html" target="_blank" class="fs12 fr link">忘记密码</a>
         </div>
+
+
         <!-- 登录按钮 -->
         <button class="big-btn btn-green btn mb10" onclick="login()">登录</button>
+
         <div class="clearfix">
             <span class="fr fs12">
                 没有账号?
-                <a href="javascript:void(0)" ng-click="locationRegister()" class="link">立即注册</a>
+                <a href="javascript:void(0)" class="link">立即注册</a>
             </span>
         </div>
     </form>
 </dh-dialog>
 <dh-dialog class="disnone" type='register' height="500" header="注册" show="registerShow" >
-    <form ng-controller="registerCtrl" class="register-form" name="registerForm">
+    <form ng-controller="registerCtrl" class="register-form" name="registerForm" method="post" action="reg.do">
         <div class="form-group mb10">
             <label for="">手机号码</label>
             <div>
-                <input type="text" ng-class="{error:user.usernameMessage}" maxlength="11" placeholder="请输入您的手机号码" ng-model="user.username"/>
+                <input name="phone" type="text" ng-class="{error:user.usernameMessage}" maxlength="11" placeholder="请输入您的手机号码" ng-model="user.username"/>
                 <span class="vaildate-error" ng-if="user.usernameMessage">
                     <span ng-bind="user.usernameMessage"></span>
                 </span>
@@ -420,6 +467,7 @@
             <div class="clearfix captcha-box">
                 <div class="fl form-group captcha-item">
                     <div class="fl w50p">
+                    
                         <input type="text" ng-class="{error:user.captchaMessage}" ng-focus="user.captchaMessage=''" placeholder="请输入验证码" ng-model="user.captcha" />
                         <span class="vaildate-error" ng-if="user.captchaMessage">
                             <span ng-bind="user.captchaMessage"></span>
@@ -429,7 +477,8 @@
                 </div>
                 <div class="fl form-group captcha-item">
                     <div class="fl w50p">
-                        <input type="text" ng-model="user.imgCaptcha" maxlength="4" ng-disabled="imgCaptchaIsDisabled" ng-class="{error:user.imgCaptchaMessage}" placeholder="请输入验证码">
+                    <!-- 验证码 -->
+                        <input  name="vcode" type="text" ng-model="user.imgCaptcha" maxlength="4" ng-disabled="imgCaptchaIsDisabled" ng-class="{error:user.imgCaptchaMessage}" placeholder="请输入验证码">
                         <span class="vaildate-error" ng-if="user.imgCaptchaMessage">
                             <span ng-bind="user.imgCaptchaMessage"></span>
                         </span>
@@ -449,7 +498,7 @@
             </div>
         </div>
         <div class="form-group mb10">
-            <div><input type="password" ng-class="{error:user.password2Message}" ng-focus="user.password2Message=''" maxlength="10" onpaste="return false" placeholder="输入登录密码 6-10个字符" ng-model="user.password2"/>
+            <div><input  name="pwd" type="password" ng-class="{error:user.password2Message}" ng-focus="user.password2Message=''" maxlength="10" onpaste="return false" placeholder="输入登录密码 6-10个字符" ng-model="user.password2"/>
                 <span class="vaildate-error" ng-if="user.password2Message">
                     <span ng-bind="user.password2Message"></span>
                 </span>
@@ -459,9 +508,11 @@
             <dh-checkbox model="user.remember" title="我同意外卖超人" class="fl"></dh-checkbox>
             <a href="/terms-and-conditions/" target="_blank" class="fs12 fl link"> " 注册条款 "</a>
         </div>
+        <!-- 确认注册按钮 -->
         <button ng-disabled="!user.remember || registerBtnDisabled" ng-click="registerVaildate()" class="big-btn btn-green btn mb10" ng-bind="registerBtn"></button>
     </form>
 </dh-dialog>
+
 <script>
     var common_sms_code = '/ajax/common_sms_code/';
     var ajax_customer_user_register_start = '/ajax/customer_user_register_start/';
@@ -574,7 +625,7 @@
     
     <script>var manually_locations='';</script>
     <script src="js/frontPage.js"></script>
-
+	<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
     
     <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
     <script>angular.bootstrap(document, ["app"]);</script>

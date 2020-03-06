@@ -11,7 +11,6 @@ public class Result {
 	private String failed_code;
 	
 	
-	
 	public String getStatus() {
 		return status;
 	}

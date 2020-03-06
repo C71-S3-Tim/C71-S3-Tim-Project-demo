@@ -6,7 +6,6 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
-import com.yc.spirngboot.takeout.bean.Orderinfo;
 import com.yc.spirngboot.takeout.bean.OrderinfoExample;
 import com.yc.spirngboot.takeout.bean.OrderinfoExample.Criteria;
 import com.yc.spirngboot.takeout.bean.Seller;
@@ -36,9 +35,13 @@ public class UserBiz {
  		um.insertSelective(user);
 	}
 
+	//用户登陆
+
 	public User selectByUser(String phone) throws BizExcption {
 		UserExample ue=new UserExample();
-		ue.createCriteria().andPhoneEqualTo(phone);						
+
+		ue.createCriteria().andPhoneEqualTo(phone);					
+
 		List<User> users=um.selectByExample(ue);
 		if(users.size()==1) {
 			return users.get(0);
@@ -46,6 +49,15 @@ public class UserBiz {
 			throw new BizExcption("用户不存在"); 
 		}
 	}
+
+	//加入积分
+	public void addIntegal(int intergal, Integer uid) {
+		User user=um.selectByPrimaryKey(uid);
+		user.setIntegral(user.getIntegral()+intergal);
+		um.updateByPrimaryKey(user);
+		
+	}
+
 	
 	
 	public void change(User user,String new_password) {
@@ -73,6 +85,7 @@ public class UserBiz {
 		int sucOrders=(int) oim.countByExample(example);
 		return sucOrders;
 	}
+
 	
 	
 	//模糊查询餐厅
@@ -91,5 +104,8 @@ public class UserBiz {
 		List<Seller> list=sm.selectByExample(example);
 		return list;
 	}
+
+
+	
 
 }
