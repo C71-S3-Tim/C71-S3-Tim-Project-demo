@@ -3,10 +3,11 @@
 <mapper namespace="com.yc.spirngboot.takeout.dao.AllotinfMapper">
   <resultMap id="BaseResultMap" type="com.yc.spirngboot.takeout.bean.Allotinf">
     <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="discrict_id" jdbcType="INTEGER" property="discrictId" />
     <result column="rename" jdbcType="VARCHAR" property="rename" />
     <result column="rephone" jdbcType="VARCHAR" property="rephone" />
     <result column="u_id" jdbcType="INTEGER" property="uId" />
+    <result column="addr" jdbcType="VARCHAR" property="addr" />
+    <result column="remarks" jdbcType="VARCHAR" property="remarks" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -67,7 +68,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, discrict_id, rename, rephone, u_id
+    id, rename, rephone, u_id, addr, remarks
   </sql>
   <select id="selectByExample" parameterType="com.yc.spirngboot.takeout.bean.AllotinfExample" resultMap="BaseResultMap">
     select
@@ -103,10 +104,10 @@
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into allotinf (discrict_id, rename, rephone, 
-      u_id)
-    values (#{discrictId,jdbcType=INTEGER}, #{rename,jdbcType=VARCHAR}, #{rephone,jdbcType=VARCHAR}, 
-      #{uId,jdbcType=INTEGER})
+    insert into allotinf (rename, rephone, u_id, 
+      addr, remarks)
+    values (#{rename,jdbcType=VARCHAR}, #{rephone,jdbcType=VARCHAR}, #{uId,jdbcType=INTEGER}, 
+      #{addr,jdbcType=VARCHAR}, #{remarks,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.yc.spirngboot.takeout.bean.Allotinf">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
@@ -114,9 +115,6 @@
     </selectKey>
     insert into allotinf
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="discrictId != null">
-        discrict_id,
-      </if>
       <if test="rename != null">
         rename,
       </if>
@@ -126,11 +124,14 @@
       <if test="uId != null">
         u_id,
       </if>
+      <if test="addr != null">
+        addr,
+      </if>
+      <if test="remarks != null">
+        remarks,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="discrictId != null">
-        #{discrictId,jdbcType=INTEGER},
-      </if>
       <if test="rename != null">
         #{rename,jdbcType=VARCHAR},
       </if>
@@ -139,6 +140,12 @@
       </if>
       <if test="uId != null">
         #{uId,jdbcType=INTEGER},
+      </if>
+      <if test="addr != null">
+        #{addr,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null">
+        #{remarks,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -154,9 +161,6 @@
       <if test="record.id != null">
         id = #{record.id,jdbcType=INTEGER},
       </if>
-      <if test="record.discrictId != null">
-        discrict_id = #{record.discrictId,jdbcType=INTEGER},
-      </if>
       <if test="record.rename != null">
         rename = #{record.rename,jdbcType=VARCHAR},
       </if>
@@ -166,6 +170,12 @@
       <if test="record.uId != null">
         u_id = #{record.uId,jdbcType=INTEGER},
       </if>
+      <if test="record.addr != null">
+        addr = #{record.addr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remarks != null">
+        remarks = #{record.remarks,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -174,10 +184,11 @@
   <update id="updateByExample" parameterType="map">
     update allotinf
     set id = #{record.id,jdbcType=INTEGER},
-      discrict_id = #{record.discrictId,jdbcType=INTEGER},
       rename = #{record.rename,jdbcType=VARCHAR},
       rephone = #{record.rephone,jdbcType=VARCHAR},
-      u_id = #{record.uId,jdbcType=INTEGER}
+      u_id = #{record.uId,jdbcType=INTEGER},
+      addr = #{record.addr,jdbcType=VARCHAR},
+      remarks = #{record.remarks,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -185,9 +196,6 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.yc.spirngboot.takeout.bean.Allotinf">
     update allotinf
     <set>
-      <if test="discrictId != null">
-        discrict_id = #{discrictId,jdbcType=INTEGER},
-      </if>
       <if test="rename != null">
         rename = #{rename,jdbcType=VARCHAR},
       </if>
@@ -197,15 +205,22 @@
       <if test="uId != null">
         u_id = #{uId,jdbcType=INTEGER},
       </if>
+      <if test="addr != null">
+        addr = #{addr,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null">
+        remarks = #{remarks,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.yc.spirngboot.takeout.bean.Allotinf">
     update allotinf
-    set discrict_id = #{discrictId,jdbcType=INTEGER},
-      rename = #{rename,jdbcType=VARCHAR},
+    set rename = #{rename,jdbcType=VARCHAR},
       rephone = #{rephone,jdbcType=VARCHAR},
-      u_id = #{uId,jdbcType=INTEGER}
+      u_id = #{uId,jdbcType=INTEGER},
+      addr = #{addr,jdbcType=VARCHAR},
+      remarks = #{remarks,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" xmlns:th="www.thymeleaf.org">
 <head>
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
@@ -8,13 +8,13 @@
     <meta property="wb:webmaster" content="239d3d1dbdde1b2c" />
     <link rel="stylesheet" type="text/css" href="css/reset.css" />
     <link rel="stylesheet" href="css/common.css"/>
-    
     <link rel="stylesheet" href="css/login.css"/>
-
     <!--[if lt IE 9]><link rel="stylesheet" type="text/css" href="css/frontPage-ie8-fix.css" /><![endif]-->
     <!--[if lte IE 10]><script>document.createElement('footer');document.createElement('header');document.createElement('nav');document.createElement('section');document.createElement('article');</script><![endif]-->
     <!--[if lte IE 7]><script>window.onload=function(){location.href="/ie6warning/"}</script><![endif]-->
     <title>注册</title>
+    
+    
     <script type="text/javascript">
         
         (function(document, screen) {
@@ -24,25 +24,42 @@
         }(document, screen));
     </script>
     <!-- 注册 -->
-    <script>
-    function register() {
-        var phone = $("#phone").val();
-        var pass = $("#pwd").val();
-        var pass2 = $("#pwd").val();
-        if (Number(pass) == Number(pass2)){
-           $.post("/register",{phone:phone,pwd:pwd2},function (res) {
-               if (res ==true){
-                   alert("注册成功");
-                   /* window.location.href ="/login"; */
-               } else {
-                   alert("注册失败，请检查数据重试");
-               }
-           })
-        }else {
-            alert("两次密码不一致！");
-        }
-    }
-    </script> 
+    <!-- 
+    <script src="https://libs.baidu.com/jquery/1.11.3/jquery.min.js"></script> -->
+    <script type="text/javascript" src="http://libs.baidu.com/jquery/2.0.0/jquery.js"></script>
+   
+    
+   <script type="text/javascript">
+    
+     function regis() {
+    	var phone = $("#phone").val();
+    	var pwd = $("#pwd").val();
+    	var pwd2 = $("#pwd2").val();
+    	var yzm = $("#yzm").val();
+    	
+    	 $.ajax({
+             url: "reg",
+             type: "post",
+              dataType:'json',//这里要写成text不然回调函数无法识别传回来的String 无法实现
+              data: {"phone":phone,
+            	  	"pwd": pwd,
+            	  	"pwd2":pwd2,
+            	  	"yzm":yzm
+            	  	},
+              success: function (result) {
+            	  if(result.code == 0){
+      				alert( "注册成功！")
+      			
+  				}else {
+  					
+  					/* $("#msg").val(result.msg);  */
+  				alert(result.msg);
+             }
+              }
+          });
+    	
+    } 
+    </script>
     
 </head>
 <body>
@@ -51,10 +68,9 @@
         <div class="common-width">
             
                 <section class="clearfix">
-                    <h1 class="logo" title="外卖超人">
-                        <a href="index.html"></a>
-                    </h1>
-                    <span class="page-name"> | 注册</span>
+                    <a href="return.do">
+                   	 <span class="page-name"> | 返回登录</span>
+                    </a>
                 </section>
                 
             
@@ -67,54 +83,49 @@
     <div class="main-inner">
         
     <div class="log-box" id="registerPageBox">
-    	<form action="reg" method="post">
+    
+    	
 	        <div class="form-group w275">
 	            <label for="">手机号码</label>
+	            
+	           <input id="msg" type="text" class="form-text" th:if="${newresult} ne null" th:value="${newresult.msg}"/>
+	            
+	           
 	            <input type="text" name="phone" id="phone" maxlength="11" class="form-text" placeholder="请输入你的手机号码" />
 	        </div>
 	        <div class="form-error-message"></div>
 	
-	        <div class="captcha-wrap">
-	            <div class="captcha-box" id="captchaBox" style="margin-left: -300px">
-	                <div class="captcha-item">
-	                    <div class="form-group captcha clearfix">
-	                        <input type="text" id="rCaptcha" class="form-text" placeholder="短信验证码"/>
-	                        <input type="button" id="getCaptcha"  class="captcha-btn" value="获取验证码"/>
-	                    </div>
-	                    <div class="form-error-message"></div>
-	                </div>
-	                <div class="captcha-item">
-	                    <div class="form-group captcha clearfix">
-	                        <input type="text" id="imgCaptcha"  maxlength="4" class="form-text" placeholder="输入验证码"/>
-	                        <input type="button" id="getCaptcha"  style="float: right;width: 100px;height: 40px" value="获取验证码"/>
-	                   
-	                        <!-- <span><img id="captchaImg" _src="/captcha/" src="/captcha/" alt="验证码"/></span> -->
-	                    </div>
-	                    <div class="form-error-message"></div>
-	                </div>
-	            </div>
-	        </div>
-	
+        	<!-- 验证码 -->
+        	<div class="form-group w275">
+        		<label for="">验证码</label>
+		        <input style="width: 155px; height: 20px;" id="yzm" type="text" />
+		        <img style="width: 145px; height: 35px; float: right;" alt="验证码" onclick="this.src='defaultKaptcha?d='+new Date()*1"
+		           src="defaultKaptcha">
+		        <br>
+		     </div>
+			<div class="form-error-message"></div>
+			
 	        <div class="form-group w275">
 	            <label for="">登录密码</label>
-	            <input type="password" name="pwd" id="pwd" maxlength="16" class="form-text" onpaste="return false" placeholder="输入登录密码 6-16个字符"/>
+	            <input type="password" name="pwd" id="pwd" maxlength="16"   placeholder="输入登录密码 6-16个字符"/><br>
 	        </div>
 	        <div class="form-error-message"></div>
+	        
 	        <div class="form-group w275">
-	            <input type="password" id="pwd2" maxlength="16" class="form-text" onpaste="return false" placeholder="确认登录密码 "/>
+	            <input type="password" id="pwd2" maxlength="16"   placeholder="确认登录密码 "/><br>
 	        </div>
-	        <div class="form-error-message"></div>
+			<div class="form-error-message"></div>
 	
 	        <div class="checkbox form-group clearfix mb5">
-	            <input type="checkbox" checked="checked" id="rAgree" value="true">
-	            <label for="rAgree" class="fl fs12">我同意外卖超人</label>
+	            <input type="checkbox" checked="checked"  value="true">
+	            <label class="fl fs12">我同意外卖超人</label>
 	            <span class="fl fs12"><a class="yo" target="_blank" href="/terms-and-conditions/">"注册条款"</a></span>
 	        </div>
 	        <div class="form-error-message"></div>
 	        <div>
-	            <button class="form-btn" id="registerPageBtn" onclick="register()">确认注册</button>
+	            <button type="button"  class="form-btn" id="regis" onclick="regis()">确认注册</button>
 	        </div>
-        </form>
+        
     </div>
 
     </div>
@@ -179,6 +190,7 @@ var s0 = d.getElementsByTagName("script")[0];s0.parentNode.insertBefore(s, s0);
   ga('send', 'pageview');
   ga('require', 'ecommerce', 'ecommerce.js');
 </script>
+
 <!-- End Google Analytics Code -->
 
 </body>

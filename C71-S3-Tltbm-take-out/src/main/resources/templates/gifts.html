@@ -109,6 +109,7 @@
             <article class="fl user-center-main">
                 <header>
 	
+		 
 	
 	
 </header>
@@ -120,16 +121,11 @@
             
              <li th:each="gift,eee: ${gift}">
                   <p class="gift-name ellipsis" ><span th:text="${gift.name}" ></span></p>  
-                  <p><img th:src="${gift.images}"/></p>
+                  <p><img th:src="${gift.image}"/></p>
                   <p class="gift-num"><span th:text="${gift.integral}"></span>氪星币 </p>
                   <p class="gift-num1">价值：<span th:text="${gift.value}"></span>&nbsp;元&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;数量：<span th:text="${gift.number}"></span></p>
-                  <button class="btn gift-button" >
-                  		<th:if>
-                  		
-                  		
-                  			立即兑换
-                  		
-                  		</th:if>
+                  <<button class="btn gift-button" ng-click="gitGift(  )" >
+                  		立即兑换
                   </button>
              </li>
              
@@ -345,14 +341,17 @@
             </table>
         </div>
     </dh-dialog>
+    
+    	<!-- 兑换商品 -->
+    	
+    	
     <dh-dialog class="disnone" header="填写兑换信息" show="giftMessageStatus">
+    	<form action="buygift" method="post">
+    
         <div class="gift-giftMessage-body" ng-controller="giftMessageCtr">
+            
             <div class="form-group row mb10">
-                <label class="col-3">兑换礼品：</label>
-                <div class="col-8 Ce18450 ellipsis" ng-bind="giftName"></div>
-            </div>
-            <div class="form-group row mb10">
-                <label class="col-3"><i class="red">*</i>联系姓名：</label>
+                <label class="col-3"><i class="red"></i>联系姓名：</label>
                 <div class="col-8">
                     <input type="text" maxlength="20" name="userName" ng-focus="userNameFocus()" ng-class="{error:giftMessage.userNameMessage}"  ng-model="giftMessage.userName"/>
                 </div>
@@ -379,13 +378,14 @@
                     <textarea ng-model="giftMessage.adress" maxlength="300" cols="37" rows="5"></textarea>
                 </div>
             </div>
-            <p class="mestip">消息确认无误后，3个工作日左右会有超人客服联系您，请耐心等待</p>
             <div class="tc">
                 <button class="btn normal-btn btn-success" ng-click="giftMessageSubmit()">确认信息并兑换</button>
-                <button class="btn normal-btn btn-cancel" ng-click="giftMessageCancel()">取消</button>
             </div>
         </div>
+        </form>
     </dh-dialog>
+    
+    
     <dh-dialog class="disnone" type="alert" header="" show="giftError">
         <div class="giftError alert-box error">
             <p ng-bind="giftErrormMsg"></p>
