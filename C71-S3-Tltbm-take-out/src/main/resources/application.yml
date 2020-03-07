@@ -1,5 +1,3 @@
-
-
 server:
   port: 80
 
@@ -36,43 +34,6 @@ logging:
    level:
      com:
        yc: debug
-
-spring:
-   datasource:
-     url: jdbc:mysql://127.0.0.1:3306/C71-S3-G-take_out?useUnicode=true&characterEncoding=UTF-8
-     username: root
-
-     password: a
-     driver-class-name: com.mysql.jdbc.Driver
-     #配置外部静态资源路径 文件上传的路径      
-   resources:
-     staticLocations: 
-        - classpath:/static
-        - file:/G:/C71-S3-Pljq-springboot-blog-uploadimage
-   thymeleaf:
-     content-type: text/html 
-     cache: false 
-     mode: LEGACYHTML5
-     #邮件配置
-   mail:
-      #邮箱服务器地址
-      host: smtp.qq.com
-      #用户名
-      username: 2161640459@qq.com
-      #授权密码
-      password: uiohzfllipfteadi
-      default-encoding: UTF-8
-#以谁来发邮件
-mail:
-   fromMail:
-      addr: 2161640459@qq.com
-   
-logging:
-   level:
-     com:
-       yc: debug
-
-          
 
 #sprinBoot实现自动化配置
 #两个入口 1.pom.xml springboot的配置文件 application*.yaml

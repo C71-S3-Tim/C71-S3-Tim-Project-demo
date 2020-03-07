@@ -97,14 +97,15 @@
                 <header>收藏的餐厅</header>
                 
     
-        <ul class="favorite clearfix transform-style">
+        <ul class="favorite clearfix transform-style" >
             
-                <li class="restaurant-item fl trans">
+                <li class="restaurant-item fl trans" th:each="collect:${collects}">
                     <div class="img-box fl">
-                        <a href="shop_detail.html"><img src="http://dhcrestaurantlogo.dhero.cn/1019?v=1402245333" width="82px" height="82px"></a>
+                        <a th:href="'show?sellerId='+${collect.sellers.id}"><img th:src="${collect.sellers.logimge}" width="82px" height="82px"></a>
+                    	<p>
                     </div>
                     <article class="restaurant-introduce fl">
-                        <h3 class="ellipsis"><a href="/shanghai/ji-xiang-hun-tun-gao-an-lu-dian/menu/">吉祥馄饨 (高安路店)</a></h3>
+                        <h3 class="ellipsis"><a href="show?sellerId=${collect.sellers.id}" th:text="${collect.sellers.sname}"></a></h3>
                         <dl class="clearfix">
                             <dt class="fl">饮料小吃</dt>
                             <dd class="r-small-star fl">
@@ -112,18 +113,12 @@
                             </dd>
                         </dl>
                         <div class="restaurant-state clearfix">
-                            
-                            
-                            
-                                
                                     <span><img src="http://dhcactivity.dhero.cn/Flswo958RM8GgqlKACT4tY5kr5K7?imageView2/1/w/15/h/15/" alt="" /></span>
                                 
                                     <span><img src="http://dhcactivity.dhero.cn/FjnSIEuUzJvV6j-ifPq7zevJSt30?imageView2/1/w/15/h/15/" alt="" /></span>
-                                
-                            
                         </div>
                     </article>
-                    <div class="close-favorite" data-rid="1019">&times;</div>
+                    <div class="close-favorite" th:attr="data-rid=${collect.sellers.id}" >&times;</div>
                 </li>
             
         </ul>
@@ -231,7 +226,7 @@
     
     <script>angular.bootstrap(document, ["app"]);</script>
 
-    <!-- Baidu Analytics -->
+    
 
 
 

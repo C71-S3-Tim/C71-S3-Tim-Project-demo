@@ -491,12 +491,17 @@ app.directive("restaurantItem",["commonApi","$window",'$http',function(commonApi
                     }
                     elem.remove();
                 },
-                url = '';
+                //删除收藏
+          
+                url = 'delectCollect?rid=0';
             elem.on('click',function(e){
                 var oTarget = e.target, rid = angular.element(oTarget).attr('data-rid');
                 if(oTarget.nodeName == 'DIV' && oTarget.className.indexOf('close-favorite') != -1 && rid){
-                    url = favoriteUrl.replace('/0/','/' + rid + '/');
-                    http['delete'](url).success(function(d){
+                    url = url.replace('0', rid );
+                    console.info(rid);
+                    console.info(url)
+                  //  http['delete'](url)
+                    http.get(url).success(function(d){
                         if(d.status == 'ok'){
                             elem.addClass("restaurant-item-close");
                             if(commonApi.browser.chrome){
@@ -510,7 +515,7 @@ app.directive("restaurantItem",["commonApi","$window",'$http',function(commonApi
                             favoriteError(d.failed_msg);
                         }
                     }).error(function(){
-                        favoriteError('未知错误，请稍后在重试。');
+                        favoriteError('未知错误，请稍后在重试！！。');
                     })
                 }else{
                     var $div = elem.children()[0] ,

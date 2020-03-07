@@ -401,7 +401,6 @@ app.value('requestData',function(_scope , _http , _cache,_ajaxData){
                console.info(url);
                 console.info(scope.currentSelectedAddress);
                 http.post(url,scope.currentSelectedAddress)
-
                 .success(function(d){
                     if(d.status == 'ok'){
                         clearForm();
