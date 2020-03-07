@@ -6,12 +6,15 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+import com.yc.spirngboot.takeout.bean.Collect;
+import com.yc.spirngboot.takeout.bean.CollectExample;
 import com.yc.spirngboot.takeout.bean.OrderinfoExample;
 import com.yc.spirngboot.takeout.bean.OrderinfoExample.Criteria;
 import com.yc.spirngboot.takeout.bean.Seller;
 import com.yc.spirngboot.takeout.bean.SellerExample;
 import com.yc.spirngboot.takeout.bean.User;
 import com.yc.spirngboot.takeout.bean.UserExample;
+import com.yc.spirngboot.takeout.dao.CollectMapper;
 import com.yc.spirngboot.takeout.dao.OrderinfoMapper;
 import com.yc.spirngboot.takeout.dao.SellerMapper;
 import com.yc.spirngboot.takeout.dao.UserMapper;
@@ -25,6 +28,8 @@ public class UserBiz {
 	private OrderinfoMapper oim;
 	@Resource
 	private SellerMapper sm;
+	@Resource
+	private CollectMapper cm;
 	
 	public void reg(User user) {
 		//对密码进行md5加密
@@ -105,7 +110,21 @@ public class UserBiz {
 		return list;
 	}
 
-
+    //收藏餐厅
+	public int collect(int seller_id,int user_id) {
+	    CollectExample example=new CollectExample();
+	    example.createCriteria().andSIdEqualTo(seller_id).andUIdEqualTo(user_id);
+	    List<Collect> collect=cm.selectByExample(example);
+		if(collect.size()<1){
+			Collect ct=new Collect();
+			ct.setuId(user_id);
+			ct.setsId(seller_id);
+			cm.insert(ct);
+			return 0;
+		}else {
+			return 1;
+		}
+	}
 	
 
 }

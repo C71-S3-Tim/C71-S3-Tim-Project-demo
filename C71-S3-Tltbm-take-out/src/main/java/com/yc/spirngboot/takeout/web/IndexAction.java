@@ -21,10 +21,6 @@ import com.yc.spirngboot.takeout.vo.Result;
 @Controller
 public class IndexAction {
 
-	@GetMapping(path= {"/","index","index.do"})
-	public String reg(Math m) {
-		return "index";                                                     
-	}
 	
 	@Resource
 	private IndexBiz iBiz;

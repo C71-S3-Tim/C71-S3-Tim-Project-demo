@@ -22,4 +22,6 @@ public class SellerBiz {
 		Seller s=sm.selectByPrimaryKey(seller_id);
 		return s;
 	}
+	
+	
 }

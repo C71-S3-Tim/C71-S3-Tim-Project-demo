@@ -30,8 +30,7 @@ import com.yc.spirngboot.takeout.dao.UserMapper;
 import com.yc.spirngboot.takeout.vo.Result;
 import com.yc.spirngboot.takeout.vo.encodeByMd5;
 
-
-@Controller
+@Controller																																																																																																																							
 /*@SessionAttributes({"loginedUser","vcode"})*/
 public class LoginAction {
 
@@ -120,5 +119,25 @@ public class LoginAction {
 		return "shop_list";
 	}
 	
+	//收藏餐厅
+	
+	@PostMapping("collect")
+	@ResponseBody
+	public Result collect(Model m,int seller_id,HttpSession hs) {
+		Result result=new Result();
+		User loginedUser=(User) hs.getAttribute("loginedUser");
+		int user_id=loginedUser.getId();
+		System.out.println("id="+user_id);
+		int code=ubiz.collect(seller_id, user_id);
+		System.out.println("code"+code);
+		if(code==0) {
+			result.setCode(code);
+			result.setMsg("收藏成功！");
+		}else {
+			result.setCode(code);
+			result.setMsg("不能重复收藏！");
+		}
+		return result;
+	}
 
 }

@@ -163,11 +163,6 @@
             </nav>
             <!--tab切换 end-->
 
-<div style="width: 12*'${seller.rank}'px; height: 10px; background: url(../images/small_start.png);" ></div>
-
-
-
-
             <div class="filter-Obj" id="filterBox" scroll-position-static="400">
                 <div class="relative clearfix">
                     <b class="restaurant-type">
@@ -227,6 +222,8 @@
 
             <!--餐厅 start-->
            <!-- <div class="restaurant-box">-->
+  
+           <span id="msg"></span>
             
                 <div id="acceptOrderRestaurants" class="restaurant-list" ng-class="{hide:!tabsAction1}">
                     <div class="cloneTooltip restaurant-info">
@@ -243,7 +240,7 @@
                                 data-price='150' data-count="1205" data-title="[半价菜][送可乐]樱花日本料理">
                                 
                                 <div class="img-box fl">
-                                    <a href="shop_detail.html">
+                                    <a th:href="@{'show?sellerId='+${seller.id}}" >
                                         <img th:src="@{'images/'+${seller.images}}"   width="100%" height="100%">
                                     </a>
                                 </div>
@@ -290,26 +287,17 @@
                                                     <li><img src="http://dhcactivity.dhero.cn/Flswo958RM8GgqlKACT4tY5kr5K7?imageView2/1/w/15/h/15/" alt="" /><span>活动菜品立减6元，多点多减！</span></li>
                                                 
                                                     <li><img src="http://dhcactivity.dhero.cn/FjnSIEuUzJvV6j-ifPq7zevJSt30?imageView2/1/w/15/h/15/" alt="" /><span>该餐厅已通过认证</span></li>
-                                                
-                                            
                                         </ul>
                                     </script>
                                 </div>
-
-                                
-                                    <div class="collect not-collect" title="收藏餐厅" data-rid="1592"></div>
+                                    <div class="collect not-collect" title="收藏餐厅"  th:attr="onclick='collect('+${seller.id}+')'" data-rid="1592"></div>
                                     <div class="collect-success">收藏成功</div>
-                                
                             </li>
                     </ul>
-                    
-                    
                     <div class="restaurant-list-empty all-restaurant-empty">
                         <div>暂无符合条件的餐厅，返回 <a href="javascript:;" class="link reset-filter">所有餐厅</a></div>
                     </div>
                 </div>
-            
-            
                 <div id="preOrderRestaruants" class="restaurant-list" ng-class="{hide:!tabsAction2}">
                     <script type="text/template">
                     <div class="cloneTooltip restaurant-info">
@@ -12176,7 +12164,7 @@
     </dh-dialog>
     
     
-<dh-dialog class="disnone" type='login' height="500" header="登录" show="loginShow" >
+<!-- <dh-dialog class="disnone" type='login' height="500" header="登录" show="loginShow" >
     <form class="login-form" novalidate name="loginForm" ng-controller="loginCtrl">
         <div class="form-group">
             <label for="">手机号码</label>
@@ -12214,7 +12202,7 @@
             <dh-checkbox model="user.rememberme" title="记住我" class="fl"></dh-checkbox>
             <a href="/account/password/reset_via_mobile/" target="_blank" class="fs12 fr link">忘记密码</a>
         </div>
-        <!-- 登录按钮 -->
+        登录按钮
         <button class="big-btn btn-green btn mb10" onclick="login()" ng-click="loginVaildate()" ng-disabled="loginBtnDisabled" ng-bind="loginBtn"></button>
         <div class="clearfix">
             <span class="fr fs12">
@@ -12287,7 +12275,8 @@
         </div>
         <button ng-disabled="!user.remember || registerBtnDisabled" ng-click="registerVaildate()" class="big-btn btn-green btn mb10" ng-bind="registerBtn"></button>
     </form>
-</dh-dialog>
+</dh-dialog> -->
+
 <script>
     var common_sms_code = '/ajax/common_sms_code/';
     var ajax_customer_user_register_start = '/ajax/customer_user_register_start/';
@@ -12336,6 +12325,7 @@
 	<script type="text/javascript">
 		(function() {
 			var jsondata = '[[${sellers1}]]';
+			console.info(jsondata);
 			//将&quot;替换成"否则无法转成数组
 			var reg = new RegExp("&quot;", "g");
 			var jsondataByTrime = jsondata.replace(reg, '"');
@@ -12349,33 +12339,25 @@
 
 		})();
 	</script>
- <script type="text/javascript">
-    	function login(){
-    		var phone=$("#phone").val();
-    		var pwd=$("#pwd").val();
-    		
-    		$.post("login.do",
-    				{phone : phone,
-    				 pwd: pwd},
+ 
+ <script src="https://libs.baidu.com/jquery/1.11.3/jquery.min.js"></script>
+    <script type="text/javascript">
+    	function collect(seller_id){
+    		console.info(seller_id);
+    		$.post("collect",
+    				{seller_id : seller_id},
     				function(result){
     					if(result.code==0){
-    						alert("登录成功！");
-    						
-    						//关闭模态窗口
-    						var e1=$("#login");
-    						angular.element(e1).triggerHandler('click');
-    						var replace=document.getElementById("replace");
-    						replace.parentNode.removeChild(replace);   //
-    						//增加账号显示
-    	    				 $("#parent").prepend("<a class='three'>"+phone+"</a>");
+    						alert(result.msg);
     					}else {
-    						$("#msg").text(result.msg); 
+    						alert(result.msg);
     					}
-  
     		} )
     	}
     
     </script>
+    
+    
 
 	<script src="js/restaurant.js"></script>
 

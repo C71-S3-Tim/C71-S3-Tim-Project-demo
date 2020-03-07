@@ -638,7 +638,7 @@ app.directive("restaurantMain", ['restaurantFilter', 'lazyImgLoad', 'formatResta
 }]);
 
 
-//用户已定过餐厅
+/*//用户已定过餐厅
 app.directive("historyRestaurants", ['$http', 'formatRestaurantData', function($http, formatRestaurantData){
     return{
         restrict:'A',
@@ -712,7 +712,7 @@ app.directive("historyRestaurants", ['$http', 'formatRestaurantData', function($
             }
         }
     }
-}]);
+}]);*/
 
 app.directive("filterActivity",function(){
     return{

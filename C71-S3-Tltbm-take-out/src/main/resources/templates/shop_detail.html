@@ -69,8 +69,8 @@
         	<span hidden="" id="seller_id" value="${seller.id}"></span>
             <h1 id="oo" class="ellipsis" th:text="${seller.sname}"></h1>
             <div class="clearfix">
-                <div class="fl nav-review">
-                    <div style="width:65.00px;"></div>
+                <div>
+                    <div class="wo" style="width:12px; height: 10px; background: url(../images/small_start.png);" ></div>
                 </div>
                 	<!-- 星级 -->
                 <p class="nav-review-x" th:text="${seller.rank} +'星'"></p>
@@ -101,7 +101,7 @@
     </div>
 </header>
 <ul class="clearfix menu-nav-list" scroll-position-static="160">
-    <li class="no-line "><a href="shop_intro.html">餐厅介绍</a></li>
+    <li class="no-line "><a th:href="@{'intro?sellerId='+${seller.id}}">餐厅介绍</a></li>
     <li class="active"><a href="shop_detail.html">菜单</a></li>
     <li ><a href="shop_comment.html">评论</a></li>
 	<li ><a href="shop_brand.html" id='point-tab'>大家都在点</a></li>
@@ -625,6 +625,8 @@
     <!--[if lt IE 9]><script src="js/fix.js"></script><![endif]-->
     
    <script src="https://libs.baidu.com/jquery/1.11.3/jquery.min.js"></script>
+   
+   
    <script type="text/javascript">
    <!-- 购物车提交-->
    function shopcart(){
@@ -746,11 +748,28 @@
         var favoriteUrl = "/ajax/restaurant/0/favorite/";
         var delivery = {minimum_order_quantity:sendprice,free_delivery_treshold:'0',delivery_fee:'0' }
     </script>
+    <script type="text/javascript">
+		(function() {
+			 var jsondata = '[[${seller1}]]';
+			//将&quot;替换成"否则无法转成数组
+			var reg = new RegExp("&quot;", "g");
+			var jsondataByTrime = jsondata.replace(reg, '"');
+			//将json转成数组
+			var seller = JSON.parse(jsondataByTrime);
+			var btns = document.getElementsByClassName("wo"); 
+			console.info("111");
+			for (var i = 0; i < btns.length; i++) {
+				var star = seller.rank;
+				btns[0].style.width = 13 * star + "px";
+			}
+		})();
+	</script>
     <script src="js/menupage.js"></script>
     <script src="js/favorite.js"></script>
 
     
     <script>angular.bootstrap(document, ["app"]);</script>
+    
 
     <!-- Baidu Analytics -->
 
