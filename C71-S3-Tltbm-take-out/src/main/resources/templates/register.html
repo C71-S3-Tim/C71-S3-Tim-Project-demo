@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta property="wb:webmaster" content="239d3d1dbdde1b2c" />
+    <link rel="stylesheet" type="text/css" href="css/reset.css" />
+    <link rel="stylesheet" href="css/common.css"/>
+    <link rel="stylesheet" href="css/login.css"/>
+    <!--[if lt IE 9]><link rel="stylesheet" type="text/css" href="css/frontPage-ie8-fix.css" /><![endif]-->
+    <!--[if lte IE 10]><script>document.createElement('footer');document.createElement('header');document.createElement('nav');document.createElement('section');document.createElement('article');</script><![endif]-->
+    <!--[if lte IE 7]><script>window.onload=function(){location.href="/ie6warning/"}</script><![endif]-->
+    <title>注册</title>
+    
+    
+    <script type="text/javascript">
+        
+        (function(document, screen) {
+            if (screen.width < 760) {
+                document.location.href="/mobile/";
+            }
+        }(document, screen));
+    </script>
+    <!-- 注册 -->
+    <!-- 
+    <script src="https://libs.baidu.com/jquery/1.11.3/jquery.min.js"></script> -->
+    <script type="text/javascript" src="http://libs.baidu.com/jquery/2.0.0/jquery.js"></script>
+   
+    
+   <script type="text/javascript">
+    
+     function regis() {
+    	var phone = $("#phone").val();
+    	var pwd = $("#pwd").val();
+    	var pwd2 = $("#pwd2").val();
+    	var yzm = $("#yzm").val();
+    	
+    	 $.ajax({
+             url: "reg",
+             type: "post",
+              dataType:'json',//这里要写成text不然回调函数无法识别传回来的String 无法实现
+              data: {"phone":phone,
+            	  	"pwd": pwd,
+            	  	"pwd2":pwd2,
+            	  	"yzm":yzm
+            	  	},
+              success: function (result) {
+            	  if(result.code == 0){
+      				alert( "注册成功！")
+      			
+  				}else {
+  					
+  					/* $("#msg").val(result.msg);  */
+  				alert(result.msg);
+             }
+              }
+          });
+    	
+    } 
+    </script>
+    
+</head>
+<body>
+    
+    <header id="header" class="">
+        <div class="common-width">
+            
+                <section class="clearfix">
+                    <a href="return.do">
+                   	 <span class="page-name"> | 返回登录</span>
+                    </a>
+                </section>
+                
+            
+        </div>
+    </header>
+    
+    <section class="main">
+        <div class="common-width">
+            
+    <div class="main-inner">
+        
+    <div class="log-box" id="registerPageBox">
+    
+    	
+	        <div class="form-group w275">
+	            <label for="">手机号码</label>
+	            
+	           <input id="msg" type="text" class="form-text" th:if="${newresult} ne null" th:value="${newresult.msg}"/>
+	            
+	           
+	            <input type="text" name="phone" id="phone" maxlength="11" class="form-text" placeholder="请输入你的手机号码" />
+	        </div>
+	        <div class="form-error-message"></div>
+	
+        	<!-- 验证码 -->
+        	<div class="form-group w275">
+        		<label for="">验证码</label>
+		        <input style="width: 155px; height: 20px;" id="yzm" type="text" />
+		        <img style="width: 145px; height: 35px; float: right;" alt="验证码" onclick="this.src='defaultKaptcha?d='+new Date()*1"
+		           src="defaultKaptcha">
+		        <br>
+		     </div>
+			<div class="form-error-message"></div>
+			
+	        <div class="form-group w275">
+	            <label for="">登录密码</label>
+	            <input type="password" name="pwd" id="pwd" maxlength="16"   placeholder="输入登录密码 6-16个字符"/><br>
+	        </div>
+	        <div class="form-error-message"></div>
+	        
+	        <div class="form-group w275">
+	            <input type="password" id="pwd2" maxlength="16"   placeholder="确认登录密码 "/><br>
+	        </div>
+			<div class="form-error-message"></div>
+	
+	        <div class="checkbox form-group clearfix mb5">
+	            <input type="checkbox" checked="checked"  value="true">
+	            <label class="fl fs12">我同意外卖超人</label>
+	            <span class="fl fs12"><a class="yo" target="_blank" href="/terms-and-conditions/">"注册条款"</a></span>
+	        </div>
+	        <div class="form-error-message"></div>
+	        <div>
+	            <button type="button"  class="form-btn" id="regis" onclick="regis()">确认注册</button>
+	        </div>
+        
+    </div>
+
+    </div>
+
+        </div>
+    </section>
+    <footer id="footer">
+        <div class="footer-first gray">
+            <div class="company-info clearfix fs14 gray">
+                <a href="/about_us/" target="_blank"  rel="nofollow">关于我们</a>
+                <a href="/help/" target="_blank"  rel="nofollow">帮助中心</a>
+                <a href="/terms-and-conditions/" target="_blank"  rel="nofollow">法律声明</a>
+                <a href="/jobs/" target="_blank"  rel="nofollow">人才招聘</a>
+                <a href="/contact/" class="last" target="_blank"  rel="nofollow">联系我们</a>
+                <a href="/restaurant/list/shanghai/1/" class="last" target="_blank" style="display:none">上海餐厅导航</a>
+            </div>
+        </div>
+        <div class="footer-last">
+            <a target="_blank" class="foot-logo-1 base-logo" href="index.html"></a>
+            <div class="tc fs14 light-gray mb10">
+              ©2014 waimaichaoren.com All Rights Reserved - 沪ICP备11019908号
+            </div>
+        </div>
+    </footer>
+    
+    
+    <script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
+    
+    <script>
+        // use new sms code url
+        var ajax_customer_user_register_start = '/ajax/customer_user_register_start/';
+        var common_sms_code = '/ajax/common_sms_code/';
+        var common_validate_sms_code = '/ajax/common_validate_sms_code/';
+        var ajax_customer_user_register_register = '/ajax/customer_user_register_register/';
+    </script>
+<script type="text/javascript" src="js/loginVaildate.js"></script>
+
+    <!-- Baidu Analytics -->
+
+<!-- End Baidu Tracking Code -->
+
+<!-- Baidu Remarketing code -->
+<script type="text/javascript">
+<!--
+(function (d) {
+window.bd_cpro_rtid="rHDzrHT";
+var s = d.createElement("script");s.type = "text/javascript";s.async = true;s.src = location.protocol + "//cpro.baidu.com/cpro/ui/rt.js";
+var s0 = d.getElementsByTagName("script")[0];s0.parentNode.insertBefore(s, s0);
+})(document);
+//-->
+</script>
+<!-- End Baidu Remarketing code -->
+
+<!-- Google Analytics Code -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-33138478-1', 'waimaichaoren.com');
+  ga('send', 'pageview');
+  ga('require', 'ecommerce', 'ecommerce.js');
+</script>
+
+<!-- End Google Analytics Code -->
+
+</body>
+</html>

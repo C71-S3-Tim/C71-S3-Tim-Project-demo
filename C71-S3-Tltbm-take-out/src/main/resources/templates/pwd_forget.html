@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+    
+<!-- 在 html标签中加入 thymeleaf 的命名空间      xmlns ==>  xml   name  spase -->
+<html lang="en" xmlns:th="www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta property="wb:webmaster" content="239d3d1dbdde1b2c" />
+    <link rel="stylesheet" type="text/css" href="css/reset.css" />
+    <link rel="stylesheet" href="css/common.css"/>
+    
+    <link rel="stylesheet" href="css/forget_passwd.css"/>
+
+    <title>找回密码</title>
+    <style>
+    #footer{
+
+	height: 165px;
+
+	width: 100%;
+
+	background-color: #ddd;
+
+	position: fixed;
+
+	bottom: 0;
+
+}
+    </style>
+    <script type="text/javascript">
+        
+        (function(document, screen) {
+            if (screen.width < 760) {
+                document.location.href="/mobile/";
+            }
+        }(document, screen));
+    </script>
+    <script src="js/jquery.min.js"></script>
+<script type="text/javascript">
+function jishi(num){
+	var tt=window.setTimeout(btnShow,num);
+}
+function btnShow(){
+	$("#send").removeAttr("disabled");
+}
+$(document).ready(function(e){
+	$("#send").click(function(e){
+		$(this).attr("disabled","disabled");
+		jishi(10000);
+		var phoneValue=$("[name=phone]").val();
+		$.post("CreateCode.php","phone="+phoneValue,function(result){
+			var rsJson=$.parseJSON(result);
+			if(rsJson.respCode!="00000"){
+				window.alert("发送失败,请稍后再试");
+			}
+		});
+		
+	});
+});
+</script>
+</head>
+<body>
+    
+    <header id="header" class="">
+        <div class="common-width">
+            
+                <section class="clearfix">
+                    <h1 class="logo" title="外卖超人">
+                        <a href="index.html"></a>
+                    </h1>
+                    <span class="page-name"> | 找回密码</span>
+                </section>
+                
+            
+        </div>
+    </header>
+    
+    <section class="main">
+        <div class="common-width">
+            
+    <div class="main-inner">
+        <div class="passwd-nav-box">
+            <ol class="passwd-nav">
+                <li class="first done">
+                    <span><i>1</i><em>身份验证</em></span>
+                </li>
+                <li class="middle ">
+                    <span><i>2</i><em>重设登录密码</em></span>
+                </li>
+                <li class="last ">
+                    <span><i>3</i><em>完成</em></span>
+                </li>
+            </ol>
+        </div>
+    
+<form action="#" method="post">
+    <div class="fill-data-box" id="phoneStep">
+        <div class="fill-data">
+            <div class="title">手机号码：</div>
+            <div class="form-group w275">
+                <input type="text" maxlength="11" id="phone" name="phone" class="form-text" placeholder="输入您常用的手机号码"/>
+            </div>
+            <div class="form-error-message"></div>
+            <div class="captcha-wrap">
+                <div class="captcha-box" id="captchaBox" style="margin-left: -300px">
+                    <div class="captcha-item">
+                        <div class="form-group captcha clearfix">
+                            <input type="text" id="captcha2" name="captcha2"  class="form-text" placeholder="短信验证码"/>
+                            <input type="button" id="getCaptcha" class="captcha-btn" value="获取短信验证码"/>
+                        </div>
+                        <div class="form-error-message"></div>
+                    </div>
+                    <div class="captcha-item">
+                        <div class="form-group captcha clearfix">
+                            <input type="text" id="imgCaptcha" disabled="disabled" maxlength="4" class="form-text" placeholder="输入验证码"/>
+							<span style="float:left"><img alt="验证码" onclick="this.src='defaultKaptcha?d='+new Date()*1" src="defaultKaptcha"alt="验证码" width="100"/></span>
+							<input type="text" id="captcha2" name="captcha2"  class="form-text" placeholder="短信验证码"/>
+                            <input type="button" id="getCaptcha" class="captcha-btn" value="获取短信验证码"/>
+                        </div>
+                        <div class="form-error-message"></div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <button class="form-btn" id="phoneNextStep" onclick="">下一步</button>
+            </div>
+            <ul class="other-way">
+                <li>联系客服，可以拨打<span>4001 517 577</span></li>
+            </ul>
+        </div>
+    </div>
+</form>
+
+    </div>
+
+        </div>
+    </section>
+    <footer id="footer">
+        <div class="footer-first gray">
+            <div class="company-info clearfix fs14 gray">
+                <a href="/about_us/" target="_blank"  rel="nofollow">关于我们</a>
+                <a href="/help/" target="_blank"  rel="nofollow">帮助中心</a>
+                <a href="/terms-and-conditions/" target="_blank"  rel="nofollow">法律声明</a>
+                <a href="/jobs/" target="_blank"  rel="nofollow">人才招聘</a>
+                <a href="/contact/" class="last" target="_blank"  rel="nofollow">联系我们</a>
+                <a href="/restaurant/list/shanghai/1/" class="last" target="_blank" style="display:none">上海餐厅导航</a>
+            </div>
+        </div>
+        <div class="footer-last">
+            <a target="_blank" class="foot-logo-1 base-logo" href="index.html"></a>
+            <div class="tc fs14 light-gray mb10">
+              ©2014 waimaichaoren.com All Rights Reserved - 沪ICP备11019908号
+            </div>
+        </div>
+    </footer>
+    
+    
+    <script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
+    
+    <script>
+        var mobile_validate_url = '/ajax/common_validate_sms_code/',
+            email_validate_url = '',
+            finish_send_mail_url = '',
+            password_reset_url = '/account/password/reset_page/',
+
+            password_timeout_url = '/account/password/request_timeout/',
+            reset_password_url = '/ajax/password_reset_via_mobile_reset/',
+            password_reset_done = '/account/password/reset_done/',
+
+            captcha_url = '/captcha/',
+
+            ajax_password_reset_via_mobile_start = '/ajax/password_reset_via_mobile_start/',
+            common_sms_code = '/ajax/common_sms_code/'
+    </script>
+    <script src="js/forget_passwd.js"></script>
+
+    <!-- Baidu Analytics -->
+
+
+</body>
+</html>
