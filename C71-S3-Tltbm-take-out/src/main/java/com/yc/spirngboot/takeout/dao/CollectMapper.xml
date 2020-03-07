@@ -5,6 +5,9 @@
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="u_id" jdbcType="INTEGER" property="uId" />
     <result column="s_id" jdbcType="INTEGER" property="sId" />
+    
+    <!-- 联查询 1:1-->
+  	<association property="sellers" autoMapping="true" column="s_id" select="com.yc.spirngboot.takeout.dao.SellerMapper.selectByPrimaryKey"></association>
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
