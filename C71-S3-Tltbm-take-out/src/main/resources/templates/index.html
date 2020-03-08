@@ -11,35 +11,7 @@
     <meta name="baidu-site-verification" content="IYCrtVH0i1" />
     <meta property="wb:webmaster" content="239d3d1dbdde1b2c" />
     <link rel="icon" type="image/png" href="images/favicon.ico"/>
-    <script type="text/javascript">
-    	function login(){
-    		var phone=$("#phone").val();
-    		var pwd=$("#pwd").val();
-    		
-    		$.post("login.do",
-    				{phone : phone,
-    				 pwd: pwd},
-    				function(result){
-    					if(result.code==0){
-    						alert("登录成功！");
-    						
-    						//关闭模态窗口
-    						var e1=$("#login");
-    						angular.element(e1).triggerHandler('click');
-    						var replace=document.getElementById("replace");
-    						replace.parentNode.removeChild(replace);   //
-    						//增加账号显示
-    	    				 $("#parent").prepend("<a class='three'>"+phone+"</a>");
-    					}else {
-    						$("#msg").text(result.msg); 
-    					}
-  
-    		} )
-    	}
     
-    </script>
-    
-  
 
     <script type="text/javascript">
     function query(){
@@ -125,8 +97,10 @@
     <script type="text/javascript">
     
      function addnewseller() {
-    	var sphone = $("#phone").val();
-    	var sname = $("#sname").val();
+    	var sphone = $("#regphone").val();
+    	console.info(sphone);
+    	var sname = $("#regsname").val();
+    	console.info(sname);
     	var name = $("#name").val();
     	var dname = $("#dname").val();
     	 $.ajax({
@@ -144,8 +118,8 @@
       			
   				}else {
   					
-  					/* $("#msg").val(result.msg);  */
-  				alert(result.msg);
+  					 $("#msgs").text(result.msg);  
+  				
              }
               }
           });
@@ -555,9 +529,10 @@
     <form action="newshop" method="post">
         <div class="inline" ng-controller="merchantCtrl">
             <div class="form-group row mb10">
+            	<span id="msgs"  style="font-size: 12px;color: red"></span>
                 <label class="col-3" >商户名称：</label>
                 <div class="col-8">
-                    <input type="text" id="sname" name="sname" ng-class="{error:merchants.nameMessage}" maxlength="11" placeholder="输入店铺的名称，例：美美小厨" ng-model="merchants.name"/>
+                    <input type="text" id="regsname"  ng-class="{error:merchants.nameMessage}" maxlength="11" placeholder="输入店铺的名称，例：美美小厨" ng-model="merchants.name"/>
                 </div>
                 <span class="vaildate-error col-8 col-offset-3" ng-if="merchants.nameMessage">
                     <span ng-bind="merchants.nameMessage"></span>
@@ -581,7 +556,7 @@
             <div class="form-group row mb20">
                 <label class="col-3">联系电话：</label>
                 <div class="col-8">
-                   <input type="text" id="phone" ng-class="{error:merchants.phoneMessage}" maxlength="11" placeholder="建议输入11位手机号码" ng-model="merchants.phone"/>
+                   <input type="text" id="regphone" ng-class="{error:merchants.phoneMessage}" maxlength="11" placeholder="建议输入11位手机号码" ng-model="merchants.phone"/>
                    
                 </div>
                 <span class="vaildate-error col-8 col-offset-3" ng-if="merchants.phoneMessage">

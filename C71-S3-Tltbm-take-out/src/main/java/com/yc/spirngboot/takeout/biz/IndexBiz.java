@@ -1,5 +1,7 @@
 package com.yc.spirngboot.takeout.biz;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
@@ -7,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.yc.spirngboot.takeout.bean.City;
 import com.yc.spirngboot.takeout.bean.CityExample;
 import com.yc.spirngboot.takeout.bean.District;
+import com.yc.spirngboot.takeout.bean.DistrictExample;
 import com.yc.spirngboot.takeout.bean.Seller;
 import com.yc.spirngboot.takeout.dao.CityMapper;
 import com.yc.spirngboot.takeout.dao.DistrictMapper;
@@ -28,24 +31,41 @@ public class IndexBiz {
 		//加入城市
 		String newcity = city.getName();
 		String newdistrict = district.getDname();
-		System.out.println("newdistrict=" + newdistrict + "newcity=" + newcity);
+		
+		//根据输入city查表
+		CityExample citys = new CityExample();
+		citys.createCriteria().andNameEqualTo(newcity);
+		List<City> allcity = cm.selectByExample(citys);
+		
+		//根据输入district查表
+		DistrictExample districts = new DistrictExample();
+		districts.createCriteria().andDnameEqualTo(newdistrict);
+		List<District> alldistrict = dm.selectByExample(districts);
+		
+		if(allcity.size()==0) { //如表内有输入city只获取id
+			cm.insert(city);
 			
-		cm.insert(city);
-		
-		CityExample cityExample = new CityExample();
-		cityExample.createCriteria().andNameEqualTo(newcity);
-		City city2 = cm.selectByExample(cityExample).get(0);
-		
-		Integer cid = city2.getId();
-		System.out.println(cid);
-		district.setCityId(cid);
-		
-		System.out.println("城市" + city.getName());
-		System.out.println("地区" + district.getDname());
-		
-		dm.insert(district);
-		
-		
+			if(alldistrict.size()==0) {//如表内有输入city只获取id
+				CityExample cityExample = new CityExample();
+				cityExample.createCriteria().andNameEqualTo(newcity);
+				City city2 = cm.selectByExample(cityExample).get(0);
+				
+				Integer cid = city2.getId();
+				district.setCityId(cid);
+				dm.insert(district);
+			}else {
+				System.out.println("dsadasda");
+			}
+			
+		}else {
+			City onecity = cm.selectByExample(citys).get(0);
+			if(alldistrict.size()==0) {
+				district.setCityId(onecity.getId());
+				dm.insert(district);
+			}else {
+				System.out.println("12312412");
+			}
+		}
 	}
 	
 	

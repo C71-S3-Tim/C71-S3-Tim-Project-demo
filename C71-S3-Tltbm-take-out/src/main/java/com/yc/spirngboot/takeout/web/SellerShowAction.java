@@ -43,7 +43,7 @@ public class SellerShowAction {
 			item.setVisible(true);
 			item.setSectionId(39215);
 			item.setPosition(0);
-			item.setOrdercount(8);
+			item.setOrdercount(seller.getGoods().get(i).getNumber());
 			
 			item.setOptionsets(new Object[0]);
 			menu_items[i]=item;

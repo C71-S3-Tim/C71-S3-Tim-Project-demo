@@ -99,7 +99,7 @@ app.controller('giftMessageCtr',['$scope','$http','$timeout','formVaildate',func
                 "customer_phone":scope.giftMessage.phone,
                 "address":scope.giftMessage.adress
             };
-            http.post("/api/userpoint/create_exchange/",data).success(function(d){
+            http.post("buygift",data).success(function(d){
                 if(d.code==0){
                     scope.$emit("giftMessage-Cancel");
                     scope.$emit("giftMessage-true");

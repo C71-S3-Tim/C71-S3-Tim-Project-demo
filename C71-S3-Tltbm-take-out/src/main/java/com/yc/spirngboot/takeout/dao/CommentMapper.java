@@ -1,5 +1,6 @@
 package com.yc.spirngboot.takeout.dao;
 
+import com.github.pagehelper.Page;
 import com.yc.spirngboot.takeout.bean.Comment;
 import com.yc.spirngboot.takeout.bean.CommentExample;
 import java.util.List;
@@ -33,4 +34,12 @@ public interface CommentMapper {
     int updateByPrimaryKeyWithBLOBs(Comment record);
 
     int updateByPrimaryKey(Comment record);
+    
+    
+
+    /**
+     * 分页查询数据
+     * @return
+     */
+    Page<Comment> findByPaging(CommentExample example);
 }

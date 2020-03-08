@@ -6,11 +6,13 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+import com.github.pagehelper.Page;
 import com.yc.spirngboot.takeout.bean.Comment;
 import com.yc.spirngboot.takeout.dao.CommentMapper;
 
@@ -30,20 +32,11 @@ public void  addComment(String seller_id,String text,int uid) {
 	comment.setCreatetime(time1);
 	cmp.insert(comment);
 }
+	public Page<Comment> commentByPag() {
+		
+		Page<Comment> list=cmp.findByPaging(null);
+		
+		return list;
+	}
 	
-//创建订单时间
-		public Date creatTiem() {
-			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
-	 		String time = LocalDateTime.now().format(formatter);
-	 		
-	 		SimpleDateFormat sdf2 = new SimpleDateFormat("yyyyMMddHHmmss");
-	 		java.sql.Date sDate = null;
-	        try {
-	            java.util.Date date3 = sdf2.parse(time);
-	            sDate = new java.sql.Date(date3.getTime());
-	        } catch (ParseException e) {
-	            e.printStackTrace();
-	        }
-	        return sDate;
-		}
 }

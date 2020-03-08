@@ -1,16 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.yc.spirngboot.takeout.dao.CommentMapper">
-  <resultMap id="BaseResultMap" type="com.yc.spirngboot.takeout.bean.Comment">
+<mapper namespace="com.yc.spirngboot.takeout.dao.GiftorderMapper">
+  <resultMap id="BaseResultMap" type="com.yc.spirngboot.takeout.bean.Giftorder">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="u_id" jdbcType="INTEGER" property="uId" />
-    <result column="s_id" jdbcType="INTEGER" property="sId" />
-    <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
-  <!-- 配置1：1关联查询-->
-  	 <association  property="user" autoMapping="true" column="u_id" select="com.yc.spirngboot.takeout.dao.UserMapper.selectByPrimaryKey" ></association >
-  </resultMap>
-  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.yc.spirngboot.takeout.bean.Comment">
-    <result column="content" jdbcType="LONGVARCHAR" property="content" />
+    <result column="integral" jdbcType="INTEGER" property="integral" />
+    <result column="customername" jdbcType="VARCHAR" property="customername" />
+    <result column="customerphone" jdbcType="VARCHAR" property="customerphone" />
+    <result column="customeraddress" jdbcType="VARCHAR" property="customeraddress" />
+    <result column="giftname" jdbcType="VARCHAR" property="giftname" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -71,20 +69,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, u_id, s_id, createtime
+    id, u_id, integral, customername, customerphone, customeraddress, giftname
   </sql>
-  <sql id="Blob_Column_List">
-    content
-  </sql>
-  <select id="selectByExampleWithBLOBs" parameterType="com.yc.spirngboot.takeout.bean.CommentExample" resultMap="ResultMapWithBLOBs">
+  <select id="selectByExample" parameterType="com.yc.spirngboot.takeout.bean.GiftorderExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from comment
+    from giftorder
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -92,89 +85,87 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByExample" parameterType="com.yc.spirngboot.takeout.bean.CommentExample" resultMap="BaseResultMap">
-    select
-    <if test="distinct">
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    from comment
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null">
-      order by ${orderByClause}
-    </if>
-  </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from comment
+    from giftorder
     where id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from comment
+    delete from giftorder
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.yc.spirngboot.takeout.bean.CommentExample">
-    delete from comment
+  <delete id="deleteByExample" parameterType="com.yc.spirngboot.takeout.bean.GiftorderExample">
+    delete from giftorder
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.yc.spirngboot.takeout.bean.Comment">
+  <insert id="insert" parameterType="com.yc.spirngboot.takeout.bean.Giftorder">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into comment (u_id, s_id, createtime, 
-      content)
-    values (#{uId,jdbcType=INTEGER}, #{sId,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP}, 
-      #{content,jdbcType=LONGVARCHAR})
+    insert into giftorder (u_id, integral, customername, 
+      customerphone, customeraddress, giftname
+      )
+    values (#{uId,jdbcType=INTEGER}, #{integral,jdbcType=INTEGER}, #{customername,jdbcType=VARCHAR}, 
+      #{customerphone,jdbcType=VARCHAR}, #{customeraddress,jdbcType=VARCHAR}, #{giftname,jdbcType=VARCHAR}
+      )
   </insert>
-  <insert id="insertSelective" parameterType="com.yc.spirngboot.takeout.bean.Comment">
+  <insert id="insertSelective" parameterType="com.yc.spirngboot.takeout.bean.Giftorder">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into comment
+    insert into giftorder
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="uId != null">
         u_id,
       </if>
-      <if test="sId != null">
-        s_id,
+      <if test="integral != null">
+        integral,
       </if>
-      <if test="createtime != null">
-        createtime,
+      <if test="customername != null">
+        customername,
       </if>
-      <if test="content != null">
-        content,
+      <if test="customerphone != null">
+        customerphone,
+      </if>
+      <if test="customeraddress != null">
+        customeraddress,
+      </if>
+      <if test="giftname != null">
+        giftname,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="uId != null">
         #{uId,jdbcType=INTEGER},
       </if>
-      <if test="sId != null">
-        #{sId,jdbcType=INTEGER},
+      <if test="integral != null">
+        #{integral,jdbcType=INTEGER},
       </if>
-      <if test="createtime != null">
-        #{createtime,jdbcType=TIMESTAMP},
+      <if test="customername != null">
+        #{customername,jdbcType=VARCHAR},
       </if>
-      <if test="content != null">
-        #{content,jdbcType=LONGVARCHAR},
+      <if test="customerphone != null">
+        #{customerphone,jdbcType=VARCHAR},
+      </if>
+      <if test="customeraddress != null">
+        #{customeraddress,jdbcType=VARCHAR},
+      </if>
+      <if test="giftname != null">
+        #{giftname,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.yc.spirngboot.takeout.bean.CommentExample" resultType="java.lang.Long">
-    select count(*) from comment
+  <select id="countByExample" parameterType="com.yc.spirngboot.takeout.bean.GiftorderExample" resultType="java.lang.Long">
+    select count(*) from giftorder
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update comment
+    update giftorder
     <set>
       <if test="record.id != null">
         id = #{record.id,jdbcType=INTEGER},
@@ -182,77 +173,71 @@
       <if test="record.uId != null">
         u_id = #{record.uId,jdbcType=INTEGER},
       </if>
-      <if test="record.sId != null">
-        s_id = #{record.sId,jdbcType=INTEGER},
+      <if test="record.integral != null">
+        integral = #{record.integral,jdbcType=INTEGER},
       </if>
-      <if test="record.createtime != null">
-        createtime = #{record.createtime,jdbcType=TIMESTAMP},
+      <if test="record.customername != null">
+        customername = #{record.customername,jdbcType=VARCHAR},
       </if>
-      <if test="record.content != null">
-        content = #{record.content,jdbcType=LONGVARCHAR},
+      <if test="record.customerphone != null">
+        customerphone = #{record.customerphone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.customeraddress != null">
+        customeraddress = #{record.customeraddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.giftname != null">
+        giftname = #{record.giftname,jdbcType=VARCHAR},
       </if>
     </set>
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExampleWithBLOBs" parameterType="map">
-    update comment
-    set id = #{record.id,jdbcType=INTEGER},
-      u_id = #{record.uId,jdbcType=INTEGER},
-      s_id = #{record.sId,jdbcType=INTEGER},
-      createtime = #{record.createtime,jdbcType=TIMESTAMP},
-      content = #{record.content,jdbcType=LONGVARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update comment
+    update giftorder
     set id = #{record.id,jdbcType=INTEGER},
       u_id = #{record.uId,jdbcType=INTEGER},
-      s_id = #{record.sId,jdbcType=INTEGER},
-      createtime = #{record.createtime,jdbcType=TIMESTAMP}
+      integral = #{record.integral,jdbcType=INTEGER},
+      customername = #{record.customername,jdbcType=VARCHAR},
+      customerphone = #{record.customerphone,jdbcType=VARCHAR},
+      customeraddress = #{record.customeraddress,jdbcType=VARCHAR},
+      giftname = #{record.giftname,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.yc.spirngboot.takeout.bean.Comment">
-    update comment
+  <update id="updateByPrimaryKeySelective" parameterType="com.yc.spirngboot.takeout.bean.Giftorder">
+    update giftorder
     <set>
       <if test="uId != null">
         u_id = #{uId,jdbcType=INTEGER},
       </if>
-      <if test="sId != null">
-        s_id = #{sId,jdbcType=INTEGER},
+      <if test="integral != null">
+        integral = #{integral,jdbcType=INTEGER},
       </if>
-      <if test="createtime != null">
-        createtime = #{createtime,jdbcType=TIMESTAMP},
+      <if test="customername != null">
+        customername = #{customername,jdbcType=VARCHAR},
       </if>
-      <if test="content != null">
-        content = #{content,jdbcType=LONGVARCHAR},
+      <if test="customerphone != null">
+        customerphone = #{customerphone,jdbcType=VARCHAR},
+      </if>
+      <if test="customeraddress != null">
+        customeraddress = #{customeraddress,jdbcType=VARCHAR},
+      </if>
+      <if test="giftname != null">
+        giftname = #{giftname,jdbcType=VARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.yc.spirngboot.takeout.bean.Comment">
-    update comment
+  <update id="updateByPrimaryKey" parameterType="com.yc.spirngboot.takeout.bean.Giftorder">
+    update giftorder
     set u_id = #{uId,jdbcType=INTEGER},
-      s_id = #{sId,jdbcType=INTEGER},
-      createtime = #{createtime,jdbcType=TIMESTAMP},
-      content = #{content,jdbcType=LONGVARCHAR}
+      integral = #{integral,jdbcType=INTEGER},
+      customername = #{customername,jdbcType=VARCHAR},
+      customerphone = #{customerphone,jdbcType=VARCHAR},
+      customeraddress = #{customeraddress,jdbcType=VARCHAR},
+      giftname = #{giftname,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.yc.spirngboot.takeout.bean.Comment">
-    update comment
-    set u_id = #{uId,jdbcType=INTEGER},
-      s_id = #{sId,jdbcType=INTEGER},
-      createtime = #{createtime,jdbcType=TIMESTAMP}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <!-- 分页插件 -->
-  <select id="findByPaging" resultMap="BaseResultMap" parameterType="com.yc.spirngboot.takeout.bean.CommentExample">
-    select * from comment
-  </select>
-
 </mapper>

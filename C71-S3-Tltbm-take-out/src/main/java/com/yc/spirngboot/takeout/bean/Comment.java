@@ -12,8 +12,22 @@ public class Comment {
     private Timestamp createtime;
 
     private String content;
+    
+    
+    //一对一电话
+    private User user;
 
-    public Integer getId() {
+   
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public Integer getId() {
         return id;
     }
 
@@ -52,4 +66,11 @@ public class Comment {
     public void setContent(String content) {
         this.content = content == null ? null : content.trim();
     }
+
+	@Override
+	public String toString() {
+		return "Comment [id=" + id + ", uId=" + uId + ", sId=" + sId + ", createtime=" + createtime + ", content="
+				+ content + "]";
+	}
+    
 }

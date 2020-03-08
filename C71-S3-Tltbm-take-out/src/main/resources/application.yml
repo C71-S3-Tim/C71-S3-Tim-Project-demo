@@ -34,6 +34,13 @@ logging:
    level:
      com:
        yc: debug
+       
+#pageHe lper分页配置
+pagehelper:
+helper -dialect: mysq1
+reasonable: true
+support -methods ar guments: true
+params: count =countSq1
 
 #sprinBoot实现自动化配置
 #两个入口 1.pom.xml springboot的配置文件 application*.yaml
