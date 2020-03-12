@@ -923,6 +923,76 @@ public class SellerExample {
             addCriterion("qualified not between", value1, value2, "qualified");
             return (Criteria) this;
         }
+
+        public Criteria andSpwdIsNull() {
+            addCriterion("spwd is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSpwdIsNotNull() {
+            addCriterion("spwd is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSpwdEqualTo(String value) {
+            addCriterion("spwd =", value, "spwd");
+            return (Criteria) this;
+        }
+
+        public Criteria andSpwdNotEqualTo(String value) {
+            addCriterion("spwd <>", value, "spwd");
+            return (Criteria) this;
+        }
+
+        public Criteria andSpwdGreaterThan(String value) {
+            addCriterion("spwd >", value, "spwd");
+            return (Criteria) this;
+        }
+
+        public Criteria andSpwdGreaterThanOrEqualTo(String value) {
+            addCriterion("spwd >=", value, "spwd");
+            return (Criteria) this;
+        }
+
+        public Criteria andSpwdLessThan(String value) {
+            addCriterion("spwd <", value, "spwd");
+            return (Criteria) this;
+        }
+
+        public Criteria andSpwdLessThanOrEqualTo(String value) {
+            addCriterion("spwd <=", value, "spwd");
+            return (Criteria) this;
+        }
+
+        public Criteria andSpwdLike(String value) {
+            addCriterion("spwd like", value, "spwd");
+            return (Criteria) this;
+        }
+
+        public Criteria andSpwdNotLike(String value) {
+            addCriterion("spwd not like", value, "spwd");
+            return (Criteria) this;
+        }
+
+        public Criteria andSpwdIn(List<String> values) {
+            addCriterion("spwd in", values, "spwd");
+            return (Criteria) this;
+        }
+
+        public Criteria andSpwdNotIn(List<String> values) {
+            addCriterion("spwd not in", values, "spwd");
+            return (Criteria) this;
+        }
+
+        public Criteria andSpwdBetween(String value1, String value2) {
+            addCriterion("spwd between", value1, value2, "spwd");
+            return (Criteria) this;
+        }
+
+        public Criteria andSpwdNotBetween(String value1, String value2) {
+            addCriterion("spwd not between", value1, value2, "spwd");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

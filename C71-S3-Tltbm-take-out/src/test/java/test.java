@@ -6,7 +6,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.yc.spirngboot.takeout.C71S3PljqSpringbootTakeoutApplication;
+import com.yc.spirngboot.takeout.bean.Seller;
 import com.yc.spirngboot.takeout.bean.User;
+import com.yc.spirngboot.takeout.biz.BackSellerBiz;
 import com.yc.spirngboot.takeout.biz.UserBiz;
 import com.yc.spirngboot.takeout.dao.UserMapper;
 
@@ -18,6 +20,8 @@ public class test {
 	private  UserBiz ubiz;
 	@Resource
 	private UserMapper um;
+	@Resource
+	private BackSellerBiz bsbiz;
 	
 	public  String encodeByMd5(String encodeText){
 		try{
@@ -30,9 +34,7 @@ public class test {
 		return result;
 		} catch (Exception e) {
 		e.printStackTrace();
-
 		return null;
-
 		}
 }
 	@Test
@@ -51,6 +53,23 @@ public class test {
 		System.out.println("result========="+result);
 		//ICy5YqxZB1uWSwcVLSNLcA
 	}
+	
+	@Test
+	public void SellercodeByMd5() {
+		Seller seller=new Seller();
+		seller.setSphone("13135187907");
+		seller.setSpwd("123456");
+
+	
+		bsbiz.reg(seller);
+		
+		String code="123";
+		String result=encodeByMd5(code);	
+		System.out.println("code========="+code);
+		System.out.println("result========="+result);
+		//ICy5YqxZB1uWSwcVLSNLcA
+	}
+	
 	@Test
 	public void testUpdate(String newpwd ,User user) {
 		

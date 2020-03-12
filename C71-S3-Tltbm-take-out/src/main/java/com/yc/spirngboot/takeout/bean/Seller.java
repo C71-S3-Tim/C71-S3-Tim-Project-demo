@@ -29,10 +29,13 @@ public class Seller {
 
     private Integer qualified;
 
-    private String description;
+    private String spwd;
 
+    private String description;
     private List<Good> goods;
     
+    
+
     public List<Good> getGoods() {
 		return goods;
 	}
@@ -145,6 +148,14 @@ public class Seller {
         this.qualified = qualified;
     }
 
+    public String getSpwd() {
+        return spwd;
+    }
+
+    public void setSpwd(String spwd) {
+        this.spwd = spwd == null ? null : spwd.trim();
+    }
+
     public String getDescription() {
         return description;
     }
@@ -152,15 +163,4 @@ public class Seller {
     public void setDescription(String description) {
         this.description = description == null ? null : description.trim();
     }
-
-	@Override
-	public String toString() {
-		return "Seller [id=" + id + ", sname=" + sname + ", sendprice=" + sendprice + ", packprice=" + packprice
-				+ ", logimge=" + logimge + ", starttime=" + starttime + ", endtime=" + endtime + ", sphone=" + sphone
-				+ ", images=" + images + ", cityId=" + cityId + ", rank=" + rank + ", hot=" + hot + ", qualified="
-
-				+ qualified + ", description=" + description + ", goods=" + goods + "]";
-
-	}
-    
 }
