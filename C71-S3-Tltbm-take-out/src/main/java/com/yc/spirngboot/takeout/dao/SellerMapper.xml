@@ -15,8 +15,15 @@
     <result column="rank" jdbcType="INTEGER" property="rank" />
     <result column="hot" jdbcType="INTEGER" property="hot" />
     <result column="qualified" jdbcType="INTEGER" property="qualified" />
+    <result column="spwd" jdbcType="VARCHAR" property="spwd" />
+  
+  <!-- 配置地区一对一 --> 
+   <association property="district" autoMapping="true" column="city_id" select="com.yc.spirngboot.takeout.dao.DistrictMapper.selectDistrictById"></association>
+   <!-- 配置地区一对一 --> 
+   <association property="city" autoMapping="true" column="city_id" select="com.yc.spirngboot.takeout.dao.CityMapper.selectByPrimaryKey"></association>
    <!-- 配置关商品与店铺的联查询 1:n-->
-  	 <collection  property="goods" autoMapping="true" column="id" select="com.yc.spirngboot.takeout.dao.GoodMapper.selectByUser_id" ></collection >
+  	<collection  property="goods" autoMapping="true" column="id" select="com.yc.spirngboot.takeout.dao.GoodMapper.selectByUser_id" ></collection>
+  
   </resultMap>
   <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.yc.spirngboot.takeout.bean.Seller">
     <result column="description" jdbcType="LONGVARCHAR" property="description" />
@@ -81,7 +88,7 @@
   </sql>
   <sql id="Base_Column_List">
     id, sname, sendprice, packprice, logImge, starttime, endtime, sphone, images, city_id, 
-    rank, hot, qualified
+    rank, hot, qualified, spwd
   </sql>
   <sql id="Blob_Column_List">
     description
@@ -142,12 +149,12 @@
       logImge, starttime, endtime, 
       sphone, images, city_id, 
       rank, hot, qualified, 
-      description)
+      spwd, description)
     values (#{sname,jdbcType=VARCHAR}, #{sendprice,jdbcType=DOUBLE}, #{packprice,jdbcType=DOUBLE}, 
       #{logimge,jdbcType=VARCHAR}, #{starttime,jdbcType=INTEGER}, #{endtime,jdbcType=INTEGER}, 
       #{sphone,jdbcType=VARCHAR}, #{images,jdbcType=VARCHAR}, #{cityId,jdbcType=INTEGER}, 
       #{rank,jdbcType=INTEGER}, #{hot,jdbcType=INTEGER}, #{qualified,jdbcType=INTEGER}, 
-      #{description,jdbcType=LONGVARCHAR})
+      #{spwd,jdbcType=VARCHAR}, #{description,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.yc.spirngboot.takeout.bean.Seller">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
@@ -191,6 +198,9 @@
       <if test="qualified != null">
         qualified,
       </if>
+      <if test="spwd != null">
+        spwd,
+      </if>
       <if test="description != null">
         description,
       </if>
@@ -231,6 +241,9 @@
       </if>
       <if test="qualified != null">
         #{qualified,jdbcType=INTEGER},
+      </if>
+      <if test="spwd != null">
+        #{spwd,jdbcType=VARCHAR},
       </if>
       <if test="description != null">
         #{description,jdbcType=LONGVARCHAR},
@@ -285,6 +298,9 @@
       <if test="record.qualified != null">
         qualified = #{record.qualified,jdbcType=INTEGER},
       </if>
+      <if test="record.spwd != null">
+        spwd = #{record.spwd,jdbcType=VARCHAR},
+      </if>
       <if test="record.description != null">
         description = #{record.description,jdbcType=LONGVARCHAR},
       </if>
@@ -308,6 +324,7 @@
       rank = #{record.rank,jdbcType=INTEGER},
       hot = #{record.hot,jdbcType=INTEGER},
       qualified = #{record.qualified,jdbcType=INTEGER},
+      spwd = #{record.spwd,jdbcType=VARCHAR},
       description = #{record.description,jdbcType=LONGVARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -327,7 +344,8 @@
       city_id = #{record.cityId,jdbcType=INTEGER},
       rank = #{record.rank,jdbcType=INTEGER},
       hot = #{record.hot,jdbcType=INTEGER},
-      qualified = #{record.qualified,jdbcType=INTEGER}
+      qualified = #{record.qualified,jdbcType=INTEGER},
+      spwd = #{record.spwd,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -371,6 +389,9 @@
       <if test="qualified != null">
         qualified = #{qualified,jdbcType=INTEGER},
       </if>
+      <if test="spwd != null">
+        spwd = #{spwd,jdbcType=VARCHAR},
+      </if>
       <if test="description != null">
         description = #{description,jdbcType=LONGVARCHAR},
       </if>
@@ -391,6 +412,7 @@
       rank = #{rank,jdbcType=INTEGER},
       hot = #{hot,jdbcType=INTEGER},
       qualified = #{qualified,jdbcType=INTEGER},
+      spwd = #{spwd,jdbcType=VARCHAR},
       description = #{description,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -407,7 +429,8 @@
       city_id = #{cityId,jdbcType=INTEGER},
       rank = #{rank,jdbcType=INTEGER},
       hot = #{hot,jdbcType=INTEGER},
-      qualified = #{qualified,jdbcType=INTEGER}
+      qualified = #{qualified,jdbcType=INTEGER},
+      spwd = #{spwd,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

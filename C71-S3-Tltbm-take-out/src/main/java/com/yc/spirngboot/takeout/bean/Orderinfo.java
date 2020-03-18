@@ -1,9 +1,11 @@
 package com.yc.spirngboot.takeout.bean;
 
+import java.sql.Timestamp;
+
 public class Orderinfo {
     private Integer id;
 
-    private Integer orderId;
+    private Integer sId;
 
     private String ordername;
 
@@ -13,6 +15,8 @@ public class Orderinfo {
 
     private Float money;
 
+    private Timestamp createtime;
+
     public Integer getId() {
         return id;
     }
@@ -21,12 +25,12 @@ public class Orderinfo {
         this.id = id;
     }
 
-    public Integer getOrderId() {
-        return orderId;
+    public Integer getsId() {
+        return sId;
     }
 
-    public void setOrderId(Integer orderId) {
-        this.orderId = orderId;
+    public void setsId(Integer sId) {
+        this.sId = sId;
     }
 
     public String getOrdername() {
@@ -59,5 +63,13 @@ public class Orderinfo {
 
     public void setMoney(Float money) {
         this.money = money;
+    }
+
+    public Timestamp getCreatetime() {
+        return createtime;
+    }
+
+    public void setCreatetime(Timestamp createtime) {
+        this.createtime = createtime;
     }
 }

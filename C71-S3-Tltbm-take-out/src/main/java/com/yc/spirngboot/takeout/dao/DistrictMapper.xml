@@ -6,6 +6,10 @@
     <result column="city_id" jdbcType="INTEGER" property="cityId" />
     <result column="dname" jdbcType="VARCHAR" property="dname" />
   </resultMap>
+   <select id="selectDistrictById" resultType="com.yc.spirngboot.takeout.bean.District">
+  	select * from District where city_id=#{city_id}
+  </select>
+  
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">

@@ -20,6 +20,7 @@ import com.yc.spirngboot.takeout.vo.Result;
 
 @Controller
 public class IndexAction {
+
 	
 	@Resource
 	private IndexBiz iBiz;

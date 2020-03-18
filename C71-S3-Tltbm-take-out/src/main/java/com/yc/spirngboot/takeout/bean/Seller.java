@@ -29,9 +29,26 @@ public class Seller {
 
     private Integer qualified;
 
+    private String spwd;
+
     private String description;
 
+    //一对多关联查询商品
     private List<Good> goods;
+    
+    //一对一关联地区
+    private District district;
+    //一对一城市
+    private City city;
+
+	public City getCity() {
+		return city;
+	}
+
+	public void setCity(City city) {
+		this.city = city;
+	}
+
     
     public List<Good> getGoods() {
 		return goods;
@@ -39,6 +56,14 @@ public class Seller {
 
 	public void setGoods(List<Good> goods) {
 		this.goods = goods;
+	}
+
+	public District getDistrict() {
+		return district;
+	}
+
+	public void setDistrict(District district) {
+		this.district = district;
 	}
 
 	public Integer getId() {
@@ -145,6 +170,14 @@ public class Seller {
         this.qualified = qualified;
     }
 
+    public String getSpwd() {
+        return spwd;
+    }
+
+    public void setSpwd(String spwd) {
+        this.spwd = spwd == null ? null : spwd.trim();
+    }
+
     public String getDescription() {
         return description;
     }
@@ -152,15 +185,4 @@ public class Seller {
     public void setDescription(String description) {
         this.description = description == null ? null : description.trim();
     }
-
-	@Override
-	public String toString() {
-		return "Seller [id=" + id + ", sname=" + sname + ", sendprice=" + sendprice + ", packprice=" + packprice
-				+ ", logimge=" + logimge + ", starttime=" + starttime + ", endtime=" + endtime + ", sphone=" + sphone
-				+ ", images=" + images + ", cityId=" + cityId + ", rank=" + rank + ", hot=" + hot + ", qualified="
-
-				+ qualified + ", description=" + description + ", goods=" + goods + "]";
-
-	}
-    
 }

@@ -1,4 +1,5 @@
 import java.security.MessageDigest;
+import java.util.List;
 
 import javax.annotation.Resource;
 
@@ -6,10 +7,11 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.yc.spirngboot.takeout.C71S3PljqSpringbootTakeoutApplication;
+import com.yc.spirngboot.takeout.bean.Dayandcount;
 import com.yc.spirngboot.takeout.bean.User;
 import com.yc.spirngboot.takeout.biz.UserBiz;
+import com.yc.spirngboot.takeout.dao.OrderinfoMapper;
 import com.yc.spirngboot.takeout.dao.UserMapper;
-
 import Decoder.BASE64Encoder;
 
 @SpringBootTest(classes =C71S3PljqSpringbootTakeoutApplication.class)// 就是你springboot的启动类
@@ -18,6 +20,8 @@ public class test {
 	private  UserBiz ubiz;
 	@Resource
 	private UserMapper um;
+	@Resource
+	private  OrderinfoMapper om;
 	
 	public  String encodeByMd5(String encodeText){
 		try{
@@ -66,8 +70,11 @@ public class test {
 		um.updateByPrimaryKeySelective(us);
 		
 	}
-	
-	
+	@Test
+	public void testweek() {
+		List<Dayandcount> s=om.selectAndcount(1);
+		System.out.println(s);
+	}
 	
 	
 }

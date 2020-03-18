@@ -147,10 +147,11 @@
                     <a th:if="${session.loginedUser} eq null" id ="login" href="javascript:void(0)" ng-click="logoinDialogShow()">登录</a>
                     <a href="member_order.html" th:if="${session.loginedUser} ne null" th:text="${session.loginedUser.phone}"></a>
                     <span th:if="${session.loginedUser} eq null" id="span">/</span>
-                    <a th:if="${session.loginedUser} eq null" id="reg"  href="javascript:void(0)" ng-click="registerDialogClose()">注册</a>
+                    <a th:if="${session.loginedUser} eq null" id="reg"  href="register.do" ng-click="registerDialogClose()">注册</a>
                     <span>|</span>
                     <a href="member_order.html">查看订单</a>
-                    
+                    <span>|</span>
+                    <a th:if="${session.loginedUser} ne null" th:href="@{'websocket?uname='+${session.loginedUser.uname}}">我的客服</a>
                 </div>
             
         </div>
@@ -610,8 +611,7 @@
     <script>var manually_locations='';</script>
     <script src="js/frontPage.js"></script>
 	<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-    
-    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+ 
     <script>angular.bootstrap(document, ["app"]);</script>
 
 

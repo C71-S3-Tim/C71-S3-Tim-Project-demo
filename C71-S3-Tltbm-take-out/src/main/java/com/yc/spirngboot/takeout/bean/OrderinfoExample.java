@@ -1,5 +1,6 @@
 package com.yc.spirngboot.takeout.bean;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -164,63 +165,63 @@ public class OrderinfoExample {
             return (Criteria) this;
         }
 
-        public Criteria andOrderIdIsNull() {
-            addCriterion("order_id is null");
+        public Criteria andSIdIsNull() {
+            addCriterion("s_id is null");
             return (Criteria) this;
         }
 
-        public Criteria andOrderIdIsNotNull() {
-            addCriterion("order_id is not null");
+        public Criteria andSIdIsNotNull() {
+            addCriterion("s_id is not null");
             return (Criteria) this;
         }
 
-        public Criteria andOrderIdEqualTo(Integer value) {
-            addCriterion("order_id =", value, "orderId");
+        public Criteria andSIdEqualTo(Integer value) {
+            addCriterion("s_id =", value, "sId");
             return (Criteria) this;
         }
 
-        public Criteria andOrderIdNotEqualTo(Integer value) {
-            addCriterion("order_id <>", value, "orderId");
+        public Criteria andSIdNotEqualTo(Integer value) {
+            addCriterion("s_id <>", value, "sId");
             return (Criteria) this;
         }
 
-        public Criteria andOrderIdGreaterThan(Integer value) {
-            addCriterion("order_id >", value, "orderId");
+        public Criteria andSIdGreaterThan(Integer value) {
+            addCriterion("s_id >", value, "sId");
             return (Criteria) this;
         }
 
-        public Criteria andOrderIdGreaterThanOrEqualTo(Integer value) {
-            addCriterion("order_id >=", value, "orderId");
+        public Criteria andSIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("s_id >=", value, "sId");
             return (Criteria) this;
         }
 
-        public Criteria andOrderIdLessThan(Integer value) {
-            addCriterion("order_id <", value, "orderId");
+        public Criteria andSIdLessThan(Integer value) {
+            addCriterion("s_id <", value, "sId");
             return (Criteria) this;
         }
 
-        public Criteria andOrderIdLessThanOrEqualTo(Integer value) {
-            addCriterion("order_id <=", value, "orderId");
+        public Criteria andSIdLessThanOrEqualTo(Integer value) {
+            addCriterion("s_id <=", value, "sId");
             return (Criteria) this;
         }
 
-        public Criteria andOrderIdIn(List<Integer> values) {
-            addCriterion("order_id in", values, "orderId");
+        public Criteria andSIdIn(List<Integer> values) {
+            addCriterion("s_id in", values, "sId");
             return (Criteria) this;
         }
 
-        public Criteria andOrderIdNotIn(List<Integer> values) {
-            addCriterion("order_id not in", values, "orderId");
+        public Criteria andSIdNotIn(List<Integer> values) {
+            addCriterion("s_id not in", values, "sId");
             return (Criteria) this;
         }
 
-        public Criteria andOrderIdBetween(Integer value1, Integer value2) {
-            addCriterion("order_id between", value1, value2, "orderId");
+        public Criteria andSIdBetween(Integer value1, Integer value2) {
+            addCriterion("s_id between", value1, value2, "sId");
             return (Criteria) this;
         }
 
-        public Criteria andOrderIdNotBetween(Integer value1, Integer value2) {
-            addCriterion("order_id not between", value1, value2, "orderId");
+        public Criteria andSIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("s_id not between", value1, value2, "sId");
             return (Criteria) this;
         }
 
@@ -471,6 +472,66 @@ public class OrderinfoExample {
 
         public Criteria andMoneyNotBetween(Float value1, Float value2) {
             addCriterion("money not between", value1, value2, "money");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatetimeIsNull() {
+            addCriterion("createtime is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatetimeIsNotNull() {
+            addCriterion("createtime is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatetimeEqualTo(Timestamp value) {
+            addCriterion("createtime =", value, "createtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatetimeNotEqualTo(Timestamp value) {
+            addCriterion("createtime <>", value, "createtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatetimeGreaterThan(Timestamp value) {
+            addCriterion("createtime >", value, "createtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatetimeGreaterThanOrEqualTo(Timestamp value) {
+            addCriterion("createtime >=", value, "createtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatetimeLessThan(Timestamp value) {
+            addCriterion("createtime <", value, "createtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatetimeLessThanOrEqualTo(Timestamp value) {
+            addCriterion("createtime <=", value, "createtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatetimeIn(List<Timestamp> values) {
+            addCriterion("createtime in", values, "createtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatetimeNotIn(List<Timestamp> values) {
+            addCriterion("createtime not in", values, "createtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatetimeBetween(Timestamp value1, Timestamp value2) {
+            addCriterion("createtime between", value1, value2, "createtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatetimeNotBetween(Timestamp value1, Timestamp value2) {
+            addCriterion("createtime not between", value1, value2, "createtime");
             return (Criteria) this;
         }
     }

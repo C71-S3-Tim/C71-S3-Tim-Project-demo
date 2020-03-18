@@ -1,7 +1,9 @@
 package com.yc.spirngboot.takeout.dao;
 
+import com.yc.spirngboot.takeout.bean.Dayandcount;
 import com.yc.spirngboot.takeout.bean.Orderinfo;
 import com.yc.spirngboot.takeout.bean.OrderinfoExample;
+
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
@@ -19,7 +21,9 @@ public interface OrderinfoMapper {
     List<Orderinfo> selectByExample(OrderinfoExample example);
 
     Orderinfo selectByPrimaryKey(Integer id);
-
+    //统计商铺周销量
+    List<Dayandcount> selectAndcount(Integer s_id);
+    
     int updateByExampleSelective(@Param("record") Orderinfo record, @Param("example") OrderinfoExample example);
 
     int updateByExample(@Param("record") Orderinfo record, @Param("example") OrderinfoExample example);

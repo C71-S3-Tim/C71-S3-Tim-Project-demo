@@ -110,4 +110,12 @@ public class Good {
     public void setRank(Integer rank) {
         this.rank = rank;
     }
+
+	@Override
+	public String toString() {
+		return "Good [id=" + id + ", gname=" + gname + ", sellerId=" + sellerId + ", price=" + price + ", discount="
+				+ discount + ", status=" + status + ", image=" + image + ", typeId=" + typeId + ", integral=" + integral
+				+ ", number=" + number + ", rank=" + rank + "]";
+	}
+    
 }

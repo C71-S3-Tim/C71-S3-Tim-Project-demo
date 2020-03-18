@@ -76,12 +76,15 @@ public class ShopAction {
 					//计算总价格
 					String str=entry.getValue()+"";
 					int munber=Integer.parseInt(str);
+					//将商品数量减
+					good.setNumber(good.getNumber()-munber);
+					gb.updateGoodNumber(good);
 					 total+=good.getPrice()*munber;
 					 //计算总积分
 					 integal+=good.getIntegral()*munber;
-					//将订单信息写入订单表
-					ob.createOrder(good, ""+seller_id, munber, order_number, sendtime, ordertime);
-					  response.setContentType("text/html;charset=utf-8");
+					 //将订单信息写入订单表
+					 ob.createOrder(good, ""+seller_id, munber, order_number, sendtime, ordertime);
+					 response.setContentType("text/html;charset=utf-8");
 		    	} catch (NumberFormatException | BizExcption e) {
 					e.printStackTrace();
 				}

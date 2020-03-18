@@ -10,10 +10,11 @@
 <link href='#css?family=PT+Sans:400,700,400italic,700italic|Oswald:400,300,700' rel='stylesheet' type='text/css'>
 <link href='#css?family=Exo+2' rel='stylesheet' type='text/css'>
 <!--//webfonts-->
-<script src="http://ajax.useso.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+ <script src="https://libs.baidu.com/jquery/1.11.3/jquery.min.js"></script>
 </head>
 <body>
-<script>$(document).ready(function(c) {
+<script>
+$(document).ready(function(c) {
 	$('.close').on('click', function(c){
 		$('.login-form').fadeOut('slow', function(c){
 	  		$('.login-form').remove();
@@ -21,6 +22,25 @@
 	});	  
 });
 </script>
+<script type="text/javascript">
+    	function login(){
+    		var sphone=$("#sphone").val();
+    		var spwd=$("#spwd").val();
+    		
+    		$.post("backindex.do",
+    				{sphone : sphone,
+    				 spwd: spwd},
+    				function(result){
+    					if(result.code==0){
+    						alert("登录成功！");
+    						window.location.href = 'toBackIndex';
+    					}else {
+    						$("#msg").text(result.msg); 
+    					}
+    		} )
+    	}
+    </script> 
+       
  <!--SIGN UP-->
  <h1>klasikal Login Form</h1>
 <div class="login-form">
@@ -32,21 +52,22 @@
 		</div>
 			<div class="clear"> </div>
 	<div class="avtar">
-		<img src="images/avtar.png" />
+		<img src="backimages/avtar.png" />
 	</div>
 			<form>
-					<input type="text" class="text" value="Username" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Username';}" >
+					<input type="text" id="sphone" class="text" value="Username" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Username';}" >
 						<div class="key">
-					<input type="password" value="Password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Password';}">
+					<input id="spwd" type="password" value="Password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Password';}">
 						</div>
 			</form>
+				<span colspan="2" id="msg" style="text-align:center; color:red"></span>
+			
 	<div class="signin">
-		<input type="submit" value="Login" >
+		<input type="submit" value="Login" onclick="login()" >
 	</div>
 </div>
  <div class="copy-rights">
-					<p>Copyright &copy; 2015.Company name All rights reserved.<a target="_blank" href="http://guantaow.taobao.com/">厚朴网络淘宝店</a><a target="_blank" href="http://www.moobnn.com">网页模板</a></p>
+					<p>Copyright &copy; 2015.Company name All rights reserved.<a target="_blank" href="http://guantaow.taobao.com/">鍘氭湸缃戠粶娣樺疂搴�</a><a target="_blank" href="http://www.moobnn.com">缃戦〉妯℃澘</a></p>
 			</div>
-
 </body>
 </html>

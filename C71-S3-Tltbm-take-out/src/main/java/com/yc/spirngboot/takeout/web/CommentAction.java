@@ -56,6 +56,7 @@ public class CommentAction {
 	@GetMapping("selectComment")
 	public String ToShopComent(String seller_id,Model m,int page) {
 		Seller seller=sb.selectById(Integer.parseInt(seller_id));
+	
 		 PageHelper.startPage(page,5);
 		Page<Comment> coms=cb.commentByPag();
 		

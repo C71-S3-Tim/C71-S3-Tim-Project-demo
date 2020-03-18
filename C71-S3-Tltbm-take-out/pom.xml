@@ -96,8 +96,13 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-websocket</artifactId>
 		</dependency>
-		<!--  -->
-		
+		<!-- https://mvnrepository.com/artifact/com.alibaba/fastjson -->
+			<dependency>
+			    <groupId>com.alibaba</groupId>
+			    <artifactId>fastjson</artifactId>
+			    <version>1.2.62</version>
+			</dependency>
+				
 	<dependency>
 		<groupId>net.sourceforge.nekohtml</groupId> 
         <artifactId>nekohtml</artifactId>
@@ -140,6 +145,17 @@
   				<artifactId>aliyun-java-sdk-core</artifactId>
   				<version>4.0.3</version>
 			</dependency>
+			
+			 <!--  redis 依赖-->
+			<dependency>
+			    <groupId>redis.clients</groupId>
+			    <artifactId>jedis</artifactId>
+			    <version>2.9.0</version>
+			</dependency>
+			
+			
+			
+			
 	</dependencies>
 
 	<build>

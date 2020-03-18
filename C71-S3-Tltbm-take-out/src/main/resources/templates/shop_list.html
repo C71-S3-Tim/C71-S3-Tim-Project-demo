@@ -1,12 +1,4 @@
 <!DOCTYPE html>
-<!--/*技术支持，小庄602842076     验证：商城技术支持*/
-/*技术支持，小庄602842076    验证：商城技术支持*/
-/*技术支持，小庄602842076    验证：商城技术支持*/
-/*技术支持，小庄602842076    验证：商城技术支持*/
-/*技术支持，小庄602842076    验证：商城技术支持*/
-/*https://shop116998991.taobao.com/*/
-/*https://shop116998991.taobao.com/*/
-/*https://shop116998991.taobao.com/*/-->
 <html>
 <head>
     <meta charset="utf-8"/>
@@ -164,7 +156,6 @@
             <!--tab切换 end-->
 
 
-
             <div class="filter-Obj" id="filterBox" scroll-position-static="400">
                 <div class="relative clearfix">
                     <b class="restaurant-type">
@@ -224,6 +215,8 @@
 
             <!--餐厅 start-->
            <!-- <div class="restaurant-box">-->
+  
+           <span id="msg"></span>
             
                 <div id="acceptOrderRestaurants" class="restaurant-list" ng-class="{hide:!tabsAction1}">
                     <div class="cloneTooltip restaurant-info">
@@ -240,8 +233,8 @@
                                 data-price='150' data-count="1205" data-title="[半价菜][送可乐]樱花日本料理">
                                 
                                 <div class="img-box fl">
-                                    <a href="shop_detail.html">
-                                        <img th:src="@{'images/'+${seller.images}}"   width="100%" height="100%">
+                                    <a th:href="@{'show?sellerId='+${seller.id}}" >
+                                        <img th:src="${seller.images}"   width="100%" height="100%">
                                     </a>
                                 </div>
                                 <article class="restaurant-introduce fl" >
@@ -264,15 +257,12 @@
           
                                              <span><img src="http://dhcactivity.dhero.cn/Fg-4kUvXVpR1DRR0O3VFr73KHEQr?imageView2/1/w/15/h/15/" alt="" /></span>
                                         
-                                             <span><img src="http://dhcactivity.dhero.cn/Flswo958RM8GgqlKACT4tY5kr5K7?imageView2/1/w/15/h/15/" alt="" /></span>
-                                        
-                                             <span><img src="http://dhcactivity.dhero.cn/FjnSIEuUzJvV6j-ifPq7zevJSt30?imageView2/1/w/15/h/15/" alt="" /></span>
-                                        
+                                             
                                     
                                 </div>
                                 </article>
                                 <div class="tooltip restaurant-info">
-                                    <script type="text/template">
+                                   
                                         <h3 class="ellipsis" th:text="${seller.sname}"></h3>
                                         
                                             <h4 class="ellipsis" th:text="'营业时间'+${seller.starttime}+':00-'+${seller.endtime}+':00'"> [09:00-22:30]</h4>
@@ -280,33 +270,17 @@
                                         <ul>
                                             
                                              
-                                                <li><i class="status-icon"></i><span>餐厅支持在线支付</span></li>
-
-                                                    <li><img src="http://dhcactivity.dhero.cn/Fg-4kUvXVpR1DRR0O3VFr73KHEQr?imageView2/1/w/15/h/15/" alt="" /><span>每单赠送价值15元进口果汁1瓶！</span></li>
-                                                
-                                                    <li><img src="http://dhcactivity.dhero.cn/Flswo958RM8GgqlKACT4tY5kr5K7?imageView2/1/w/15/h/15/" alt="" /><span>活动菜品立减6元，多点多减！</span></li>
-                                                
-                                                    <li><img src="http://dhcactivity.dhero.cn/FjnSIEuUzJvV6j-ifPq7zevJSt30?imageView2/1/w/15/h/15/" alt="" /><span>该餐厅已通过认证</span></li>
-                                                
-                                            
-                                        </ul>
-                                    </script>
+                                     
+                                    
                                 </div>
-
-                                
-                                    <div class="collect not-collect" title="收藏餐厅" data-rid="1592"></div>
+                                    <div class="collect not-collect" title="收藏餐厅"  th:attr="onclick='collect('+${seller.id}+')'" data-rid="1592"></div>
                                     <div class="collect-success">收藏成功</div>
-                                
                             </li>
                     </ul>
-                    
-                    
                     <div class="restaurant-list-empty all-restaurant-empty">
                         <div>暂无符合条件的餐厅，返回 <a href="javascript:;" class="link reset-filter">所有餐厅</a></div>
                     </div>
                 </div>
-            
-            
                 <div id="preOrderRestaruants" class="restaurant-list" ng-class="{hide:!tabsAction2}">
                     <script type="text/template">
                     <div class="cloneTooltip restaurant-info">
@@ -9944,7 +9918,7 @@
                                 </b>
                             </div>
                         </div>
-                        
+                        	<span id="msg"  style="font-size: 12px;color: red"></span>
 
 
                         <ul class="clearfix transform-style">
@@ -12173,7 +12147,7 @@
     </dh-dialog>
     
     
-<dh-dialog class="disnone" type='login' height="500" header="登录" show="loginShow" >
+<!-- <dh-dialog class="disnone" type='login' height="500" header="登录" show="loginShow" >
     <form class="login-form" novalidate name="loginForm" ng-controller="loginCtrl">
         <div class="form-group">
             <label for="">手机号码</label>
@@ -12211,7 +12185,7 @@
             <dh-checkbox model="user.rememberme" title="记住我" class="fl"></dh-checkbox>
             <a href="/account/password/reset_via_mobile/" target="_blank" class="fs12 fr link">忘记密码</a>
         </div>
-        <!-- 登录按钮 -->
+        登录按钮
         <button class="big-btn btn-green btn mb10" onclick="login()" ng-click="loginVaildate()" ng-disabled="loginBtnDisabled" ng-bind="loginBtn"></button>
         <div class="clearfix">
             <span class="fr fs12">
@@ -12284,7 +12258,8 @@
         </div>
         <button ng-disabled="!user.remember || registerBtnDisabled" ng-click="registerVaildate()" class="big-btn btn-green btn mb10" ng-bind="registerBtn"></button>
     </form>
-</dh-dialog>
+</dh-dialog> -->
+
 <script>
     var common_sms_code = '/ajax/common_sms_code/';
     var ajax_customer_user_register_start = '/ajax/customer_user_register_start/';
@@ -12333,6 +12308,7 @@
 	<script type="text/javascript">
 		(function() {
 			var jsondata = '[[${sellers1}]]';
+			console.info(jsondata);
 			//将&quot;替换成"否则无法转成数组
 			var reg = new RegExp("&quot;", "g");
 			var jsondataByTrime = jsondata.replace(reg, '"');
@@ -12346,33 +12322,25 @@
 
 		})();
 	</script>
- <script type="text/javascript">
-    	function login(){
-    		var phone=$("#phone").val();
-    		var pwd=$("#pwd").val();
-    		
-    		$.post("login.do",
-    				{phone : phone,
-    				 pwd: pwd},
+ 
+ <script src="https://libs.baidu.com/jquery/1.11.3/jquery.min.js"></script>
+    <script type="text/javascript">
+    	function collect(seller_id){
+    		console.info(seller_id);
+    		$.post("collect",
+    				{seller_id : seller_id},
     				function(result){
     					if(result.code==0){
-    						alert("登录成功！");
-    						
-    						//关闭模态窗口
-    						var e1=$("#login");
-    						angular.element(e1).triggerHandler('click');
-    						var replace=document.getElementById("replace");
-    						replace.parentNode.removeChild(replace);   //
-    						//增加账号显示
-    	    				 $("#parent").prepend("<a class='three'>"+phone+"</a>");
+    						$("#msg").text(result.msg);  
     					}else {
-    						$("#msg").text(result.msg); 
+    						$("#msg").text(result.msg);
     					}
-  
     		} )
     	}
     
     </script>
+    
+    
 
 	<script src="js/restaurant.js"></script>
 

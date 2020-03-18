@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>	
+<head>
+<title>Login</title>
+<link href="css/style.css" rel='stylesheet' type='text/css' />
+<!--webfonts-->
+<!--//webfonts-->
+<script src="https://libs.baidu.com/jquery/1.11.3/jquery.min.js"></script>
+<script type="text/javascript">
+    
+     function toanmlogin() {
+    	 
+    	var admusername = $("#admusername").val();
+    	var admpass = $("#admpass").val();
+    	 $.ajax({
+    		 
+             url: "admlogin",
+             type: "post",
+              dataType:'json',//这里要写成text不然回调函数无法识别传回来的String 无法实现
+              data: {"admusername":admusername,
+            	  	"admpass": admpass
+            	  	},
+              success: function (res) {
+            	  if(res.code == 0){
+      				alert( "登陆成功！！！");
+      				window.location.href = 'index';
+  				}else {
+  					
+  					 /* $("#msgs").text(result.msg);   */
+  					alert(res.msg);
+             }
+              }
+          });
+    	
+    } 
+    </script>
+</head>
+<body>
+
+ <!--SIGN UP-->
+ <h1>klasikal Login Form</h1>
+<div class="login-form">
+	<div class="close"> </div>
+		<div class="head-info">
+			<label class="lbl-1"> </label>
+			<label class="lbl-2"> </label>
+			<label class="lbl-3"> </label>
+		</div>
+			<div class="clear"> </div>
+	<div class="avtar">
+		<img src="images/avtar.png" />
+	</div>
+			<form>
+					<input type="text" id="admusername" name="admusername" class="text" placeholder="用户名" >
+						<div class="key">
+					<input type="password" id="admpass" name="admpass" placeholder="密码"  >
+						</div>
+			</form>
+	<div class="signin">
+		<input type="submit" value="登录"  id="toanmlogin" onclick="toanmlogin()">
+	</div>
+</div>
+
+</body>
+</html>

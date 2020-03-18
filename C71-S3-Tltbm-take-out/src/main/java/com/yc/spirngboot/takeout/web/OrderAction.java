@@ -109,7 +109,7 @@ public class OrderAction {
 		}
 		
 		//写入订单详请
-		of.createinfo(totalMoney,order_number);
+		of.createinfo(totalMoney,order_number,sid);
 		
 		//将积分加入
 		System.out.println("logindedUser.getId()"+logindedUser.getId());
