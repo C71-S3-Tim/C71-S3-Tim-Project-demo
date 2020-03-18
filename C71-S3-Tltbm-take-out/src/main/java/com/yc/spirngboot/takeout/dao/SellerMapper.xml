@@ -16,6 +16,7 @@
     <result column="hot" jdbcType="INTEGER" property="hot" />
     <result column="qualified" jdbcType="INTEGER" property="qualified" />
     <result column="spwd" jdbcType="VARCHAR" property="spwd" />
+<<<<<<< HEAD
   
   <!-- 配置地区一对一 --> 
    <association property="district" autoMapping="true" column="city_id" select="com.yc.spirngboot.takeout.dao.DistrictMapper.selectDistrictById"></association>
@@ -24,6 +25,10 @@
    <!-- 配置关商品与店铺的联查询 1:n-->
   	<collection  property="goods" autoMapping="true" column="id" select="com.yc.spirngboot.takeout.dao.GoodMapper.selectByUser_id" ></collection>
   
+=======
+  <!-- 配置关商品与店铺的联查询 1:n-->
+  	 <collection  property="goods" autoMapping="true" column="id" select="com.yc.spirngboot.takeout.dao.GoodMapper.selectByUser_id" ></collection>
+>>>>>>> branch 'master' of https://github.com/C71-S3-Tim/C71-S3-Tim-Project-demo.git
   </resultMap>
   <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.yc.spirngboot.takeout.bean.Seller">
     <result column="description" jdbcType="LONGVARCHAR" property="description" />

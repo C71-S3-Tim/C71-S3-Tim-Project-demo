@@ -7,8 +7,13 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.yc.spirngboot.takeout.C71S3PljqSpringbootTakeoutApplication;
+<<<<<<< HEAD
 import com.yc.spirngboot.takeout.bean.Dayandcount;
+=======
+import com.yc.spirngboot.takeout.bean.Seller;
+>>>>>>> branch 'master' of https://github.com/C71-S3-Tim/C71-S3-Tim-Project-demo.git
 import com.yc.spirngboot.takeout.bean.User;
+import com.yc.spirngboot.takeout.biz.BackSellerBiz;
 import com.yc.spirngboot.takeout.biz.UserBiz;
 import com.yc.spirngboot.takeout.dao.OrderinfoMapper;
 import com.yc.spirngboot.takeout.dao.UserMapper;
@@ -21,7 +26,11 @@ public class test {
 	@Resource
 	private UserMapper um;
 	@Resource
+<<<<<<< HEAD
 	private  OrderinfoMapper om;
+=======
+	private BackSellerBiz bsbiz;
+>>>>>>> branch 'master' of https://github.com/C71-S3-Tim/C71-S3-Tim-Project-demo.git
 	
 	public  String encodeByMd5(String encodeText){
 		try{
@@ -34,9 +43,7 @@ public class test {
 		return result;
 		} catch (Exception e) {
 		e.printStackTrace();
-
 		return null;
-
 		}
 }
 	@Test
@@ -55,6 +62,23 @@ public class test {
 		System.out.println("result========="+result);
 		//ICy5YqxZB1uWSwcVLSNLcA
 	}
+	
+	@Test
+	public void SellercodeByMd5() {
+		Seller seller=new Seller();
+		seller.setSphone("13135187907");
+		seller.setSpwd("123456");
+
+	
+		bsbiz.reg(seller);
+		
+		String code="123";
+		String result=encodeByMd5(code);	
+		System.out.println("code========="+code);
+		System.out.println("result========="+result);
+		//ICy5YqxZB1uWSwcVLSNLcA
+	}
+	
 	@Test
 	public void testUpdate(String newpwd ,User user) {
 		

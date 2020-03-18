@@ -30,12 +30,20 @@ public class Seller {
     private Integer qualified;
 
     private String spwd;
+<<<<<<< HEAD
 
     private String description;
+=======
+>>>>>>> branch 'master' of https://github.com/C71-S3-Tim/C71-S3-Tim-Project-demo.git
 
+<<<<<<< HEAD
     //一对多关联查询商品
+=======
+    private String description;
+>>>>>>> branch 'master' of https://github.com/C71-S3-Tim/C71-S3-Tim-Project-demo.git
     private List<Good> goods;
     
+<<<<<<< HEAD
     //一对一关联地区
     private District district;
     //一对一城市
@@ -50,6 +58,10 @@ public class Seller {
 	}
 
     
+=======
+    
+
+>>>>>>> branch 'master' of https://github.com/C71-S3-Tim/C71-S3-Tim-Project-demo.git
     public List<Good> getGoods() {
 		return goods;
 	}
